@@ -26,6 +26,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   glass_kit: ^1.0.2
   glassmorphism: ^1.0.6
+  google_fonts: ^2.0.0
   lottie: ^1.0.0
 
 dev_dependencies:

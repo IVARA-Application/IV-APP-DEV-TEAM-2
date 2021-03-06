@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:new_ivara_app/homepage.dart';
 
 class StudentHomePage extends StatelessWidget {
   static String id = 'StudentHomePage';

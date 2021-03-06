@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
-import 'package:new_ivara_app/student_screens/student_homepage/studentHomepage.dart';
+import 'package:new_ivara_app/lib.dart';
+import 'package:new_ivara_app/shared/custom_elevated_button.dart';
+import 'package:new_ivara_app/shared/custom_text_field.dart';
 
 class LoginPage extends StatelessWidget {
   static String id = 'LoginPage';
@@ -8,12 +10,10 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    
     TextEditingController _nameController = TextEditingController();
-    
+
     TextEditingController _passwordController = TextEditingController();
-    return  Scaffold(
+    return Scaffold(
       body: Stack(
         children: [
           Container(
@@ -54,7 +54,7 @@ class LoginPage extends StatelessWidget {
             child: Center(
               child: GlassmorphicContainer(
                 width: MediaQuery.of(context).size.width * 0.8,
-                height: 500,
+                height: MediaQuery.of(context).size.height * 0.55,
                 borderRadius: 20,
                 blur: 10,
                 alignment: Alignment.bottomCenter,
@@ -92,89 +92,15 @@ class LoginPage extends StatelessWidget {
                             .headline6
                             .copyWith(color: Colors.white),
                       ),
-                      TextField(
-                        controller: _nameController,
-                        decoration: InputDecoration(
-                          focusColor: Colors.white,
-                          filled: true,
-                          fillColor: Colors.white.withOpacity(0.9),
-                          hintText: "Enter your name",
-                          hintStyle: Theme.of(context)
-                              .textTheme
-                              .headline6
-                              .copyWith(color: Color(0xff898989)),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xff697ae4),
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                        ),
+                      CustomTextField(
+                        passwordController: _nameController,
+                        hintText: "Enter your name",
                       ),
-                      TextField(
-                        controller: _passwordController,
-                        decoration: InputDecoration(
-                          focusColor: Colors.white,
-                          filled: true,
-                          fillColor: Colors.white.withOpacity(0.9),
-                          hintText: "Password",
-                          hintStyle: Theme.of(context)
-                              .textTheme
-                              .headline6
-                              .copyWith(color: Color(0xff898989)),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xff697ae4),
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                        ),
+                      CustomTextField(
+                        passwordController: _passwordController,
+                        hintText: "Password",
                       ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          visualDensity: VisualDensity.compact,
-                          // onPrimary: Colors.transparent,
-                          // onSurface: Colors.transparent,
-                          primary: Colors.transparent,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0)),
-
-                          padding: EdgeInsets.all(0.0),
-                          shadowColor: Colors.transparent,
-                        ),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color(0xFF1835E9),
-                                  Color(0xFFF85AC9),
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0)),
-                          child: Container(
-                            color: Colors.transparent,
-                            constraints: BoxConstraints(
-                                maxWidth: 120.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Login",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
+                      CustomElevatedButton(label: "Login", onTap: () {}),
                       Row(
                         children: [
                           Text(
@@ -185,6 +111,12 @@ class LoginPage extends StatelessWidget {
                                 .copyWith(color: Colors.white),
                           ),
                           InkWell(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (_) => SignUpPage()),
+                              );
+                            },
                             child: Text(
                               "Click here",
                               style: Theme.of(context)
@@ -204,6 +136,5 @@ class LoginPage extends StatelessWidget {
         ],
       ),
     );
- 
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:new_ivara_app/lib.dart';
 
 class UserType extends StatefulWidget {
   static String id = 'UserType';
@@ -11,7 +12,17 @@ class UserType extends StatefulWidget {
   _UserTypeState createState() => _UserTypeState();
 }
 
+enum ChoiceMethod { student, teacher, parent, none }
+
 class _UserTypeState extends State<UserType> {
+  ChoiceMethod _method = ChoiceMethod.none;
+
+  //TODO: Add some logic for different user type
+
+  void foo() {
+    Navigator.push(context, MaterialPageRoute(builder: (_) => LoginPage()));
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -24,8 +35,8 @@ class _UserTypeState extends State<UserType> {
             painter: TopCurveCustomPainter(),
           ),
           Positioned(
-            top: 25.0,
-            left: 10.0,
+            top: 20.0,
+            left: 5.0,
             child: Text(
               'Welcome\nTO\nIVARA',
               style: Theme.of(context).textTheme.headline3.copyWith(
@@ -36,12 +47,11 @@ class _UserTypeState extends State<UserType> {
           ),
           Column(
             children: [
-              Expanded(
-                flex: 2,
-                child: Lottie.asset(
-                  'assets/walking.json',
-                  alignment: Alignment.bottomCenter,
-                ),
+              Spacer(),
+              Lottie.asset(
+                'assets/walking.json',
+                alignment: Alignment.bottomCenter,
+                height: MediaQuery.of(context).size.height * 0.4,
               ),
               Align(
                 alignment: Alignment.centerLeft,
@@ -57,9 +67,42 @@ class _UserTypeState extends State<UserType> {
                   ),
                 ),
               ),
-              UserTypeButton(userType: 'Student', onTap: () {}),
-              UserTypeButton(userType: 'Teacher', onTap: () {}),
-              UserTypeButton(userType: 'Parent', onTap: () {}),
+              UserTypeButton(
+                userType: 'Student',
+                onTap: () {},
+                value: ChoiceMethod.student,
+                groupValue: _method,
+                onChanged: (value) {
+                  setState(() {
+                    _method = value;
+                  });
+                  foo();
+                },
+              ),
+              UserTypeButton(
+                userType: 'Teacher',
+                onTap: () {},
+                value: ChoiceMethod.teacher,
+                groupValue: _method,
+                onChanged: (value) {
+                  setState(() {
+                    _method = value;
+                  });
+                  foo();
+                },
+              ),
+              UserTypeButton(
+                userType: 'Parent',
+                onTap: () {},
+                value: ChoiceMethod.parent,
+                groupValue: _method,
+                onChanged: (value) {
+                  setState(() {
+                    _method = value;
+                  });
+                  foo();
+                },
+              ),
               SizedBox(height: 10),
             ],
           )
@@ -69,22 +112,33 @@ class _UserTypeState extends State<UserType> {
   }
 }
 
-class UserTypeButton extends StatelessWidget {
+class UserTypeButton extends StatefulWidget {
   final String userType;
   final Function onTap;
+  final dynamic value;
+  final dynamic groupValue;
+  final Function(dynamic) onChanged;
 
   const UserTypeButton({
     Key key,
     @required this.userType,
     @required this.onTap,
+    this.value,
+    this.groupValue,
+    this.onChanged,
   }) : super(key: key);
 
+  @override
+  _UserTypeButtonState createState() => _UserTypeButtonState();
+}
+
+class _UserTypeButtonState extends State<UserTypeButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
       child: ElevatedButton(
-        onPressed: onTap,
+        onPressed: widget.onTap,
         style: ElevatedButton.styleFrom(
           primary: Colors.white,
           shape:
@@ -96,16 +150,18 @@ class UserTypeButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                userType,
+                widget.userType,
                 style: Theme.of(context)
                     .textTheme
                     .headline4
                     .copyWith(color: Color(0xff585858)),
                 textAlign: TextAlign.center,
               ),
-              CircleAvatar(
-                radius: 10,
-                backgroundColor: Colors.pink,
+              Radio(
+                // value: ChoiceMethod.parent,
+                value: widget.value,
+                groupValue: widget.groupValue,
+                onChanged: widget.onChanged,
               ),
             ],
           ),
