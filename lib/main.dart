@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: UserType.id,
       routes: {
-        HomePage.id: (context) => HomePage(),
+        UserType.id: (_) => UserType(),
+        // HomePage.id: (context) => HomePage(),
       },
     );
   }

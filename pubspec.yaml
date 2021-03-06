@@ -24,6 +24,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  glass_kit: ^1.0.2
+  glassmorphism: ^1.0.6
   lottie: ^1.0.0
 
 dev_dependencies:

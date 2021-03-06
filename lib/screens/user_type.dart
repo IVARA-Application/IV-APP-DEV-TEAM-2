@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class UserType extends StatefulWidget {
-
   static String id = 'UserType';
 
   UserType({Key key}) : super(key: key);
@@ -36,7 +35,6 @@ class _UserTypeState extends State<UserType> {
             ),
           ),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 flex: 2,
@@ -45,20 +43,23 @@ class _UserTypeState extends State<UserType> {
                   alignment: Alignment.bottomCenter,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 40.0, bottom: 10.0),
-                child: Text(
-                  'Are You!',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline3
-                      .copyWith(color: Colors.grey),
-                  // textAlign: TextAlign.center,
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 40.0),
+                  child: Text(
+                    'Are You!',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline3
+                        .copyWith(color: Colors.grey),
+                    // textAlign: TextAlign.center,
+                  ),
                 ),
               ),
-              UserTypeCard(userType: 'Student', onTap: () {}),
-              UserTypeCard(userType: 'Teacher', onTap: () {}),
-              UserTypeCard(userType: 'Parent', onTap: () {}),
+              UserTypeButton(userType: 'Student', onTap: () {}),
+              UserTypeButton(userType: 'Teacher', onTap: () {}),
+              UserTypeButton(userType: 'Parent', onTap: () {}),
               SizedBox(height: 10),
             ],
           )
@@ -68,11 +69,11 @@ class _UserTypeState extends State<UserType> {
   }
 }
 
-class UserTypeCard extends StatelessWidget {
+class UserTypeButton extends StatelessWidget {
   final String userType;
   final Function onTap;
 
-  const UserTypeCard({
+  const UserTypeButton({
     Key key,
     @required this.userType,
     @required this.onTap,
@@ -80,18 +81,19 @@ class UserTypeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: ElevatedButton.styleFrom(
+          primary: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         ),
-        elevation: 2.0,
-        margin: EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 userType,
@@ -103,7 +105,7 @@ class UserTypeCard extends StatelessWidget {
               ),
               CircleAvatar(
                 radius: 10,
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.pink,
               ),
             ],
           ),

@@ -81,6 +81,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  glass_kit:
+    dependency: "direct main"
+    description:
+      name: glass_kit
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
+  glassmorphism:
+    dependency: "direct main"
+    description:
+      name: glassmorphism
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.6"
   logging:
     dependency: transitive
     description:
@@ -179,3 +193,4 @@ packages:
     version: "2.1.0"
 sdks:
   dart: ">=2.12.0-0.0 <3.0.0"
+  flutter: ">=1.17.0"
