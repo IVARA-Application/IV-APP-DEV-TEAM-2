@@ -1,26 +1,21 @@
 import 'package:flutter/material.dart';
 
-
-
-
-
-
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({
+  CustomTextField({
     Key key,
-    @required TextEditingController passwordController,
+    @required TextEditingController textController,
     @required this.hintText,
-  })  : _passwordController = passwordController,
+  })  : textController = textController,
         super(key: key);
 
-  final TextEditingController _passwordController;
+  final TextEditingController textController;
 
   final String hintText;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: _passwordController,
+      controller: textController,
       decoration: InputDecoration(
         focusColor: Colors.white,
         filled: true,

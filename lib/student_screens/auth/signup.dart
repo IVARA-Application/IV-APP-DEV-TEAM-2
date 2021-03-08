@@ -22,8 +22,8 @@ class _SignUpPageState extends State<SignUpPage> {
     TextEditingController _emailController = TextEditingController();
     TextEditingController _phoneController = TextEditingController();
 
-    TextEditingController _passwordController = TextEditingController();
-    TextEditingController _retypePasswordController = TextEditingController();
+    TextEditingController _textController = TextEditingController();
+    TextEditingController _retypetextController = TextEditingController();
 
     return Scaffold(
       body: Stack(
@@ -86,23 +86,23 @@ class _SignUpPageState extends State<SignUpPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomTextField(
-                        passwordController: _nameController,
+                        textController: _nameController,
                         hintText: "Enter your name",
                       ),
                       CustomTextField(
-                        passwordController: _emailController,
+                        textController: _emailController,
                         hintText: "Enter email",
                       ),
                       CustomTextField(
-                        passwordController: _phoneController,
+                        textController: _phoneController,
                         hintText: "Enter phone no.",
                       ),
                       CustomTextField(
-                        passwordController: _passwordController,
+                        textController: _textController,
                         hintText: "Enter your Password",
                       ),
                       CustomTextField(
-                        passwordController: _retypePasswordController,
+                        textController: _retypetextController,
                         hintText: "Retype Password",
                       ),
                       CustomElevatedButton(label: "Register", onTap: () {}),
