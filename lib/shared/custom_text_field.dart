@@ -17,6 +17,9 @@ class CustomTextField extends StatelessWidget {
     return TextField(
       controller: textController,
       decoration: InputDecoration(
+        // contentPadding: EdgeInsets.all(2),
+        isDense: true,
+
         focusColor: Colors.white,
         filled: true,
         fillColor: Colors.white.withOpacity(0.9),
@@ -25,9 +28,6 @@ class CustomTextField extends StatelessWidget {
             .textTheme
             .headline6
             .copyWith(color: Color(0xff898989)),
-
-
-            
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Color(0xff697ae4),
