@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:new_ivara_app/lib.dart';
-import 'package:new_ivara_app/shared/custom_elevated_button.dart';
-import 'package:new_ivara_app/shared/custom_text_field.dart';
 
 class SignUpPage extends StatefulWidget {
   static String id = 'SignupPage';
@@ -34,15 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                //     stops: [
-                //   0.1,
-                //   0.4,
-                //   0.6,
-                //   0.9
-                // ],
                 colors: [
-                  // Color(0xFF8569C5),
-                  // Color(0xFFC579B5),
                   Color(0xFFF85AC9),
                   Color(0xFF1835E9),
                 ],
@@ -116,7 +106,13 @@ class _SignUpPageState extends State<SignUpPage> {
                           textController: _repassC,
                           hintText: "Retype Password",
                         ),
-                        CustomElevatedButton(label: "Register", onTap: () {}),
+                        CustomElevatedButton(
+                          label: "Register",
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => TutionCourses()),
+                          ),
+                        ),
                         Row(
                           children: [
                             Checkbox(
