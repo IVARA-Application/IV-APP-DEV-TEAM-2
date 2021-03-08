@@ -100,7 +100,9 @@ class LoginPage extends StatelessWidget {
                         passwordController: _passwordController,
                         hintText: "Password",
                       ),
-                      CustomElevatedButton(label: "Login", onTap: () {}),
+                      CustomElevatedButton(label: "Login", onTap: () {
+                        Navigator.push(context,MaterialPageRoute(builder: (context)=>StudentHomePage()));
+                      }),
                       Row(
                         children: [
                           Text(
