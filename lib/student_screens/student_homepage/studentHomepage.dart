@@ -138,7 +138,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
               height: double.infinity,
               width: double.infinity,
               // child: StudentHome()
-              child:StudentNotification()
+              child:StudentChatPage()
             ),
             Positioned(
                 height: height * 0.08,
