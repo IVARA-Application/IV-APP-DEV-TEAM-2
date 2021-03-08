@@ -17,15 +17,14 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _nameController = TextEditingController();
-
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _phoneController = TextEditingController();
-
-    TextEditingController _passwordController = TextEditingController();
-    TextEditingController _retypePasswordController = TextEditingController();
+    TextEditingController _nameC = TextEditingController();
+    TextEditingController _emailC = TextEditingController();
+    TextEditingController _phoneC = TextEditingController();
+    TextEditingController _passC = TextEditingController();
+    TextEditingController _repassC = TextEditingController();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Container(
@@ -51,113 +50,129 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ),
           SafeArea(
-            child: Center(
-              child: GlassmorphicContainer(
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: MediaQuery.of(context).size.height * 0.8,
-                borderRadius: 20,
-                blur: 10,
-                alignment: Alignment.bottomCenter,
-                border: 2,
-                linearGradient: LinearGradient(
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    "Welcome to IVARA",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline3
+                        .copyWith(color: Colors.white),
+                  ),
+                ),
+                GlassmorphicContainer(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  borderRadius: 20,
+                  blur: 10,
+                  alignment: Alignment.bottomCenter,
+                  border: 2,
+                  linearGradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFFffffff).withOpacity(0.1),
+                        Color(0xFFFFFFFF).withOpacity(0.05),
+                      ],
+                      stops: [
+                        0.1,
+                        1,
+                      ]),
+                  borderGradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
                       Color(0xFFffffff).withOpacity(0.1),
-                      Color(0xFFFFFFFF).withOpacity(0.05),
+                      Color((0xFFFFFFFF)).withOpacity(0.2),
                     ],
-                    stops: [
-                      0.1,
-                      1,
-                    ]),
-                borderGradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFFffffff).withOpacity(0.1),
-                    Color((0xFFFFFFFF)).withOpacity(0.2),
-                  ],
-                ),
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomTextField(
-                        passwordController: _nameController,
-                        hintText: "Enter your name",
-                      ),
-                      CustomTextField(
-                        passwordController: _emailController,
-                        hintText: "Enter email",
-                      ),
-                      CustomTextField(
-                        passwordController: _phoneController,
-                        hintText: "Enter phone no.",
-                      ),
-                      CustomTextField(
-                        passwordController: _passwordController,
-                        hintText: "Enter your Password",
-                      ),
-                      CustomTextField(
-                        passwordController: _retypePasswordController,
-                        hintText: "Retype Password",
-                      ),
-                      CustomElevatedButton(label: "Register", onTap: () {}),
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: isCheck,
-                            onChanged: (value) {
-                              setState(() {
-                                isCheck = !isCheck;
-                              });
-                            },
-                            checkColor: Colors.green,
-                            visualDensity: VisualDensity.compact,
-                            fillColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                          ),
-                          Flexible(
-                            child: Text(
-                              'I agree with all the terms and condion',
-                              style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomTextField(
+                          textController: _nameC,
+                          hintText: "Enter your name",
+                        ),
+                        CustomTextField(
+                          textController: _emailC,
+                          hintText: "Enter email",
+                        ),
+                        CustomTextField(
+                          textController: _phoneC,
+                          hintText: "Enter phone no.",
+                        ),
+                        CustomTextField(
+                          textController: _passC,
+                          hintText: "Enter your Password",
+                        ),
+                        CustomTextField(
+                          textController: _repassC,
+                          hintText: "Retype Password",
+                        ),
+                        CustomElevatedButton(label: "Register", onTap: () {}),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: isCheck,
+                              onChanged: (value) {
+                                setState(() {
+                                  isCheck = !isCheck;
+                                });
+                              },
+                              checkColor: Colors.green,
+                              visualDensity: VisualDensity.compact,
+                              fillColor: MaterialStateProperty.all<Color>(
+                                  Colors.white),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "Already have an account? ",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1
-                                .copyWith(color: Colors.white),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (_) => LoginPage()),
-                              );
-                            },
-                            child: Text(
-                              "Click here",
+                            Flexible(
+                              child: Text(
+                                'I agree with all the terms and condion',
+                                style: Theme.of(context).textTheme.bodyText1,
+                                softWrap: true,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "Already have an account? ",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1
-                                  .copyWith(color: Colors.blue),
+                                  .copyWith(color: Colors.white),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                            InkWell(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => LoginPage()),
+                                );
+                              },
+                              child: Text(
+                                "Click here",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    .copyWith(color: Colors.blue),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
+                Spacer(),
+              ],
             ),
           ),
         ],
