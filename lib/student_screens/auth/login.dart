@@ -68,7 +68,7 @@ class LoginPage extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.55,
                   borderRadius: 20,
                   blur: 10,
-                  alignment: Alignment.bottomCenter,
+                  // alignment: Alignment.bottomCenter,
                   border: 2,
                   linearGradient: LinearGradient(
                       begin: Alignment.topLeft,
@@ -93,7 +93,7 @@ class LoginPage extends StatelessWidget {
                     padding:
                         EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(

@@ -82,7 +82,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomTextField(

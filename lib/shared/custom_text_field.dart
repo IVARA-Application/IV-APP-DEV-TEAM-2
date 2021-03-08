@@ -25,6 +25,9 @@ class CustomTextField extends StatelessWidget {
             .textTheme
             .headline6
             .copyWith(color: Color(0xff898989)),
+
+
+            
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Color(0xff697ae4),
