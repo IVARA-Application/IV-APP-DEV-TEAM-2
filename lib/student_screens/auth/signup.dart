@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:new_ivara_app/lib.dart';
-import 'package:new_ivara_app/shared/custom_elevated_button.dart';
-import 'package:new_ivara_app/shared/custom_text_field.dart';
 
 class SignUpPage extends StatefulWidget {
   static String id = 'SignupPage';
@@ -34,17 +32,9 @@ class _SignUpPageState extends State<SignUpPage> {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                //     stops: [
-                //   0.1,
-                //   0.4,
-                //   0.6,
-                //   0.9
-                // ],
                 colors: [
-                  // Color(0xFF8569C5),
-                  // Color(0xFFC579B5),
-                  Color(0xFFF85AC9),
-                  Color(0xFF1835E9),
+                  kPink,
+                  kDarkBlue,
                 ],
               ),
             ),
@@ -116,7 +106,13 @@ class _SignUpPageState extends State<SignUpPage> {
                           textController: _repassC,
                           hintText: "Retype Password",
                         ),
-                        CustomElevatedButton(label: "Register", onTap: () {}),
+                        CustomElevatedButton(
+                          label: "Register",
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => TutionClasses()),
+                          ),
+                        ),
                         Row(
                           children: [
                             Checkbox(
@@ -134,7 +130,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             Flexible(
                               child: Text(
                                 'I agree with all the terms and condion',
-                                style: Theme.of(context).textTheme.bodyText1,
+                                style:ftt(context).bodyText1,
                                 softWrap: true,
                               ),
                             ),
@@ -144,8 +140,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           children: [
                             Text(
                               "Already have an account? ",
-                              style: Theme.of(context)
-                                  .textTheme
+                              style: ftt(context)
                                   .bodyText1
                                   .copyWith(color: Colors.white),
                             ),
@@ -159,10 +154,10 @@ class _SignUpPageState extends State<SignUpPage> {
                               },
                               child: Text(
                                 "Click here",
-                                style: Theme.of(context)
-                                    .textTheme
+                                style: ftt(context)
+                                   
                                     .bodyText1
-                                    .copyWith(color: Colors.blue),
+                                    .copyWith(color: kPink),
                               ),
                             ),
                           ],

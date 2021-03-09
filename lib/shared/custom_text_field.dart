@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   CustomTextField({
     Key key,
-    @required TextEditingController textController,
     @required this.hintText,
-  })  : textController = textController,
-        super(key: key);
+    @required this.textController,
+  }) : super(key: key);
 
   final TextEditingController textController;
 
