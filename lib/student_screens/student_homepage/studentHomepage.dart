@@ -11,7 +11,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
   static String id = 'StudentHomePage';
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int currentIndex=0;
-
+  List tabs=[StudentHome(),StudentNotification(),StudentAttendance(),StudentChatPage(),StudentAcademicSection()];
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -137,8 +137,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
               ),
               height: double.infinity,
               width: double.infinity,
-              // child: StudentHome()
-              child:StudentChatPage()
+              child: tabs[currentIndex]
             ),
             Positioned(
                 height: height * 0.08,
