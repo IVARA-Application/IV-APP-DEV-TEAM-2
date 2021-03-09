@@ -33,8 +33,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color(0xFFF85AC9),
-                  Color(0xFF1835E9),
+                  kPink,
+                  kDarkBlue,
                 ],
               ),
             ),
@@ -110,7 +110,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           label: "Register",
                           onTap: () => Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (_) => TutionCourses()),
+                            MaterialPageRoute(builder: (_) => TutionClasses()),
                           ),
                         ),
                         Row(
@@ -130,7 +130,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             Flexible(
                               child: Text(
                                 'I agree with all the terms and condion',
-                                style: Theme.of(context).textTheme.bodyText1,
+                                style:ftt(context).bodyText1,
                                 softWrap: true,
                               ),
                             ),
@@ -140,8 +140,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           children: [
                             Text(
                               "Already have an account? ",
-                              style: Theme.of(context)
-                                  .textTheme
+                              style: ftt(context)
                                   .bodyText1
                                   .copyWith(color: Colors.white),
                             ),
@@ -155,10 +154,10 @@ class _SignUpPageState extends State<SignUpPage> {
                               },
                               child: Text(
                                 "Click here",
-                                style: Theme.of(context)
-                                    .textTheme
+                                style: ftt(context)
+                                   
                                     .bodyText1
-                                    .copyWith(color: Colors.blue),
+                                    .copyWith(color: kPink),
                               ),
                             ),
                           ],

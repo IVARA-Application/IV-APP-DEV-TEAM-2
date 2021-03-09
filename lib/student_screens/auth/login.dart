@@ -141,7 +141,7 @@ class LoginPage extends StatelessWidget {
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyText1
-                                    .copyWith(color: Colors.blue),
+                                    .copyWith(color: kPink),
                               ),
                             ),
                           ],

@@ -17,3 +17,7 @@ const BoxDecoration kBGdecoration = BoxDecoration(
 TextTheme ftt(BuildContext c) {
   return Theme.of(c).textTheme;
 }
+
+ShapeBorder kCardShape = RoundedRectangleBorder(
+  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+);

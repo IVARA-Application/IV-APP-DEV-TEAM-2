@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:new_ivara_app/lib.dart';
 
-class TutionCourses extends StatefulWidget {
-  const TutionCourses({Key key}) : super(key: key);
+class TutionClasses extends StatefulWidget {
+  const TutionClasses({Key key}) : super(key: key);
 
   @override
-  _TutionCoursesState createState() => _TutionCoursesState();
+  _TutionClassesState createState() => _TutionClassesState();
 }
 
-class _TutionCoursesState extends State<TutionCourses> {
+class _TutionClassesState extends State<TutionClasses> {
   int selectedRadio;
   @override
   void initState() {
@@ -46,7 +46,6 @@ class _TutionCoursesState extends State<TutionCourses> {
               padding: const EdgeInsets.only(left: 30),
               child: Text(
                 "Virtual Tuition Courses",
-                // textAlign: TextAlign.right,
                 style: ftt(context).headline5.copyWith(color: Colors.white),
               ),
             ),
@@ -65,17 +64,19 @@ class _TutionCoursesState extends State<TutionCourses> {
                         groupValue: selectedRadio,
                         onChanged: (v) {
                           setRadioState(v);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => TutionCoursesSubject()),
+                          );
                         },
                         controlAffinity: ListTileControlAffinity.trailing,
-                        // tileColor: Colors.pink,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                        ),
+                        shape: kCardShape,
                         title: Text(
                           "CLASS ${i + 4}TH",
                           style: ftt(context)
                               .headline5
-                              .copyWith(color: Colors.blue),
+                              .copyWith(color: kLightBlue),
                         ),
                       ),
                     ),

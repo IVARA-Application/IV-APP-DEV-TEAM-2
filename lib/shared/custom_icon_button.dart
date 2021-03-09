@@ -19,7 +19,7 @@ class CustomIconButton extends StatelessWidget {
         FontAwesomeIcons.chevronCircleLeft,
         color: kLightYellow,
       ),
-      onPressed: () {},
+      onPressed: onPressed,
     );
   }
 }

@@ -112,7 +112,7 @@ class _UserTypeState extends State<UserType> {
   }
 }
 
-class UserTypeButton extends StatefulWidget {
+class UserTypeButton extends StatelessWidget{
   final String userType;
   final Function onTap;
   final dynamic value;
@@ -129,42 +129,26 @@ class UserTypeButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _UserTypeButtonState createState() => _UserTypeButtonState();
-}
-
-class _UserTypeButtonState extends State<UserTypeButton> {
-  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-      child: ElevatedButton(
-        onPressed: widget.onTap,
-        style: ElevatedButton.styleFrom(
-          primary: Colors.white,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                widget.userType,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline4
-                    .copyWith(color: Color(0xff585858)),
-                textAlign: TextAlign.center,
-              ),
-              Radio(
-                // value: ChoiceMethod.parent,
-                value: widget.value,
-                groupValue: widget.groupValue,
-                onChanged: widget.onChanged,
-              ),
-            ],
-          ),
+
+
+    return Card(
+      elevation: 4.0,
+      margin: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+      shape:kCardShape,
+      child: RadioListTile(
+        value: value,
+        groupValue: groupValue,
+        onChanged: onChanged,
+        controlAffinity: ListTileControlAffinity.trailing,
+        shape:kCardShape,
+        title: Text(
+          userType,
+          style: Theme.of(context)
+              .textTheme
+              .headline4
+              .copyWith(color: kTextColor1),
+          // textAlign: TextAlign.center,
         ),
       ),
     );
