@@ -13,3 +13,7 @@ const BoxDecoration kBGdecoration = BoxDecoration(
     ],
   ),
 );
+
+TextTheme ftt(BuildContext c) {
+  return Theme.of(c).textTheme;
+}
