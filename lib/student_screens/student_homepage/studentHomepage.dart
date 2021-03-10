@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:new_ivara_app/lib.dart';
-import 'package:new_ivara_app/student_screens/student_homepage/home.dart';
 class StudentHomePage extends StatefulWidget {
   @override
   _StudentHomePageState createState() => _StudentHomePageState();

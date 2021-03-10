@@ -62,6 +62,7 @@ class _TutionClassesState extends State<TutionClasses> {
                       child: RadioListTile(
                         value: i,
                         groupValue: selectedRadio,
+                        toggleable: true,
                         onChanged: (v) {
                           setRadioState(v);
                           Navigator.push(
