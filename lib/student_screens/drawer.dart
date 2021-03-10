@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:new_ivara_app/constant/colours.dart';
-import 'package:new_ivara_app/student_screens/student_homepage/navbar section/heal my mind/heal my mind.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/study_abroad.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar section/24X7_doubt.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/heal_my_mind.dart';
 
 class StudentDrawer extends StatefulWidget {
   @override
@@ -189,6 +190,8 @@ class _StudentDrawerState extends State<StudentDrawer> {
               setState(() {
                 currentIndex = 4;
               });
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DoubtPortalPage()));
             },
             child: Padding(
               padding: EdgeInsets.symmetric(

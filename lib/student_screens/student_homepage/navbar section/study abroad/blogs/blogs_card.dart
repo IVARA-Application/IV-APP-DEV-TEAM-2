@@ -1,9 +1,8 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/courses/courses.dart';
-import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/scholarships/scholarships.dart';
-import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/blogs/blogs.dart';
+// import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/courses/courses.dart';
+// import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/scholarships/scholarships.dart';
 
 class BlogsCardPage extends StatelessWidget {
   static String id = 'BlogsCardPage';

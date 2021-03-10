@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:new_ivara_app/lib.dart';
+import 'package:new_ivara_app/constant/colours.dart';
+import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/shared/custom_icon_button.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/virtual%20tution/virtual_tution_chapter.dart';
 
 class TutionCoursesSubject extends StatefulWidget {
   const TutionCoursesSubject({Key key}) : super(key: key);
@@ -55,7 +58,7 @@ class _TutionCoursesSubjectState extends State<TutionCoursesSubject> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 100),
+            SizedBox(height: 56),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 30, vertical: 10.0),

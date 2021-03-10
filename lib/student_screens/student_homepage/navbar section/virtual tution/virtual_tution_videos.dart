@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:new_ivara_app/lib.dart';
+import 'package:new_ivara_app/constant/colours.dart';
+import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/shared/custom_icon_button.dart';
 
 String _src =
     'https://images.unsplash.com/photo-1615266895738-11f1371cd7e5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1349&q=80';
@@ -41,9 +43,9 @@ class _TutionVideosState extends State<TutionVideos> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 100),
+            SizedBox(height: 56),
             Padding(
-              padding: const EdgeInsets.only(left: 30),
+              padding: const EdgeInsets.all(8),
               child: Text(
                 "Virtual Tuition Courses",
                 style: ftt(context).headline5.copyWith(color: Colors.white),

@@ -1,7 +1,9 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:new_ivara_app/lib.dart';
+import 'package:new_ivara_app/constant/colours.dart';
+import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/student_screens/auth/login.dart';
 
 class UserType extends StatefulWidget {
   static String id = 'UserType';

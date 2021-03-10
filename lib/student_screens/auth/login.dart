@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
-import 'package:new_ivara_app/lib.dart';
+import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/shared/custom_elevated_button.dart';
 import 'package:new_ivara_app/shared/custom_text_field.dart';
+import 'package:new_ivara_app/student_screens/auth/signup.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/studentHomepage.dart';
 
 class LoginPage extends StatelessWidget {
   static String id = 'LoginPage';

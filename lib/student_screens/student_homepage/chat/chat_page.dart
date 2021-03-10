@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-class StudentChatPage extends StatelessWidget {
   List subjects = [
     {'subjectName': 'Subject 1', 'icon': 'assets/subject.png'},
     {'subjectName': 'Subject 2', 'icon': 'assets/subject.png'},
@@ -11,6 +10,7 @@ class StudentChatPage extends StatelessWidget {
     {'subjectName': 'Subject 7', 'icon': 'assets/subject.png'},
     {'subjectName': 'Subject 8', 'icon': 'assets/subject.png'},
   ];
+class StudentChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
