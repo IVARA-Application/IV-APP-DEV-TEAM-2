@@ -10,11 +10,35 @@ class HealMyMindVideosPage extends StatefulWidget {
 }
 
 class _HealMyMindVideosPageState extends State<HealMyMindVideosPage> {
+  contentBox(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    return showDialog(context: context, builder: (context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        child: Container(
+          height: screenHeight*0.21,
+          width: double.infinity,
+          color: Colors.transparent,
+          child: Padding(
+            padding: const EdgeInsets.all(0.0),
+            child: VideoDisplay(videoURL: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",),
+          ),
+        ),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     int index = 0;
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -89,12 +113,7 @@ class _HealMyMindVideosPageState extends State<HealMyMindVideosPage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Container(
-                          child: VideoDisplay(
-                            videoURL:
-                                "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-                          ),
-                        );
+                        contentBox(context);
                       },
                       child: Padding(
                         padding: EdgeInsets.only(
@@ -143,9 +162,137 @@ class _HealMyMindVideosPageState extends State<HealMyMindVideosPage> {
                                 ),
                                 Positioned(
                                   child: Text(
-                                    "Title",
+                                    "Title 1",
                                     style: TextStyle(
-                                        color: Colors.black, fontSize: 25),
+                                        color: Colors.black, fontSize: 22),
+                                  ),
+                                  top: screenHeight * 0.04,
+                                  left: screenWidth * 0.04,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        contentBox(context);
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            top: screenWidth * 0.07, left: screenWidth * 0.07),
+                        child: Row(
+                          children: [
+                            Stack(
+                              children: [
+                                Container(
+                                  height: screenHeight * 0.12,
+                                  width: screenWidth * 0.38,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/thumbnail.jpg'),
+                                        fit: BoxFit.cover,
+                                        colorFilter: ColorFilter.mode(
+                                            Colors.black45, BlendMode.darken)),
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10.0),
+                                        bottomLeft: Radius.circular(10.0)),
+                                  ),
+                                ),
+                                Positioned(
+                                  child: Icon(
+                                    Icons.play_arrow,
+                                    color: Colors.white,
+                                    size: 50,
+                                  ),
+                                  top: screenHeight * 0.03,
+                                  left: screenWidth * 0.12,
+                                )
+                              ],
+                            ),
+                            Stack(
+                              children: [
+                                Container(
+                                  height: screenHeight * 0.12,
+                                  width: screenWidth * 0.48,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(10.0),
+                                        bottomRight: Radius.circular(10.0)),
+                                  ),
+                                ),
+                                Positioned(
+                                  child: Text(
+                                    "Title 2",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 22),
+                                  ),
+                                  top: screenHeight * 0.04,
+                                  left: screenWidth * 0.04,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        contentBox(context);
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            top: screenWidth * 0.07, left: screenWidth * 0.07),
+                        child: Row(
+                          children: [
+                            Stack(
+                              children: [
+                                Container(
+                                  height: screenHeight * 0.12,
+                                  width: screenWidth * 0.38,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/thumbnail.jpg'),
+                                        fit: BoxFit.cover,
+                                        colorFilter: ColorFilter.mode(
+                                            Colors.black45, BlendMode.darken)),
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10.0),
+                                        bottomLeft: Radius.circular(10.0)),
+                                  ),
+                                ),
+                                Positioned(
+                                  child: Icon(
+                                    Icons.play_arrow,
+                                    color: Colors.white,
+                                    size: 50,
+                                  ),
+                                  top: screenHeight * 0.03,
+                                  left: screenWidth * 0.12,
+                                )
+                              ],
+                            ),
+                            Stack(
+                              children: [
+                                Container(
+                                  height: screenHeight * 0.12,
+                                  width: screenWidth * 0.48,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(10.0),
+                                        bottomRight: Radius.circular(10.0)),
+                                  ),
+                                ),
+                                Positioned(
+                                  child: Text(
+                                    "Title 3",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 22),
                                   ),
                                   top: screenHeight * 0.04,
                                   left: screenWidth * 0.04,

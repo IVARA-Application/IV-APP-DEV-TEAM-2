@@ -26,11 +26,18 @@ class _VideoPlayerState extends State<VideoPlayer> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(0.0),
       child: Chewie(
         controller: chewieController,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.videoPlayerController.dispose();
+    chewieController.dispose();
   }
 }
 
