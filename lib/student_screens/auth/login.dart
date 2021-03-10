@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:glassmorphism/glassmorphism.dart';
+import 'package:new_ivara_app/Controllers/authController.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/shared/custom_elevated_button.dart';
 import 'package:new_ivara_app/shared/custom_text_field.dart';
@@ -7,14 +9,15 @@ import 'package:new_ivara_app/student_screens/auth/signup.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/studentHomepage.dart';
 
 class LoginPage extends StatelessWidget {
-  static String id = 'LoginPage';
-  const LoginPage({Key key}) : super(key: key);
+  String userType;
+  LoginPage(this.userType);
+  TextEditingController _nameController = TextEditingController();
+
+    TextEditingController _textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _nameController = TextEditingController();
-
-    TextEditingController _textController = TextEditingController();
+    
     return Scaffold(
       body: Stack(
         children: [
@@ -116,10 +119,8 @@ class LoginPage extends StatelessWidget {
                         CustomElevatedButton(
                             label: "Login",
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => StudentHomePage()));
+                              Get.find<AuthController>().signIn(
+                                  _nameController.text, _textController.text);
                             }),
                         Row(
                           mainAxisSize: MainAxisSize.min,
@@ -136,16 +137,16 @@ class LoginPage extends StatelessWidget {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => SignUpPage()),
+                                      builder: (_) => SignUpPage(userType)),
                                 );
                               },
                               child: Text(
-                                  "Click here",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1
-                                      .copyWith(color: kPink),
-                                ),
+                                "Click here",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    .copyWith(color: kPink),
+                              ),
                             ),
                           ],
                         ),

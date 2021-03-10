@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:new_ivara_app/Controllers/authController.dart';
 import 'package:new_ivara_app/constant/constants.dart';
 import 'package:new_ivara_app/student_screens/drawer.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/academic/academic_section.dart';
@@ -29,6 +31,12 @@ class _StudentHomePageState extends State<StudentHomePage> {
         return Scaffold(
           key: _scaffoldKey,
           drawer: StudentDrawer(),
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: (){
+              Get.find<AuthController>().signOut();
+            },
+            label: Text("Logout"),
+          ),
           body: SafeArea(
             child: Stack(
               children: [
