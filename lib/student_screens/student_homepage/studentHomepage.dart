@@ -31,10 +31,11 @@ class _StudentHomePageState extends State<StudentHomePage> {
         return Scaffold(
           key: _scaffoldKey,
           drawer: StudentDrawer(),
-          floatingActionButton: FloatingActionButton(
+          floatingActionButton: FloatingActionButton.extended(
             onPressed: (){
               Get.find<AuthController>().signOut();
             },
+            label: Text("Logout"),
           ),
           body: SafeArea(
             child: Stack(
