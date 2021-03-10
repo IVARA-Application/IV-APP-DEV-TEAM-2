@@ -40,6 +40,7 @@ dependencies:
   chewie: ^1.0.0
   carousel_pro: ^1.0.0
   video_player: ^2.0.1
+  cloud_firestore: ^1.0.1
 
 dev_dependencies:
   flutter_test:
