@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/skill_development.dart';
 
 class EntranceExamTopic extends StatefulWidget {
   final String topic;
@@ -74,24 +75,32 @@ class _EntranceExamTopicState extends State<EntranceExamTopic> {
                 child: Column(
                   children: List.generate(
                     9,
-                    (i) => Card(
-                      elevation: 4.0,
-                      margin: EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 10.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              exams[i],
-                              style: ftt(context)
-                                  .headline5
-                                  .copyWith(color: kLightBlue),
-                            ),
-                            Icon(FontAwesomeIcons.solidPlayCircle,
-                                color: kYellow)
-                          ],
+                    (i) => InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => SkillDevelopment()),
+                        );
+                      },
+                      child: Card(
+                        elevation: 4.0,
+                        margin: EdgeInsets.symmetric(
+                            horizontal: 30.0, vertical: 10.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                exams[i],
+                                style: ftt(context)
+                                    .headline5
+                                    .copyWith(color: kLightBlue),
+                              ),
+                              Icon(FontAwesomeIcons.solidPlayCircle,
+                                  color: kYellow)
+                            ],
+                          ),
                         ),
                       ),
                     ),
