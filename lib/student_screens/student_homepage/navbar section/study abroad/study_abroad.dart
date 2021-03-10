@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/courses/courses.dart';
-import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/scholarships/scholarships.dart';
-import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/blogs/blogs.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/study%20abroad/blogs/blogs.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/study%20abroad/courses/courses.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/study%20abroad/scholarships/scholarships.dart';
+// import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/courses/courses.dart';
+// import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/scholarships/scholarships.dart';
+// import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/blogs/blogs.dart';
 
 class StudyAbroadPage extends StatelessWidget {
   static String id = 'StudyAbroadPage';
@@ -115,6 +118,7 @@ class StudyAbroadPage extends StatelessWidget {
                                       MaterialPageRoute(
                                           builder: (context) => CoursesPage()))
                                 },
+                          
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 1.0),
                                   child: Container(

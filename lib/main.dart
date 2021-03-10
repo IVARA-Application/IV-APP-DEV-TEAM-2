@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:new_ivara_app/bindings.dart';
-import 'lib.dart';
+import 'package:new_ivara_app/screens/user_type.dart';
 
 void main() async{
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

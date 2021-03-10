@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:new_ivara_app/lib.dart';
+import 'package:new_ivara_app/constant/colours.dart';
+import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/shared/custom_icon_button.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/entrance%20exam/entrance_exam_topic.dart';
 
 class EntranceExam extends StatefulWidget {
   EntranceExam({Key key}) : super(key: key);

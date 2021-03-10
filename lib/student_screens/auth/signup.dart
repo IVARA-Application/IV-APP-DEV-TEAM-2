@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
-import 'package:new_ivara_app/lib.dart';
+import 'package:new_ivara_app/constant/colours.dart';
+import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/shared/custom_elevated_button.dart';
+import 'package:new_ivara_app/shared/custom_text_field.dart';
+import 'package:new_ivara_app/student_screens/auth/login.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/entrance%20exam/entrance_exam.dart';
 
 class SignUpPage extends StatefulWidget {
   static String id = 'SignupPage';
