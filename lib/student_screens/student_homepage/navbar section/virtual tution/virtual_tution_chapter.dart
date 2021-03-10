@@ -67,7 +67,10 @@ class TutionChapter extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                           horizontal: 30.0, vertical: 10.0),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => TutionVideos()),
+                        ),
                         style: ElevatedButton.styleFrom(
                           shape: kCardShape,
                           padding: EdgeInsets.all(8),
@@ -78,14 +81,16 @@ class TutionChapter extends StatelessWidget {
                           children: [
                             Flexible(
                               child: Text(
-                                chapters[i],
+                                i.toString() + ". " + chapters[i],
                                 style: ftt(context)
                                     .headline6
                                     .copyWith(color: kLightBlue),
                               ),
                             ),
-                            Icon(FontAwesomeIcons.arrowCircleRight,
-                                color: kDarkBlue)
+                            Icon(
+                              FontAwesomeIcons.arrowCircleRight,
+                              color: kDarkBlue,
+                            )
                           ],
                         ),
                       ),

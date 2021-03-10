@@ -120,6 +120,7 @@ class LoginPage extends StatelessWidget {
                                       builder: (context) => StudentHomePage()));
                             }),
                         Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
                               "Don't have and account? ",
@@ -137,12 +138,12 @@ class LoginPage extends StatelessWidget {
                                 );
                               },
                               child: Text(
-                                "Click here",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    .copyWith(color: kPink),
-                              ),
+                                  "Click here",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1
+                                      .copyWith(color: kPink),
+                                ),
                             ),
                           ],
                         ),

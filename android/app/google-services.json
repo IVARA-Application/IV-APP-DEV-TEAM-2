@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "22383561423",
+    "project_id": "iv---mobile-app-2",
+    "storage_bucket": "iv---mobile-app-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22383561423:android:7ea197431b6c41f38385ba",
+        "android_client_info": {
+          "package_name": "com.example.new_ivara_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22383561423-a6ujkscqfgdufh4ct8b6mictgh7u5le8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUK2Ns4-pqi3aU6wGPCgX6iRJmARjte_M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22383561423-a6ujkscqfgdufh4ct8b6mictgh7u5le8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
