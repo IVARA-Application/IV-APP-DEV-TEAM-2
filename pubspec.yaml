@@ -35,6 +35,8 @@ dependencies:
   condition: ^0.0.8
   image_picker: ^0.7.2
   chewie: ^1.0.0
+  carousel_pro: ^1.0.0
+  video_player: ^2.0.1
 
 dev_dependencies:
   flutter_test:
