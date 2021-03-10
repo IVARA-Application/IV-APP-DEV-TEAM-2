@@ -24,7 +24,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  expandable: ^4.1.4
   flutter_glow: ^0.1.2
   font_awesome_flutter: ^8.11.0
   glass_kit: ^1.0.2
