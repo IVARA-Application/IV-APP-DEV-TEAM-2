@@ -21,6 +21,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
         looping: widget.isLoop,
         aspectRatio: 16 / 9,
         autoInitialize: true);
+    super.initState();
   }
 
   @override

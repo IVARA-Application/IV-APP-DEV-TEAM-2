@@ -40,7 +40,7 @@ class TutionChapter extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 100),
+            SizedBox(height: 56),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 30, vertical: 10.0),

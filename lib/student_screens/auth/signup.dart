@@ -110,7 +110,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           label: "Register",
                           onTap: () => Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (_) => TutionClasses()),
+                            MaterialPageRoute(builder: (_) => EntranceExam()),  
                           ),
                         ),
                         Row(

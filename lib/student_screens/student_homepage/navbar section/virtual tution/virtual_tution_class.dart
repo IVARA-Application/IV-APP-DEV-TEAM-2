@@ -41,7 +41,7 @@ class _TutionClassesState extends State<TutionClasses> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 100),
+            SizedBox(height: 56),
             Padding(
               padding: const EdgeInsets.only(left: 30),
               child: Text(

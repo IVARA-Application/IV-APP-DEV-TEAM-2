@@ -41,9 +41,9 @@ class _TutionVideosState extends State<TutionVideos> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 100),
+            SizedBox(height: 56),
             Padding(
-              padding: const EdgeInsets.only(left: 30),
+              padding: const EdgeInsets.all(8),
               child: Text(
                 "Virtual Tuition Courses",
                 style: ftt(context).headline5.copyWith(color: Colors.white),
