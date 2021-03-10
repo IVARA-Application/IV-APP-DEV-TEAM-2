@@ -130,13 +130,14 @@ class _SignUpPageState extends State<SignUpPage> {
                             Flexible(
                               child: Text(
                                 'I agree with all the terms and condion',
-                                style:ftt(context).bodyText1,
+                                style: ftt(context).bodyText1,
                                 softWrap: true,
                               ),
                             ),
                           ],
                         ),
                         Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
                               "Already have an account? ",
@@ -155,7 +156,6 @@ class _SignUpPageState extends State<SignUpPage> {
                               child: Text(
                                 "Click here",
                                 style: ftt(context)
-                                   
                                     .bodyText1
                                     .copyWith(color: kPink),
                               ),

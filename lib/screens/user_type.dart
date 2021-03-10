@@ -15,7 +15,6 @@ class UserType extends StatefulWidget {
 enum ChoiceMethod { student, teacher, parent, none }
 
 class _UserTypeState extends State<UserType> {
-  ChoiceMethod _method = ChoiceMethod.none;
 
   //TODO: Add some logic for different user type
 
@@ -25,6 +24,7 @@ class _UserTypeState extends State<UserType> {
 
   @override
   Widget build(BuildContext context) {
+  ChoiceMethod _method = ChoiceMethod.none;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
@@ -72,10 +72,12 @@ class _UserTypeState extends State<UserType> {
                 onTap: () {},
                 value: ChoiceMethod.student,
                 groupValue: _method,
+
                 onChanged: (value) {
                   setState(() {
                     _method = value;
                   });
+
                   foo();
                 },
               ),
@@ -137,6 +139,8 @@ class UserTypeButton extends StatelessWidget{
       margin: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
       shape:kCardShape,
       child: RadioListTile(
+        
+        // toggleable: true,
         value: value,
         groupValue: groupValue,
         onChanged: onChanged,
