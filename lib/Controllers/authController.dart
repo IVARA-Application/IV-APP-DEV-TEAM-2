@@ -8,7 +8,7 @@ class AuthController extends GetxController {
   RxBool isSignedIn = false.obs;
   FirebaseAuth auth = FirebaseAuth.instance;
   Rx<User> user;
-  String userType="";
+  String userType = "";
   @override
   void onInit() {
     // TODO: implement onInit
@@ -31,7 +31,7 @@ class AuthController extends GetxController {
           userType = userDoc.data()['userType'];
           isSignedIn = true.obs;
           print("User is signed in");
-          Get.offAll(()=>StudentHomePage());
+          Get.offAll(() => StudentHomePage());
         }
       },
     );
@@ -50,33 +50,52 @@ class AuthController extends GetxController {
         'email': user.value.email,
         'userType': userType,
       });
-      Get.offAll(()=>StudentHomePage());
+      Get.offAll(() => StudentHomePage());
 
       isSignedIn = true.obs;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
+        Get.showSnackbar(new GetBar(
+          title: "weak password",
+          message: "The password provided is too weak.",
+          duration: Duration(
+            seconds: 2,
+          ),
+        ));
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
+        Get.showSnackbar(new GetBar(
+          title: "Email already in use",
+          message: "The account already exists for that email.",
+          duration: Duration(
+            seconds: 2,
+          ),
+        ));
       }
     } catch (e) {
       print(e);
+      Get.showSnackbar(new GetBar(
+        title: "Error",
+        message: e.toString(),
+        duration: Duration(
+          seconds: 2,
+        ),
+      ));
     }
   }
 
   Future signIn(String email, String password) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: email,
-              password: password);
+          .signInWithEmailAndPassword(email: email, password: password);
       user.value = userCredential.user;
       DocumentSnapshot userDoc = await FirebaseFirestore.instance
           .collection("Users")
           .doc(user.value.uid)
           .get();
       userType = userDoc.data()['userType'].obs;
-      Get.offAll(()=>StudentHomePage());
+      Get.offAll(() => StudentHomePage());
       isSignedIn = true.obs;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -86,8 +105,9 @@ class AuthController extends GetxController {
       }
     }
   }
-  void signOut()async{
+
+  void signOut() async {
     await FirebaseAuth.instance.signOut();
-    Get.offAll(()=>UserType());
+    Get.offAll(() => UserType());
   }
 }
