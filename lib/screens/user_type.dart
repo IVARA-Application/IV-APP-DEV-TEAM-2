@@ -20,12 +20,12 @@ class _UserTypeState extends State<UserType> {
   //TODO: Add some logic for different user type
   ChoiceMethod _method = ChoiceMethod.none;
 
-  void foo() {
+  void foo(userType) {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (_) => LoginPage(
-                  "student",
+                  userType,
                 )));
   }
 
@@ -84,7 +84,7 @@ class _UserTypeState extends State<UserType> {
                     _method = value;
                   });
 
-                  foo();
+                  foo("student");
                 },
               ),
               UserTypeButton(
@@ -96,7 +96,7 @@ class _UserTypeState extends State<UserType> {
                   setState(() {
                     _method = value;
                   });
-                  foo();
+                  foo("teacher");
                 },
               ),
               UserTypeButton(
@@ -108,7 +108,7 @@ class _UserTypeState extends State<UserType> {
                   setState(() {
                     _method = value;
                   });
-                  foo();
+                  foo("parent");
                 },
               ),
               SizedBox(height: 10),

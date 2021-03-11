@@ -88,6 +88,6 @@ class AuthController extends GetxController {
   }
   void signOut()async{
     await FirebaseAuth.instance.signOut();
-    Get.offAll(UserType());
+    Get.offAll(()=>UserType());
   }
 }
