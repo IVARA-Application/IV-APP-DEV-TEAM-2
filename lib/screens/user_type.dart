@@ -1,7 +1,9 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:new_ivara_app/lib.dart';
+import 'package:new_ivara_app/constant/colours.dart';
+import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/student_screens/auth/login.dart';
 
 class UserType extends StatefulWidget {
   static String id = 'UserType';
@@ -15,16 +17,21 @@ class UserType extends StatefulWidget {
 enum ChoiceMethod { student, teacher, parent, none }
 
 class _UserTypeState extends State<UserType> {
+  //TODO: Add some logic for different user type
   ChoiceMethod _method = ChoiceMethod.none;
 
-  //TODO: Add some logic for different user type
-
-  void foo() {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => LoginPage()));
+  void foo(userType) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (_) => LoginPage(
+                  userType,
+                )));
   }
 
   @override
   Widget build(BuildContext context) {
+    
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
@@ -76,7 +83,8 @@ class _UserTypeState extends State<UserType> {
                   setState(() {
                     _method = value;
                   });
-                  foo();
+
+                  foo("student");
                 },
               ),
               UserTypeButton(
@@ -88,7 +96,7 @@ class _UserTypeState extends State<UserType> {
                   setState(() {
                     _method = value;
                   });
-                  foo();
+                  foo("teacher");
                 },
               ),
               UserTypeButton(
@@ -100,7 +108,7 @@ class _UserTypeState extends State<UserType> {
                   setState(() {
                     _method = value;
                   });
-                  foo();
+                  foo("parent");
                 },
               ),
               SizedBox(height: 10),
@@ -112,7 +120,7 @@ class _UserTypeState extends State<UserType> {
   }
 }
 
-class UserTypeButton extends StatelessWidget{
+class UserTypeButton extends StatelessWidget {
   final String userType;
   final Function onTap;
   final dynamic value;
@@ -130,18 +138,17 @@ class UserTypeButton extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-
-
     return Card(
       elevation: 4.0,
       margin: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-      shape:kCardShape,
+      shape: kCardShape,
       child: RadioListTile(
+        // toggleable: true,
         value: value,
         groupValue: groupValue,
         onChanged: onChanged,
         controlAffinity: ListTileControlAffinity.trailing,
-        shape:kCardShape,
+        shape: kCardShape,
         title: Text(
           userType,
           style: Theme.of(context)

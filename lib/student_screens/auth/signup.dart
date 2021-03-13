@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:glassmorphism/glassmorphism.dart';
-import 'package:new_ivara_app/lib.dart';
+import 'package:new_ivara_app/Controllers/authController.dart';
+import 'package:new_ivara_app/constant/colours.dart';
+import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/shared/custom_elevated_button.dart';
+import 'package:new_ivara_app/shared/custom_text_field.dart';
+import 'package:new_ivara_app/student_screens/auth/login.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/entrance%20exam/entrance_exam.dart';
 
 class SignUpPage extends StatefulWidget {
-  static String id = 'SignupPage';
-  const SignUpPage({Key key}) : super(key: key);
+  String userType;
+  SignUpPage(this.userType);
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -12,15 +19,14 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   bool isCheck = false;
+  TextEditingController _nameC = TextEditingController();
+  TextEditingController _emailC = TextEditingController();
+  TextEditingController _phoneC = TextEditingController();
+  TextEditingController _passC = TextEditingController();
+  TextEditingController _repassC = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _nameC = TextEditingController();
-    TextEditingController _emailC = TextEditingController();
-    TextEditingController _phoneC = TextEditingController();
-    TextEditingController _passC = TextEditingController();
-    TextEditingController _repassC = TextEditingController();
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -107,12 +113,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           hintText: "Retype Password",
                         ),
                         CustomElevatedButton(
-                          label: "Register",
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (_) => TutionClasses()),
-                          ),
-                        ),
+                            label: "Register",
+                            onTap: () {
+                              Get.find<AuthController>().signup(
+                                  _emailC.text, _passC.text, widget.userType);
+                            }),
                         Row(
                           children: [
                             Checkbox(
@@ -130,13 +135,14 @@ class _SignUpPageState extends State<SignUpPage> {
                             Flexible(
                               child: Text(
                                 'I agree with all the terms and condion',
-                                style:ftt(context).bodyText1,
+                                style: ftt(context).bodyText1,
                                 softWrap: true,
                               ),
                             ),
                           ],
                         ),
                         Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
                               "Already have an account? ",
@@ -149,13 +155,13 @@ class _SignUpPageState extends State<SignUpPage> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => LoginPage()),
+                                      builder: (_) =>
+                                          LoginPage(widget.userType)),
                                 );
                               },
                               child: Text(
                                 "Click here",
                                 style: ftt(context)
-                                   
                                     .bodyText1
                                     .copyWith(color: kPink),
                               ),
