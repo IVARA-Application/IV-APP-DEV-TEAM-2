@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:new_ivara_app/lib.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/academic/academic_section.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/studentHomepage.dart';
+//import 'package:new_ivara_app/lib.dart';
+
+import 'academic/upcoming_test.dart';
+import 'ar/ar_calssroom.dart';
 
 class StudentHome extends StatelessWidget {
   Widget makeTab({color, text1, text2, image, height, width, onTap}) {
@@ -99,7 +104,11 @@ class StudentHome extends StatelessWidget {
                 text2: 'Record',
                 image: 'assets/attendance1.png',
                 height: height,
-                width: width),
+                width: width,
+                onTap: (){
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>StudentHomePage(2)));
+                }
+                ),
             SizedBox(
               width: width * 0.08,
             ),
@@ -111,7 +120,7 @@ class StudentHome extends StatelessWidget {
                 height: height,
                 width: width,
                 onTap: (){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>StudentUpcomingTest()));
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>StudentHomePage(4)));
                 }
                 ),
           ],

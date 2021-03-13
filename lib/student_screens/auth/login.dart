@@ -119,8 +119,9 @@ class LoginPage extends StatelessWidget {
                         CustomElevatedButton(
                             label: "Login",
                             onTap: () {
-                              Get.find<AuthController>().signIn(
-                                  _nameController.text, _textController.text);
+                              // Get.find<AuthController>().signIn(
+                              //     _nameController.text, _textController.text);
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentHomePage(0)));
                             }),
                         Row(
                           mainAxisSize: MainAxisSize.min,

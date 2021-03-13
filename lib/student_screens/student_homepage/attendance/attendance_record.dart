@@ -22,39 +22,40 @@ class _StudentAttendanceState extends State<StudentAttendance> {
     'Nov',
     'Dec'
   ];
+  List<String> days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   List<String> years = ['2020', '2021', '2022'];
-  List classes=[
+  List classes = [
     {
-      'subjectName':'Subject Name',
-      'teacherName':'Teacher Name',
-      'id':'IVID',
-      'classNo':'Class Number',
-      'time':'09:00 AM',
-      'duration':'01:30 hrs'
+      'subjectName': 'Subject Name',
+      'teacherName': 'Teacher Name',
+      'id': 'IVID',
+      'classNo': 'Class Number',
+      'time': '09:00 AM',
+      'duration': '01:30 hrs'
     },
     {
-      'subjectName':'Subject Name',
-      'teacherName':'Teacher Name',
-      'id':'IVID',
-      'classNo':'Class Number',
-      'time':'10:40 AM',
-      'duration':'01:30 hrs'
+      'subjectName': 'Subject Name',
+      'teacherName': 'Teacher Name',
+      'id': 'IVID',
+      'classNo': 'Class Number',
+      'time': '10:40 AM',
+      'duration': '01:30 hrs'
     },
     {
-      'subjectName':'Subject Name',
-      'teacherName':'Teacher Name',
-      'id':'IVID',
-      'classNo':'Class Number',
-      'time':'10:40 AM',
-      'duration':'01:30 hrs'
+      'subjectName': 'Subject Name',
+      'teacherName': 'Teacher Name',
+      'id': 'IVID',
+      'classNo': 'Class Number',
+      'time': '10:40 AM',
+      'duration': '01:30 hrs'
     },
     {
-      'subjectName':'Subject Name',
-      'teacherName':'Teacher Name',
-      'id':'IVID',
-      'classNo':'Class Number',
-      'time':'10:40 AM',
-      'duration':'01:30 hrs'
+      'subjectName': 'Subject Name',
+      'teacherName': 'Teacher Name',
+      'id': 'IVID',
+      'classNo': 'Class Number',
+      'time': '10:40 AM',
+      'duration': '01:30 hrs'
     }
   ];
 
@@ -105,7 +106,12 @@ class _StudentAttendanceState extends State<StudentAttendance> {
                                       fontSize: height * 0.025,
                                       color: kDarkBlue)),
                             )),
-                        SizedBox(height: height * 0.01),
+                        SizedBox(height: height * 0.005),
+                        Text(
+                        days[index % 7], //(index + 1).toString(),
+                        style: TextStyle(
+                            fontSize: height * 0.015, color: Colors.white),
+                       ),
                         Container(
                             height: height * 0.005,
                             width: width * 0.04,
@@ -123,14 +129,29 @@ class _StudentAttendanceState extends State<StudentAttendance> {
                         left: index == 0 ? width * 0.05 : height * 0.001,
                         right: index == 30 ? width * 0.05 : height * 0.001),
                     child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            currentIndex = index;
-                          });
-                        },
-                        child: Text((index + 1).toString(),
-                            style: TextStyle(
-                                fontSize: height * 0.025, color: kDarkBlue))),
+                      onTap: () {
+                        setState(() {
+                          currentIndex = index;
+                        });
+                      },
+                      // child: Text(
+                      //   days[index % 7], //(index + 1).toString(),
+                      //   style: TextStyle(
+                      //       fontSize: height * 0.025, color: kDarkBlue),
+                      // ),
+                      child:Column(children: [
+                        Text(
+                        (index + 1).toString(),
+                        style: TextStyle(
+                            fontSize: height * 0.025, color: kDarkBlue),
+                      ),
+                      Text(
+                        days[index % 7], //(index + 1).toString(),
+                        style: TextStyle(
+                            fontSize: height * 0.015, color: kDarkBlue),
+                       )
+                      ],)
+                    ),
                   ),
                 );
         });
@@ -155,7 +176,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
             borderRadius: BorderRadius.all(Radius.circular(height * 0.015)),
             color: Colors.transparent,
             child: Container(
-              height: height * 0.14,
+              height: height * 0.155,
               width: width * 0.8,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(height * 0.015)),
@@ -212,56 +233,80 @@ class _StudentAttendanceState extends State<StudentAttendance> {
                 ),
               ),
               child: ListView.builder(
-                itemCount: classes.length,
-                itemBuilder: (context, index){
-                return Padding(
-                  padding: EdgeInsets.only(top:height*0.01),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                    Container(
-                      width:width*0.28,
-                      child: Column(children:[
-                        Card(child: Padding(
-                          padding: EdgeInsets.symmetric(vertical:height*0.005,horizontal:width*0.02),
-                          child: Text(classes[index]['time'],style:TextStyle(color:kDarkBlue)),
-                        ),),
-                        SizedBox(height:height*0.04),
-                        Card(
-                          color: kLightBlue,
-                          child: Padding(
-                          padding: EdgeInsets.symmetric(vertical:height*0.005,horizontal:width*0.02),
-                          child: Text(classes[index]['duration'],style:TextStyle(color:Colors.white)),
-                        ),)
-                      ]),
-                    ),
-                    Column(children: [
-                      Padding(
-                        padding:EdgeInsets.symmetric(vertical:height*0.005),
-                        child: Icon(Icons.fiber_manual_record,color:Colors.white),
-                      ),
-                      Container(height:height*0.15,width:width*0.005, color:Colors.white),
-                      index==classes.length-1?Padding(
-                        padding:EdgeInsets.symmetric(vertical:height*0.005),
-                        child: Icon(Icons.fiber_manual_record,color:Colors.white),
-                      ):Center()
-                    ],),
-                    Container(
-                      height:height*0.18,
-                      padding: EdgeInsets.symmetric(horizontal:width*0.05),
-                      child: Column(
+                  itemCount: classes.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.only(top: height * 0.01),
+                      child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                        Text(classes[index]['subjectName'],style:TextStyle(fontSize: height*0.03)),
-                        Text(classes[index]['teacherName']),
-                        Text(classes[index]['id']),
-                        Text(classes[index]['classNo'])
-                      ],),
-                    )
-                  ],),
-                );
-              }),
+                          Container(
+                            width: width * 0.28,
+                            child: Column(children: [
+                              Card(
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: height * 0.005,
+                                      horizontal: width * 0.02),
+                                  child: Text(classes[index]['time'],
+                                      style: TextStyle(color: kDarkBlue)),
+                                ),
+                              ),
+                              SizedBox(height: height * 0.04),
+                              Card(
+                                color: kLightBlue,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: height * 0.005,
+                                      horizontal: width * 0.02),
+                                  child: Text(classes[index]['duration'],
+                                      style: TextStyle(color: Colors.white)),
+                                ),
+                              )
+                            ]),
+                          ),
+                          Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: height * 0.005),
+                                child: Icon(Icons.fiber_manual_record,
+                                    color: Colors.white),
+                              ),
+                              Container(
+                                  height: height * 0.15,
+                                  width: width * 0.005,
+                                  color: Colors.white),
+                              index == classes.length - 1
+                                  ? Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: height * 0.005),
+                                      child: Icon(Icons.fiber_manual_record,
+                                          color: Colors.white),
+                                    )
+                                  : Center()
+                            ],
+                          ),
+                          Container(
+                            height: height * 0.18,
+                            padding:
+                                EdgeInsets.symmetric(horizontal: width * 0.05),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(classes[index]['subjectName'],
+                                    style: TextStyle(fontSize: height * 0.03)),
+                                Text(classes[index]['teacherName']),
+                                Text(classes[index]['id']),
+                                Text(classes[index]['classNo'])
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  }),
             ),
           )
         ],

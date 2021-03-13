@@ -8,15 +8,20 @@ import 'package:new_ivara_app/student_screens/student_homepage/attendance/attend
 import 'package:new_ivara_app/student_screens/student_homepage/chat/chat_page.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/home.dart';
 
+import 'notification/notification.dart';
+
 class StudentHomePage extends StatefulWidget {
+  int index;
+  StudentHomePage(this.index);
   @override
-  _StudentHomePageState createState() => _StudentHomePageState();
+  _StudentHomePageState createState() => _StudentHomePageState(index);
 }
 
 class _StudentHomePageState extends State<StudentHomePage> {
   static String id = 'StudentHomePage';
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  int currentIndex = 0;
+  int currentIndex;
+  _StudentHomePageState(this.currentIndex);
   List tabs = [
     StudentHome(),
     StudentNotification(),
@@ -73,9 +78,9 @@ class _StudentHomePageState extends State<StudentHomePage> {
                         color: Color(0xFF697AE4),
                       ),
                       width: width * 0.9,
-                      height: height * 0.08,
+                      height: height * 0.085,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: width * 0.02),
+                        padding: EdgeInsets.symmetric(horizontal: width * 0.015),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -276,5 +281,4 @@ class _StudentHomePageState extends State<StudentHomePage> {
       }
     }
     
-    class StudentNotification {
-}
+
