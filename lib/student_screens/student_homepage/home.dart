@@ -100,7 +100,7 @@ class StudentHome extends StatelessWidget {
           children: [
             makeTab(
                 color: Color(0xFFF8B461),
-                text1: 'Attendance',
+                text1: 'Timetable',
                 text2: 'Record',
                 image: 'assets/attendance1.png',
                 height: height,
