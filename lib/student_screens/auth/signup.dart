@@ -50,13 +50,14 @@ class _SignUpPageState extends State<SignUpPage> {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Text(
-                    "Welcome to IVARA",
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline3
-                        .copyWith(color: Colors.white),
+                  child: Center(
+                    child: Text(
+                      "Welcome to IVARA",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline4
+                          .copyWith(color: Colors.white),
+                    ),
                   ),
                 ),
                 GlassmorphicContainer(

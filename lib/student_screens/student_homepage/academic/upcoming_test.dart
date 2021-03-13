@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:new_ivara_app/constant/constants.dart';
 import 'package:new_ivara_app/student_screens/drawer.dart';
+
 class StudentUpcomingTest extends StatefulWidget {
   @override
   _StudentUpcomingTestState createState() => _StudentUpcomingTestState();
@@ -18,19 +20,7 @@ class _StudentUpcomingTestState extends State<StudentUpcomingTest> {
         child: Stack(
           children: [
             Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: [0.1, 0.5, 0.7, 0.9],
-                  colors: [
-                    Color(0xFF8569C5),
-                    Color(0xFFC579B5),
-                    Color(0xFFF48380),
-                    Color(0xFFF3d37B),
-                  ],
-                ),
-              ),
+              decoration: kBGdecoration,
               height: double.infinity,
               width: double.infinity,
               child: Column(
@@ -45,8 +35,7 @@ class _StudentUpcomingTestState extends State<StudentUpcomingTest> {
                         fontWeight: FontWeight.w300,
                         fontSize: height * 0.03),
                   ),
-                  SizedBox(height:height*0.03),
-                  
+                  SizedBox(height: height * 0.03),
                 ],
               ),
             ),

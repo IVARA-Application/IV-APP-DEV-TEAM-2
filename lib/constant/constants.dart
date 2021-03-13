@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_ivara_app/constant/colours.dart';
 
 const BoxDecoration kBGdecoration = BoxDecoration(
   gradient: LinearGradient(
@@ -11,6 +12,15 @@ const BoxDecoration kBGdecoration = BoxDecoration(
       Color(0xFFF48380),
       Color(0xFFF3d37B),
     ],
+  ),
+);
+
+const BoxDecoration kPBGdecoration = BoxDecoration(
+  gradient: LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    // stops: [0.0, 0.25, 0.75, 1.0],
+    colors: [kPurple, kLightRed],
   ),
 );
 

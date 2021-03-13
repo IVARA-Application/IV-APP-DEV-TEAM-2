@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:new_ivara_app/lib.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/academic/upcoming_test.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/ar/ar_calssroom.dart';
 
 class StudentHome extends StatelessWidget {
   Widget makeTab({color, text1, text2, image, height, width, onTap}) {
