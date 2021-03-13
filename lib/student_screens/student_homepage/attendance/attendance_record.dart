@@ -165,7 +165,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
       child: Column(
         children: [
           SizedBox(height: height * 0.06),
-          Text('Attendance Record',
+          Text('Timetable Record',
               style: TextStyle(
                   fontSize: height * 0.03,
                   color: Colors.white,
