@@ -125,31 +125,35 @@ class StudentAcademicSection extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(height * 0.015)),
             color: Colors.transparent,
             child: Container(
-              height: height * 0.1,
-              width: width * 0.8,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(height * 0.015)),
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.bottomCenter,
-                  stops: [0.15, 0.45, 0.75, 1.0],
-                  colors: [
-                    Color(0xFFFEFDFE).withOpacity(0.8),
-                    Color(0xFFFAE3E6).withOpacity(0.8),
-                    Color(0xFFF6C5CD).withOpacity(0.9),
-                    Color(0xFFED919F).withOpacity(0.9),
-                  ],
+                height: height * 0.1,
+                width: width * 0.85,
+                decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.all(Radius.circular(height * 0.015)),
+                  gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.bottomCenter,
+                    stops: [0.15, 0.45, 0.75, 1.0],
+                    colors: [
+                      Color(0xFFFEFDFE).withOpacity(0.8),
+                      Color(0xFFFAE3E6).withOpacity(0.8),
+                      Color(0xFFF6C5CD).withOpacity(0.9),
+                      Color(0xFFED919F).withOpacity(0.9),
+                    ],
+                  ),
                 ),
-              ),
-              child:Padding(
-                padding: EdgeInsets.symmetric(horizontal:width*0.05),
-                child: Row(children: [
-                  Text('Subject Wise Analysis',style:TextStyle(fontSize:height*0.03)),
-                  Spacer(),
-                  Icon(Icons.keyboard_arrow_right,size:height*0.05,color:Colors.white)
-                ],),
-              )
-            ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                  child: Row(
+                    children: [
+                      Text('Subject Wise Analysis',
+                          style: TextStyle(fontSize: height * 0.025)),
+                      Spacer(),
+                      Icon(Icons.keyboard_arrow_right,
+                          size: height * 0.05, color: Colors.white)
+                    ],
+                  ),
+                )),
           ),
           SizedBox(height: height * 0.03),
           Material(
@@ -157,31 +161,35 @@ class StudentAcademicSection extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(height * 0.015)),
             color: Colors.transparent,
             child: Container(
-              height: height * 0.11,
-              width: width * 0.8,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(height * 0.015)),
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.bottomCenter,
-                  stops: [0.15, 0.45, 0.75, 1.0],
-                  colors: [
-                    Color(0xFFFEFDFE).withOpacity(0.8),
-                    Color(0xFFFAE3E6).withOpacity(0.8),
-                    Color(0xFFF6C5CD).withOpacity(0.9),
-                    Color(0xFFED919F).withOpacity(0.9),
-                  ],
+                height: height * 0.11,
+                width: width * 0.85,
+                decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.all(Radius.circular(height * 0.015)),
+                  gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.bottomCenter,
+                    stops: [0.15, 0.45, 0.75, 1.0],
+                    colors: [
+                      Color(0xFFFEFDFE).withOpacity(0.8),
+                      Color(0xFFFAE3E6).withOpacity(0.8),
+                      Color(0xFFF6C5CD).withOpacity(0.9),
+                      Color(0xFFED919F).withOpacity(0.9),
+                    ],
+                  ),
                 ),
-              ),
-              child:Padding(
-                padding: EdgeInsets.symmetric(horizontal:width*0.05),
-                child: Row(children: [
-                  Text('Overall Analysis',style:TextStyle(fontSize:height*0.03)),
-                  Spacer(),
-                  Icon(Icons.keyboard_arrow_right,size:height*0.05,color:Colors.white)
-                ],),
-              )
-            ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                  child: Row(
+                    children: [
+                      Text('Overall Analysis',
+                          style: TextStyle(fontSize: height * 0.025)),
+                      Spacer(),
+                      Icon(Icons.keyboard_arrow_right,
+                          size: height * 0.05, color: Colors.white)
+                    ],
+                  ),
+                )),
           ),
           SizedBox(height: height * 0.03),
           Material(
@@ -189,31 +197,35 @@ class StudentAcademicSection extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(height * 0.015)),
             color: Colors.transparent,
             child: Container(
-              height: height * 0.11,
-              width: width * 0.8,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(height * 0.015)),
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.bottomCenter,
-                  stops: [0.15, 0.45, 0.75, 1.0],
-                  colors: [
-                    Color(0xFFFEFDFE).withOpacity(0.8),
-                    Color(0xFFFAE3E6).withOpacity(0.8),
-                    Color(0xFFF6C5CD).withOpacity(0.9),
-                    Color(0xFFED919F).withOpacity(0.9),
-                  ],
+                height: height * 0.11,
+                width: width * 0.85,
+                decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.all(Radius.circular(height * 0.015)),
+                  gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.bottomCenter,
+                    stops: [0.15, 0.45, 0.75, 1.0],
+                    colors: [
+                      Color(0xFFFEFDFE).withOpacity(0.8),
+                      Color(0xFFFAE3E6).withOpacity(0.8),
+                      Color(0xFFF6C5CD).withOpacity(0.9),
+                      Color(0xFFED919F).withOpacity(0.9),
+                    ],
+                  ),
                 ),
-              ),
-              child:Padding(
-                padding: EdgeInsets.symmetric(horizontal:width*0.05),
-                child: Row(children: [
-                  Text('Upcoming Test Schedule',style:TextStyle(fontSize:height*0.03)),
-                  Spacer(),
-                  Icon(Icons.keyboard_arrow_right,size:height*0.05,color:Colors.white)
-                ],),
-              )
-            ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                  child: Row(
+                    children: [
+                      Text('Upcoming Test Schedule',
+                          style: TextStyle(fontSize: height * 0.025)),
+                      Spacer(),
+                      Icon(Icons.keyboard_arrow_right,
+                          size: height * 0.05, color: Colors.white)
+                    ],
+                  ),
+                )),
           ),
         ],
       ),

@@ -31,7 +31,7 @@ class AuthController extends GetxController {
           userType = userDoc.data()['userType'];
           isSignedIn = true.obs;
           print("User is signed in");
-          Get.offAll(() => StudentHomePage());
+          Get.offAll(() => StudentHomePage(0));
         }
       },
     );
@@ -50,7 +50,7 @@ class AuthController extends GetxController {
         'email': user.value.email,
         'userType': userType,
       });
-      Get.offAll(() => StudentHomePage());
+      Get.offAll(() => StudentHomePage(0));
 
       isSignedIn = true.obs;
     } on FirebaseAuthException catch (e) {
@@ -95,7 +95,7 @@ class AuthController extends GetxController {
           .doc(user.value.uid)
           .get();
       userType = userDoc.data()['userType'].obs;
-      Get.offAll(() => StudentHomePage());
+      Get.offAll(() => StudentHomePage(0));
       isSignedIn = true.obs;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

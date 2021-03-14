@@ -96,7 +96,7 @@ class _StudentNotificationState extends State<StudentNotification> {
                                     BorderRadius.all(Radius.circular(height)),
                                 color: Color(0xFFF5B421)),
                             child: Center(
-                                child: Text('E',
+                                child: Text(notif[i]['subject'].substring(0, 1),
                                     style: TextStyle(
                                         fontSize: height * 0.03,
                                         fontWeight: FontWeight.bold,
@@ -104,7 +104,7 @@ class _StudentNotificationState extends State<StudentNotification> {
                         SizedBox(width: width * 0.05),
                         Text(notif[i]['subject'],
                             style: TextStyle(
-                                fontSize: height * 0.03,
+                                fontSize: height * 0.025,
                                 fontWeight: FontWeight.w500)),
                         Spacer(),
                         IconButton(
@@ -145,8 +145,8 @@ class _StudentNotificationState extends State<StudentNotification> {
                     Text(notifications[i]['date'],
                         style: TextStyle(
                             fontSize: height * 0.022, color: Colors.white)),
-                    makeNotificationCards(notifications[i]['notification'],
-                        height, width, i),
+                    makeNotificationCards(
+                        notifications[i]['notification'], height, width, i),
                     SizedBox(height: height * 0.02),
                   ],
                 ),
