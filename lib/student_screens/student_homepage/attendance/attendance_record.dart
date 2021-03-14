@@ -35,6 +35,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
     'saturday',
     'sunday'
   ];
+  List<String> days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   List classes = [
     {
       'subjectName': 'Subject Name',
@@ -137,7 +138,12 @@ class _StudentAttendanceState extends State<StudentAttendance> {
                                       fontSize: height * 0.025,
                                       color: kDarkBlue)),
                             )),
-                        SizedBox(height: height * 0.01),
+                        SizedBox(height: height * 0.005),
+                        Text(
+                          days[index % 7], //(index + 1).toString(),
+                          style: TextStyle(
+                              fontSize: height * 0.015, color: Colors.white),
+                        ),
                         Container(
                             height: height * 0.005,
                             width: width * 0.04,
@@ -160,9 +166,25 @@ class _StudentAttendanceState extends State<StudentAttendance> {
                             currentIndex = index;
                           });
                         },
-                        child: Text((index + 1).toString(),
-                            style: TextStyle(
-                                fontSize: height * 0.025, color: kDarkBlue))),
+                        // child: Text(
+                        //   days[index % 7], //(index + 1).toString(),
+                        //   style: TextStyle(
+                        //       fontSize: height * 0.025, color: kDarkBlue),
+                        // ),
+                        child: Column(
+                          children: [
+                            Text(
+                              (index + 1).toString(),
+                              style: TextStyle(
+                                  fontSize: height * 0.025, color: kDarkBlue),
+                            ),
+                            Text(
+                              days[index % 7], //(index + 1).toString(),
+                              style: TextStyle(
+                                  fontSize: height * 0.015, color: kDarkBlue),
+                            )
+                          ],
+                        )),
                   ),
                 );
         });
@@ -176,7 +198,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
       child: Column(
         children: [
           SizedBox(height: height * 0.06),
-          Text('Attendance Record',
+          Text('Timetable Record',
               style: TextStyle(
                   fontSize: height * 0.03,
                   color: Colors.white,
@@ -228,7 +250,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
             color: Colors.transparent,
             child: Container(
               height: height * 0.5,
-              width: width * 0.8,
+              width: width * 0.85,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(height * 0.015)),
                 gradient: LinearGradient(
@@ -252,7 +274,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            width: width * 0.28,
+                            width: width * 0.25,
                             child: Column(children: [
                               Card(
                                 child: Padding(
@@ -301,13 +323,13 @@ class _StudentAttendanceState extends State<StudentAttendance> {
                           Container(
                             height: height * 0.18,
                             padding:
-                                EdgeInsets.symmetric(horizontal: width * 0.05),
+                                EdgeInsets.symmetric(horizontal: width * 0.02),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text(classes[index]['subjectName'],
-                                    style: TextStyle(fontSize: height * 0.03)),
+                                    style: TextStyle(fontSize: height * 0.028)),
                                 Text(classes[index]['teacherName']),
                                 Text(classes[index]['id']),
                                 Text(classes[index]['classNo'])

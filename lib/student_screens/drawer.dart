@@ -70,15 +70,17 @@ class _StudentDrawerState extends State<StudentDrawer> {
                   MaterialPageRoute(builder: (context) => HealMyMindPage()));
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: height * 0.03, vertical: height * 0.015),
+              padding: EdgeInsets.only(
+                  left: height * 0.03,
+                  top: height * 0.01,
+                  bottom: height * 0.01),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Heal My Mind',
                     style: TextStyle(
-                        fontSize: height * 0.028,
+                        fontSize: height * 0.025,
                         fontWeight: FontWeight.w500,
                         color: kDarkBlue),
                     textAlign: TextAlign.center,
@@ -102,15 +104,17 @@ class _StudentDrawerState extends State<StudentDrawer> {
                   MaterialPageRoute(builder: (context) => StudyAbroadPage()));
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: height * 0.03, vertical: height * 0.015),
+              padding: EdgeInsets.only(
+                  left: height * 0.03,
+                  top: height * 0.01,
+                  bottom: height * 0.01),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Study Abroad Support',
                     style: TextStyle(
-                        fontSize: height * 0.028,
+                        fontSize: height * 0.025,
                         fontWeight: FontWeight.w500,
                         color: kDarkBlue),
                     textAlign: TextAlign.center,
@@ -132,15 +136,17 @@ class _StudentDrawerState extends State<StudentDrawer> {
               });
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: height * 0.03, vertical: height * 0.015),
+              padding: EdgeInsets.only(
+                  left: height * 0.03,
+                  top: height * 0.01,
+                  bottom: height * 0.01),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Skill Development',
                     style: TextStyle(
-                        fontSize: height * 0.028,
+                        fontSize: height * 0.025,
                         fontWeight: FontWeight.w500,
                         color: kDarkBlue),
                     textAlign: TextAlign.center,
@@ -162,15 +168,17 @@ class _StudentDrawerState extends State<StudentDrawer> {
               });
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: height * 0.03, vertical: height * 0.015),
+              padding: EdgeInsets.only(
+                  left: height * 0.03,
+                  top: height * 0.01,
+                  bottom: height * 0.01),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Entrance Preperation',
                     style: TextStyle(
-                        fontSize: height * 0.028,
+                        fontSize: height * 0.025,
                         fontWeight: FontWeight.w500,
                         color: kDarkBlue),
                     textAlign: TextAlign.center,
@@ -194,15 +202,17 @@ class _StudentDrawerState extends State<StudentDrawer> {
                   MaterialPageRoute(builder: (context) => DoubtPortalPage()));
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: height * 0.03, vertical: height * 0.015),
+              padding: EdgeInsets.only(
+                  left: height * 0.03,
+                  top: height * 0.01,
+                  bottom: height * 0.01),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     '24 X 7 Doubt Portal',
                     style: TextStyle(
-                        fontSize: height * 0.028,
+                        fontSize: height * 0.025,
                         fontWeight: FontWeight.w500,
                         color: kDarkBlue),
                     textAlign: TextAlign.center,
@@ -224,15 +234,17 @@ class _StudentDrawerState extends State<StudentDrawer> {
               });
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: height * 0.03, vertical: height * 0.015),
+              padding: EdgeInsets.only(
+                  left: height * 0.03,
+                  top: height * 0.01,
+                  bottom: height * 0.01),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Student Personal Details',
                     style: TextStyle(
-                        fontSize: height * 0.028,
+                        fontSize: height * 0.025,
                         fontWeight: FontWeight.w500,
                         color: kDarkBlue),
                     textAlign: TextAlign.center,
@@ -254,15 +266,17 @@ class _StudentDrawerState extends State<StudentDrawer> {
               });
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: height * 0.03, vertical: height * 0.015),
+              padding: EdgeInsets.only(
+                  left: height * 0.03,
+                  top: height * 0.01,
+                  bottom: height * 0.01),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Virtual Tutions',
                     style: TextStyle(
-                        fontSize: height * 0.028,
+                        fontSize: height * 0.025,
                         fontWeight: FontWeight.w500,
                         color: kDarkBlue),
                     textAlign: TextAlign.center,
@@ -285,7 +299,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
               child: Text(
                 'Contact Us',
                 style: TextStyle(
-                    fontSize: height * 0.028,
+                    fontSize: height * 0.025,
                     fontWeight: FontWeight.w500,
                     color: kDarkBlue),
                 textAlign: TextAlign.center,
@@ -296,17 +310,33 @@ class _StudentDrawerState extends State<StudentDrawer> {
             onTap: () {},
             child: Padding(
               padding: EdgeInsets.symmetric(
-                  horizontal: height * 0.03, vertical: height * 0.01),
+                  horizontal: height * 0.03, vertical: height * 0.005),
               child: Text(
                 'Home',
                 style: TextStyle(
-                    fontSize: height * 0.028,
+                    fontSize: height * 0.025,
                     fontWeight: FontWeight.w500,
                     color: kDarkBlue),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
+          GestureDetector(
+            onTap: () {},
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: height * 0.03, vertical: height * 0.00),
+              child: Text(
+                'Logout',
+                style: TextStyle(
+                    fontSize: height * 0.025,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          SizedBox(height: height * 0.02)
         ],
       ),
     );
