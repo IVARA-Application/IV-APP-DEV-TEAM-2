@@ -8,6 +8,7 @@ class StudentNavbar extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Positioned(
+        top: height * 0.03,
         height: height * 0.08,
         width: width,
         child: Row(

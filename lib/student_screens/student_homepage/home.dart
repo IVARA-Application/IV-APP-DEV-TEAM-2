@@ -43,7 +43,7 @@ class StudentHome extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Container(
       child: Column(children: [
-        SizedBox(height: height * 0.1),
+        SizedBox(height: height * 0.13),
         Text(
           'Hello,',
           style: TextStyle(
@@ -87,10 +87,12 @@ class StudentHome extends StatelessWidget {
                 image: 'assets/arClassroom.png',
                 height: height,
                 width: width,
-                onTap: (){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>StudentArClassroom()));
-                }
-                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => StudentArClassroom()));
+                }),
           ],
         ),
         SizedBox(height: width * 0.04),
@@ -104,10 +106,12 @@ class StudentHome extends StatelessWidget {
                 image: 'assets/attendance1.png',
                 height: height,
                 width: width,
-                onTap: (){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>StudentHomePage(2)));
-                }
-                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => StudentHomePage(2)));
+                }),
             SizedBox(
               width: width * 0.08,
             ),
@@ -118,10 +122,12 @@ class StudentHome extends StatelessWidget {
                 image: 'assets/acadmicSection1.png',
                 height: height,
                 width: width,
-                onTap: (){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>StudentHomePage(4)));
-                }
-                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => StudentHomePage(4)));
+                }),
           ],
         ),
       ]),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:new_ivara_app/Controllers/authController.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/study_abroad.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/24X7_doubt.dart';
@@ -322,7 +324,8 @@ class _StudentDrawerState extends State<StudentDrawer> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+          Get.find<AuthController>().signOut();},
             child: Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: height * 0.03, vertical: height * 0.00),
