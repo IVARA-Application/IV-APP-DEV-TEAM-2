@@ -27,7 +27,6 @@ dependencies:
   flutter_glow: ^0.1.2
   font_awesome_flutter: ^8.11.0
   glass_kit: ^1.0.2
-  glassmorphism: ^1.0.6
   google_fonts: ^2.0.0
   lottie: ^1.0.0
   firebase_core:
@@ -41,6 +40,12 @@ dependencies:
   carousel_pro: ^1.0.0
   video_player: ^2.0.1
   cloud_firestore: ^1.0.1
+  cached_network_image:
+  permission_handler:
+  flutter_downloader:
+  path_provider:
+  firebase_storage:
+  file_picker:
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +65,7 @@ flutter:
     - assets/
     - assets/icons/
     - assets/images/
+    - assets/pdf.png
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

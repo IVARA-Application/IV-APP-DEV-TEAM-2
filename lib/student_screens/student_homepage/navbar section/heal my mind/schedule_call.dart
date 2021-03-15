@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/healMyMindsFunctions/scheduleCallMethods.dart';
 
 class ScheduleACallPage extends StatefulWidget {
   static String id = 'ScheduleACallPage';
@@ -10,6 +11,10 @@ class ScheduleACallPage extends StatefulWidget {
 }
 
 class _ScheduleACallPageState extends State<ScheduleACallPage> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController slotController = TextEditingController();
+  TextEditingController problemController = TextEditingController();
   String _myActivity;
   String _myActivityResult;
   final formKey = new GlobalKey<FormState>();
@@ -21,10 +26,18 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
     _myActivityResult = '';
   }
 
-  _saveForm() {
+  _saveForm() async {
     var form = formKey.currentState;
     if (form.validate()) {
       form.save();
+      await ScheduleACallMethods.onSubmit(
+        name: nameController.text,
+        phoneNumber: phoneNumberController.text,
+        problem: problemController.text,
+        slot: slotController.text
+      );
+      nameController.text = phoneNumberController.text =
+          slotController.text = problemController.text = "";
       setState(() {
         _myActivityResult = _myActivity;
       });
@@ -98,191 +111,205 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
                         ),
                       ],
                     ),
-                    Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: screenHeight * 0.035),
-                            child: Text(
-                              "Schedule A Call",
-                              style:
-                                  TextStyle(fontSize: 25, color: Colors.white),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: screenHeight * 0.015,
-                                horizontal: screenWidth * 0.07),
-                            child: Container(
-                              height: 50,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.white, width: 0.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.white)),
-                                    labelText: 'Name',
-                                    labelStyle: TextStyle(color: Colors.white),
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide())),
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return 'Please enter name.';
-                                  }
-                                  return null;
-                                },
+                    Form(
+                      key: formKey,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: screenHeight * 0.035),
+                              child: Text(
+                                "Schedule A Call",
+                                style: TextStyle(
+                                    fontSize: 25, color: Colors.white),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: screenHeight * 0.015,
-                                horizontal: screenWidth * 0.07),
-                            child: Container(
-                              height: 50,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.white, width: 0.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.white)),
-                                    labelText: 'Phone Number',
-                                    labelStyle: TextStyle(color: Colors.white)),
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return 'Please enter phone number';
-                                  }
-                                  return null;
-                                },
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: screenHeight * 0.015,
+                                  horizontal: screenWidth * 0.07),
+                              child: Container(
+                                height: 50,
+                                child: TextFormField(
+                                  controller: nameController,
+                                  decoration: InputDecoration(
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.white, width: 0.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.white)),
+                                      labelText: 'Name',
+                                      labelStyle:
+                                          TextStyle(color: Colors.white),
+                                      border: OutlineInputBorder(
+                                          borderSide: BorderSide())),
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Please enter name.';
+                                    }
+                                    return null;
+                                  },
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: screenHeight * 0.015,
-                                horizontal: screenWidth * 0.07),
-                            child: Container(
-                              height: 62,
-                              child: DropDownFormField(
-                                titleText: 'Book Slot',
-                                hintText: 'Please choose one',
-                                value: _myActivity,
-                                onSaved: (value) {
-                                  setState(() {
-                                    _myActivity = value;
-                                  });
-                                },
-                                onChanged: (value) {
-                                  setState(() {
-                                    _myActivity = value;
-                                  });
-                                },
-                                dataSource: [
-                                  {
-                                    "display": "9-10 AM",
-                                    "value": "9-10 AM",
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: screenHeight * 0.015,
+                                  horizontal: screenWidth * 0.07),
+                              child: Container(
+                                height: 50,
+                                child: TextFormField(
+                                  controller: phoneNumberController,
+                                  decoration: InputDecoration(
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.white, width: 0.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.white)),
+                                      labelText: 'Phone Number',
+                                      labelStyle:
+                                          TextStyle(color: Colors.white)),
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Please enter phone number';
+                                    }
+                                    return null;
                                   },
-                                  {
-                                    "display": "10-11 AM",
-                                    "value": "10-11 AM",
-                                  },
-                                  {
-                                    "display": "11-12 PM",
-                                    "value": "11-12 PM",
-                                  },
-                                  {
-                                    "display": "12-1 PM",
-                                    "value": "12-1 PM",
-                                  },
-                                  {
-                                    "display": "1-2 PM",
-                                    "value": "1-2 PM",
-                                  },
-                                  {
-                                    "display": "2-3 PM",
-                                    "value": "2-3 PM",
-                                  },
-                                  {
-                                    "display": "3-4 PM",
-                                    "value": "3-4 PM",
-                                  },
-                                ],
-                                textField: 'display',
-                                valueField: 'value',
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: screenHeight * 0.015,
-                                horizontal: screenWidth * 0.07),
-                            child: Container(
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.white, width: 0.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.white)),
-                                    labelText: 'Describe The Problem',
-                                    labelStyle: TextStyle(color: Colors.white)),
-                                maxLines: 4,
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return 'Please write problem.';
-                                  }
-                                  return null;
-                                },
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: screenHeight * 0.015,
+                                  horizontal: screenWidth * 0.07),
+                              child: Container(
+                                height: 62,
+                                child: DropDownFormField(
+                                  titleText: 'Book Slot',
+                                  hintText: 'Please choose one',
+                                  value: _myActivity,
+                                  onSaved: (value) {
+                                    setState(() {
+                                      _myActivity = value;
+                                    });
+                                    slotController.text = value;
+                                  },
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _myActivity = value;
+                                    });
+                                    slotController.text = value;
+                                  },
+                                  dataSource: [
+                                    {
+                                      "display": "9-10 AM",
+                                      "value": "9-10 AM",
+                                    },
+                                    {
+                                      "display": "10-11 AM",
+                                      "value": "10-11 AM",
+                                    },
+                                    {
+                                      "display": "11-12 PM",
+                                      "value": "11-12 PM",
+                                    },
+                                    {
+                                      "display": "12-1 PM",
+                                      "value": "12-1 PM",
+                                    },
+                                    {
+                                      "display": "1-2 PM",
+                                      "value": "1-2 PM",
+                                    },
+                                    {
+                                      "display": "2-3 PM",
+                                      "value": "2-3 PM",
+                                    },
+                                    {
+                                      "display": "3-4 PM",
+                                      "value": "3-4 PM",
+                                    },
+                                  ],
+                                  textField: 'display',
+                                  valueField: 'value',
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: screenHeight*0.02,left: screenWidth*0.55),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                _saveForm();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                visualDensity: VisualDensity.compact,
-                                // onPrimary: Colors.transparent,
-                                // onSurface: Colors.transparent,
-                                primary: Colors.transparent,
-                                shape:
-                                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: screenHeight * 0.015,
+                                  horizontal: screenWidth * 0.07),
+                              child: Container(
+                                child: TextFormField(
+                                  controller: problemController,
+                                  decoration: InputDecoration(
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.white, width: 0.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.white)),
+                                      labelText: 'Describe The Problem',
+                                      labelStyle:
+                                          TextStyle(color: Colors.white)),
+                                  maxLines: 4,
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Please write problem.';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: screenHeight * 0.02,
+                                  left: screenWidth * 0.55),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  _saveForm();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  visualDensity: VisualDensity.compact,
+                                  // onPrimary: Colors.transparent,
+                                  // onSurface: Colors.transparent,
+                                  primary: Colors.transparent,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(30.0)),
 
-                                padding: EdgeInsets.all(0.0),
-                                shadowColor: Colors.transparent,
-                              ),
+                                  padding: EdgeInsets.all(0.0),
+                                  shadowColor: Colors.transparent,
+                                ),
                                 child: Ink(
                                   decoration: BoxDecoration(
-                                    color: Color(0xFF697AE4),
-                                      borderRadius: BorderRadius.circular(30.0)),
+                                      color: Color(0xFF697AE4),
+                                      borderRadius:
+                                          BorderRadius.circular(30.0)),
                                   child: Container(
                                     color: Colors.transparent,
-                                    constraints: BoxConstraints(maxWidth: 120.0, minHeight: 50.0),
+                                    constraints: BoxConstraints(
+                                        maxWidth: 120.0, minHeight: 50.0),
                                     alignment: Alignment.center,
                                     child: Text(
                                       'Submit',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15
-                                      ),
+                                          color: Colors.white, fontSize: 15),
                                     ),
                                   ),
                                 ),
+                              ),
                             ),
-                          ),
-                        ]),
+                          ]),
+                    ),
                   ],
                 ),
               ),

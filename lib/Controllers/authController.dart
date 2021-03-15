@@ -110,4 +110,25 @@ class AuthController extends GetxController {
     await FirebaseAuth.instance.signOut();
     Get.offAll(() => UserType());
   }
+
+  Future<bool> scheduleACall(
+      name, phoneno,bookSlot, description) async {
+    bool isSuccessfull = false;
+    DocumentReference doc =
+        await FirebaseFirestore.instance.collection("ScheduleACall").add(
+      {
+        'timestamp': DateTime.now().millisecondsSinceEpoch,
+        'name': name,
+        'phoneno': phoneno,
+        'bookSlot': bookSlot,
+        'description': description,
+        'uid': user.value.uid,
+      },
+    );
+    if (doc.id != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
