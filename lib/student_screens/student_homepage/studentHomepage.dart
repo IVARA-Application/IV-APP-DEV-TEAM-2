@@ -7,6 +7,7 @@ import 'package:new_ivara_app/student_screens/student_homepage/academic/academic
 import 'package:new_ivara_app/student_screens/student_homepage/attendance/attendance_record.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/chat/chat_page.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/home.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/navbar.dart';
 
 import 'notification/notification.dart';
 
@@ -50,24 +51,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
                 height: double.infinity,
                 width: double.infinity,
                 child: tabs[currentIndex]),
-            Positioned(
-                height: height * 0.08,
-                width: width,
-                child: Row(
-                  children: [
-                    TextButton(
-                        onPressed: () {
-                          _scaffoldKey.currentState.openDrawer();
-                        },
-                        child: Image.asset('assets/drawer.png')),
-                    Spacer(),
-                    TextButton(
-                        onPressed: () {
-                          _scaffoldKey.currentState.openDrawer();
-                        },
-                        child: Image.asset('assets/back.png')),
-                  ],
-                )),
+            StudentNavbar(_scaffoldKey),
             Positioned(
               top: height * 0.85,
               left: width * 0.025,
