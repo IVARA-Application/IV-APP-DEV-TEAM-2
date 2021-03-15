@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/parent_screens/teachers_list.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
 
 class ParentsHomeScreen extends StatelessWidget {
@@ -8,7 +10,6 @@ class ParentsHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size _size = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -28,7 +29,9 @@ class ParentsHomeScreen extends StatelessWidget {
             CustomCard(
               imgPath: 'assets/images/teacherlist.png',
               title: 'Teacher List',
-              onTap: () {},
+              onTap: () {
+                Get.to(TeachersList());
+              },
             ),
             CustomCard(
               imgPath: 'assets/images/acadmis.png',
