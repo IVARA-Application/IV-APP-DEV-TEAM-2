@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart ';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/shared/GlowCircleAvatar.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
 
 List<Map<String, String>> _teacherinfo = [
@@ -39,6 +40,12 @@ class TeachersList extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
+         actions: [
+          GlowCircleAvatar(
+            onTap: () {},
+            imageProvider: AssetImage('assets/icons/profile.jpg'),
+          ),
+        ],
         elevation: 0.0,
         backgroundColor: Colors.transparent,
       ),
