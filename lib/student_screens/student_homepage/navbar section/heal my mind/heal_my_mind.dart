@@ -4,15 +4,26 @@ import 'package:new_ivara_app/student_screens/student_homepage/navbar section/he
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/heal my mind/chat_councellor.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/heal my mind/heal_my_mind_videos.dart';
 
-class HealMyMindPage extends StatelessWidget {
+import '../../../drawer.dart';
+import '../navbar.dart';
+
+class HealMyMindPage extends StatefulWidget {
   static String id = 'HealMyMindPage';
   const HealMyMindPage({Key key}) : super(key: key);
 
+  @override
+  _HealMyMindPageState createState() => _HealMyMindPageState();
+}
+
+class _HealMyMindPageState extends State<HealMyMindPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: StudentDrawer(),
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -42,109 +53,69 @@ class HealMyMindPage extends StatelessWidget {
               child: Center(
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/icons/tab.png',
-                                width: 40,
-                                height: 40,
-                                fit: BoxFit.cover,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/icons/back.png',
-                                width: 40,
-                                height: 40,
-                                fit: BoxFit.cover,
-                                colorBlendMode: BlendMode.darken,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: screenHeight * 0.09),
+                      child: Text(
+                        "Heal My Mind",
+                        style: TextStyle(fontSize: 25, color: Colors.white),
+                      ),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: screenHeight * 0.035),
-                          child: Text(
-                            "Heal My Mind",
-                            style: TextStyle(fontSize: 25, color: Colors.white),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Container(
+                            width: screenWidth * 0.05,
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 25),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Container(
-                                width: screenWidth * 0.05,
+                          Padding(
+                              padding: const EdgeInsets.only(left: 1.0),
+                              child: CircleAvatar(
+                                  radius: 60.0,
+                                  backgroundColor: Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(18.0),
+                                    child: ClipRRect(
+                                      child: Image.asset(
+                                          'assets/images/schedule1.png'),
+                                    ),
+                                  ))),
+                          GestureDetector(
+                            onTap: () => {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ScheduleACallPage()))
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Container(
+                                height: screenHeight * 0.085,
+                                width: screenWidth * 0.6,
+                                color: Colors.transparent,
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(100.0),
+                                            bottomLeft:
+                                                Radius.circular(100.0))),
+                                    child: new Center(
+                                      child: new Text(
+                                        "Schedule A Call",
+                                        style: TextStyle(
+                                            color: Color(0xFF8569C5),
+                                            fontSize: 18),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )),
                               ),
-                              Padding(
-                                  padding: const EdgeInsets.only(left: 1.0),
-                                  child: CircleAvatar(
-                                      radius: 60.0,
-                                      backgroundColor: Colors.white,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(18.0),
-                                        child: ClipRRect(
-                                          child: Image.asset(
-                                              'assets/images/schedule1.png'),
-                                        ),
-                                      ))),
-                              GestureDetector(
-                                onTap: () => {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ScheduleACallPage()))
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 1.0),
-                                  child: Container(
-                                    height: screenHeight * 0.085,
-                                    width: screenWidth * 0.6,
-                                    color: Colors.transparent,
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(100.0),
-                                                bottomLeft:
-                                                    Radius.circular(100.0))),
-                                        child: new Center(
-                                          child: new Text(
-                                            "Schedule A Call",
-                                            style: TextStyle(
-                                                color: Color(0xFF8569C5),
-                                                fontSize: 18),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        )),
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -231,7 +202,7 @@ class HealMyMindPage extends StatelessWidget {
                                         ),
                                       ))),
                               GestureDetector(
-                                onTap: () =>{
+                                onTap: () => {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -272,6 +243,7 @@ class HealMyMindPage extends StatelessWidget {
                 ),
               ),
             ),
+            StudentNavbar(_scaffoldKey),
           ],
         ),
       ),

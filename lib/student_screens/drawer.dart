@@ -4,7 +4,10 @@ import 'package:new_ivara_app/Controllers/authController.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/study_abroad.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/24X7_doubt.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/entrance%20exam/entrance_exam.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/heal_my_mind.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/skill_development.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/virtual%20tution/virtual_tution_class.dart';
 
 class StudentDrawer extends StatefulWidget {
   @override
@@ -136,6 +139,8 @@ class _StudentDrawerState extends State<StudentDrawer> {
               setState(() {
                 currentIndex = 2;
               });
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SkillDevelopment()));
             },
             child: Padding(
               padding: EdgeInsets.only(
@@ -168,6 +173,8 @@ class _StudentDrawerState extends State<StudentDrawer> {
               setState(() {
                 currentIndex = 3;
               });
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => EntranceExam()));
             },
             child: Padding(
               padding: EdgeInsets.only(
@@ -266,6 +273,8 @@ class _StudentDrawerState extends State<StudentDrawer> {
               setState(() {
                 currentIndex = 6;
               });
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => TutionClasses()));
             },
             child: Padding(
               padding: EdgeInsets.only(

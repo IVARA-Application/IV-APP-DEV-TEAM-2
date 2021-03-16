@@ -3,6 +3,9 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/healMyMindsFunctions/scheduleCallMethods.dart';
 
+import '../../../drawer.dart';
+import '../navbar.dart';
+
 class ScheduleACallPage extends StatefulWidget {
   static String id = 'ScheduleACallPage';
 
@@ -11,6 +14,7 @@ class ScheduleACallPage extends StatefulWidget {
 }
 
 class _ScheduleACallPageState extends State<ScheduleACallPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController slotController = TextEditingController();
@@ -31,11 +35,10 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
     if (form.validate()) {
       form.save();
       await ScheduleACallMethods.onSubmit(
-        name: nameController.text,
-        phoneNumber: phoneNumberController.text,
-        problem: problemController.text,
-        slot: slotController.text
-      );
+          name: nameController.text,
+          phoneNumber: phoneNumberController.text,
+          problem: problemController.text,
+          slot: slotController.text);
       nameController.text = phoneNumberController.text =
           slotController.text = problemController.text = "";
       setState(() {
@@ -49,6 +52,8 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: StudentDrawer(),
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -78,39 +83,6 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
               child: Center(
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () => {Navigator.pop(context)},
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/icons/tab.png',
-                                width: 40,
-                                height: 40,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/icons/back.png',
-                                width: 40,
-                                height: 40,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                     Form(
                       key: formKey,
                       child: Column(
@@ -118,7 +90,7 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
                           children: <Widget>[
                             Padding(
                               padding: EdgeInsets.symmetric(
-                                  vertical: screenHeight * 0.035),
+                                  vertical: screenHeight * 0.09),
                               child: Text(
                                 "Schedule A Call",
                                 style: TextStyle(
@@ -314,6 +286,7 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
                 ),
               ),
             ),
+            StudentNavbar(_scaffoldKey),
           ],
         ),
       ),

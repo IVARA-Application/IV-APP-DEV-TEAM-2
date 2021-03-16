@@ -14,6 +14,9 @@ import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../drawer.dart';
+import '../navbar.dart';
+
 class ChatToCounsellorPage extends StatefulWidget {
   static String id = 'ChatToCounsellorPage';
   int _class = 6;
@@ -24,6 +27,7 @@ class ChatToCounsellorPage extends StatefulWidget {
 }
 
 class _ChatToCounsellorPageState extends State<ChatToCounsellorPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   File _imageFile;
   String messageText;
   final messageController = TextEditingController();
@@ -81,6 +85,8 @@ class _ChatToCounsellorPageState extends State<ChatToCounsellorPage> {
         Navigator.of(context).pop();
       },
       child: Scaffold(
+        key: _scaffoldKey,
+        drawer: StudentDrawer(),
         body: Stack(
           children: [
             Container(
@@ -111,43 +117,10 @@ class _ChatToCounsellorPageState extends State<ChatToCounsellorPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                onTap: () => {Navigator.pop(context)},
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: ClipOval(
-                                    child: Image.asset(
-                                      'assets/icons/tab.png',
-                                      width: 40,
-                                      height: 40,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: ClipOval(
-                                    child: Image.asset(
-                                      'assets/icons/back.png',
-                                      width: 40,
-                                      height: 40,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
                           Center(
                             child: Padding(
                               padding: EdgeInsets.symmetric(
-                                  vertical: screenHeight * 0.015),
+                                  vertical: screenHeight * 0.05),
                               child: Text(
                                 "Chat To Counsellor",
                                 style: TextStyle(
@@ -351,7 +324,8 @@ class _ChatToCounsellorPageState extends State<ChatToCounsellorPage> {
                           )
                         ],
                       )),
-            )
+            ),
+            StudentNavbar(_scaffoldKey),
           ],
         ),
       ),
