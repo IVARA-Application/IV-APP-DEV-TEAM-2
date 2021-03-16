@@ -36,7 +36,6 @@ class _TutionVideosState extends State<TutionVideos> {
         ),
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        centerTitle: true,
       ),
       body: Container(
         decoration: kBGdecoration,
@@ -124,8 +123,8 @@ class Card2 extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height*0.3,
-                          child: CustomVideoPlayer(
+              height: MediaQuery.of(context).size.height * 0.3,
+              child: CustomVideoPlayer(
                 videoPlayerController: VideoPlayerController.network(
                     'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'),
               ),

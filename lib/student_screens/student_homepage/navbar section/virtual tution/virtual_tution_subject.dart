@@ -51,7 +51,6 @@ class _TutionCoursesSubjectState extends State<TutionCoursesSubject> {
         ),
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        centerTitle: true,
       ),
       body: Container(
         decoration: kBGdecoration,

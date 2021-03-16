@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
+import 'package:new_ivara_app/constant/constants.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/healMyMindsFunctions/scheduleCallMethods.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
@@ -63,24 +64,7 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
             Container(
               width: screenWidth,
               height: screenHeight,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  //     stops: [
-                  //   0.1,
-                  //   0.4,
-                  //   0.6,
-                  //   0.9
-                  // ],
-                  colors: [
-                    Color(0xFF8569C5),
-                    Color(0xFFC579B5),
-                    Color(0xFFF48380),
-                    Color(0xFFF3D37B),
-                  ],
-                ),
-              ),
+              decoration: kBGdecoration,
             ),
             SafeArea(
               child: Center(

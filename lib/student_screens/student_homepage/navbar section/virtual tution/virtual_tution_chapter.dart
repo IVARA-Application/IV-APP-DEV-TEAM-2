@@ -36,7 +36,6 @@ class TutionChapter extends StatelessWidget {
         ),
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        centerTitle: true,
       ),
       body: Container(
         decoration: kBGdecoration,

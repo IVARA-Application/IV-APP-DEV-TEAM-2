@@ -8,6 +8,7 @@ import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/entrance%20exam/entrance_exam.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/heal_my_mind.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/skill_development.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/student_details.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/virtual%20tution/virtual_tution_class.dart';
 
 class StudentDrawer extends StatefulWidget {
@@ -242,6 +243,8 @@ class _StudentDrawerState extends State<StudentDrawer> {
               setState(() {
                 currentIndex = 5;
               });
+
+              Get.to(StudentDetails());
             },
             child: Padding(
               padding: EdgeInsets.only(
@@ -369,7 +372,8 @@ class _StudentDrawerState extends State<StudentDrawer> {
           ),
           GestureDetector(
             onTap: () {
-          Get.find<AuthController>().signOut();},
+              Get.find<AuthController>().signOut();
+            },
             child: Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: height * 0.03, vertical: height * 0.00),
