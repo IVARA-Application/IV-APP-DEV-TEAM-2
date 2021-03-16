@@ -50,7 +50,7 @@ class _VideosCardPageState extends State<VideosCardPage> {
         ),
         child: Stack(
           children: [
-            VideoPlayer(
+            CustomVideoPlayer(
               videoPlayerController:
                   VideoPlayerController.network(videos[index]['url']),
             ),
@@ -70,16 +70,16 @@ class _VideosCardPageState extends State<VideosCardPage> {
   }
 }
 
-class VideoPlayer extends StatefulWidget {
+class CustomVideoPlayer extends StatefulWidget {
   final VideoPlayerController videoPlayerController;
   final bool loop;
-  VideoPlayer({this.videoPlayerController, this.loop});
+  CustomVideoPlayer({this.videoPlayerController, this.loop});
 
   @override
-  _VideoPlayerState createState() => _VideoPlayerState();
+  _CustomVideoPlayerState createState() => _CustomVideoPlayerState();
 }
 
-class _VideoPlayerState extends State<VideoPlayer> {
+class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   ChewieController _chewieController;
   @override
   void initState() {
@@ -89,7 +89,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
         aspectRatio: 16 / 9,
         autoInitialize: true,
         autoPlay: true,
-        looping: widget.loop,
+        looping: widget.loop??false,
         errorBuilder: (constext, errorMessage) {
           return Center(
             child: Padding(

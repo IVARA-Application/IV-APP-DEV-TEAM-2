@@ -3,9 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
-
-String _src =
-    'https://images.unsplash.com/photo-1615266895738-11f1371cd7e5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1349&q=80';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/videos.dart';
+import 'package:video_player/video_player.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar section/heal my mind/videos.dart';
 
 const String loremIpsum =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
@@ -43,7 +43,7 @@ class _TutionVideosState extends State<TutionVideos> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 56),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.15),
             Padding(
               padding: const EdgeInsets.all(8),
               child: Text(
@@ -123,7 +123,13 @@ class Card2 extends StatelessWidget {
                 color: kDarkBlue,
               ),
             ),
-            Flexible(child: Image.network(_src)),
+            SizedBox(
+              height: MediaQuery.of(context).size.height*0.3,
+                          child: CustomVideoPlayer(
+                videoPlayerController: VideoPlayerController.network(
+                    'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'),
+              ),
+            ),
             Flexible(
               child: Text(
                 loremIpsum,

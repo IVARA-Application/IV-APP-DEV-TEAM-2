@@ -44,7 +44,7 @@ class _TutionClassesState extends State<TutionClasses> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 56),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.15),
             Padding(
               padding: const EdgeInsets.only(left: 30),
               child: Text(
