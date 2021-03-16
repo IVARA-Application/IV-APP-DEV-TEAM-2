@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/healMyMindsFunctions/scheduleCallMethods.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 import '../../../drawer.dart';
 import '../navbar.dart';
@@ -47,6 +48,8 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
     }
   }
 
+  DateTime selectedtime;
+  bool pressed = false;
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -160,55 +163,67 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
                                   vertical: screenHeight * 0.015,
                                   horizontal: screenWidth * 0.07),
                               child: Container(
-                                height: 62,
-                                child: DropDownFormField(
-                                  titleText: 'Book Slot',
-                                  hintText: 'Please choose one',
-                                  value: _myActivity,
-                                  onSaved: (value) {
-                                    setState(() {
-                                      _myActivity = value;
-                                    });
-                                    slotController.text = value;
+                                height: 50,
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.white, width: 0.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.white)),
+                                      labelText: 'E-mail Id',
+                                      labelStyle:
+                                          TextStyle(color: Colors.white)),
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Please enter E-mail id';
+                                    }
+                                    return null;
                                   },
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _myActivity = value;
-                                    });
-                                    slotController.text = value;
-                                  },
-                                  dataSource: [
-                                    {
-                                      "display": "9-10 AM",
-                                      "value": "9-10 AM",
-                                    },
-                                    {
-                                      "display": "10-11 AM",
-                                      "value": "10-11 AM",
-                                    },
-                                    {
-                                      "display": "11-12 PM",
-                                      "value": "11-12 PM",
-                                    },
-                                    {
-                                      "display": "12-1 PM",
-                                      "value": "12-1 PM",
-                                    },
-                                    {
-                                      "display": "1-2 PM",
-                                      "value": "1-2 PM",
-                                    },
-                                    {
-                                      "display": "2-3 PM",
-                                      "value": "2-3 PM",
-                                    },
-                                    {
-                                      "display": "3-4 PM",
-                                      "value": "3-4 PM",
-                                    },
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: screenHeight * 0.015,
+                                  horizontal: screenWidth * 0.07),
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white)),
+                                child: Column(
+                                  children: [
+                                    TextButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            pressed = true;
+
+                                            DatePicker.showDateTimePicker(
+                                                context,
+                                                showTitleActions: true,
+                                                onChanged: (date) {
+                                              print(
+                                                  'change $date in time zone ' +
+                                                      date.timeZoneOffset
+                                                          .inHours
+                                                          .toString());
+                                            }, onConfirm: (date) {
+                                              selectedtime = date;
+                                            }, currentTime: DateTime.now());
+                                          });
+                                        },
+                                        child: Text(
+                                          'Time Slot',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: screenWidth * 0.05),
+                                        )),
+                                    pressed
+                                        ? _displayDateTime(selectedtime)
+                                        : SizedBox(),
                                   ],
-                                  textField: 'display',
-                                  valueField: 'value',
                                 ),
                               ),
                             ),
@@ -291,5 +306,88 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
         ),
       ),
     );
+  }
+
+  Widget _displayDateTime(selectedDateTime) {
+    return Center(
+        child: Text(
+      "$selectedtime",
+      style: TextStyle(fontSize: 15),
+    ));
+  }
+}
+
+class CustomPicker extends CommonPickerModel {
+  String digits(int value, int length) {
+    return '$value'.padLeft(length, "0");
+  }
+
+  CustomPicker({DateTime currentTime, LocaleType locale})
+      : super(locale: locale) {
+    this.currentTime = currentTime ?? DateTime.now();
+    this.setLeftIndex(this.currentTime.hour);
+    this.setMiddleIndex(this.currentTime.minute);
+    this.setRightIndex(this.currentTime.second);
+  }
+
+  @override
+  String leftStringAtIndex(int index) {
+    if (index >= 0 && index < 24) {
+      return this.digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String middleStringAtIndex(int index) {
+    if (index >= 0 && index < 60) {
+      return this.digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String rightStringAtIndex(int index) {
+    if (index >= 0 && index < 60) {
+      return this.digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String leftDivider() {
+    return "|";
+  }
+
+  @override
+  String rightDivider() {
+    return "|";
+  }
+
+  @override
+  List<int> layoutProportions() {
+    return [1, 2, 1];
+  }
+
+  @override
+  DateTime finalTime() {
+    return currentTime.isUtc
+        ? DateTime.utc(
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            this.currentLeftIndex(),
+            this.currentMiddleIndex(),
+            this.currentRightIndex())
+        : DateTime(
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            this.currentLeftIndex(),
+            this.currentMiddleIndex(),
+            this.currentRightIndex());
   }
 }

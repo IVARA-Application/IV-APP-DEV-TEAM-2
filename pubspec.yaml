@@ -46,6 +46,7 @@ dependencies:
   path_provider:
   firebase_storage:
   file_picker:
+  flutter_datetime_picker: ^1.5.0
 
 dev_dependencies:
   flutter_test:
