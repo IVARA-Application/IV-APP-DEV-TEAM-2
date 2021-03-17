@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/parent_screens/parents_home_screen.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
 
 List<Map<String, dynamic>> courses = [
@@ -81,7 +83,9 @@ class SkillDevelopment extends StatelessWidget {
                     children: [
                       for (var sub in course['subject']) ...[
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(ParentsHomeScreen());
+                          },
                           child: Text(
                             sub,
                             style: Theme.of(context).textTheme.bodyText2,
@@ -101,8 +105,6 @@ class SkillDevelopment extends StatelessWidget {
           ],
         ),
       ),
-   
-   
     );
   }
 }

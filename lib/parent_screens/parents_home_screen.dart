@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/parent_screens/parent_academic_section.dart';
 import 'package:new_ivara_app/parent_screens/teachers_list.dart';
 import 'package:new_ivara_app/shared/glow_circle_avatar.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
@@ -43,7 +44,9 @@ class ParentsHomeScreen extends StatelessWidget {
             CustomCard(
               imgPath: 'assets/images/acadmis.png',
               title: 'Academics',
-              onTap: () {},
+              onTap: () {
+                Get.to(ParentAcademicSection());
+              },
             ),
             CustomCard(
               imgPath: 'assets/images/attendance(1).png',
