@@ -45,12 +45,12 @@ class _StudentDrawerState extends State<StudentDrawer> {
                       ),
                     ),
                     SizedBox(
-                      height: height * 0.005,
+                      height: height * 0.003,
                     ),
                     Text('Ankit Sharma',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: height * 0.03,
+                            fontSize: height * 0.025,
                             fontWeight: FontWeight.w600)),
                     Align(
                       alignment: Alignment.centerRight,
