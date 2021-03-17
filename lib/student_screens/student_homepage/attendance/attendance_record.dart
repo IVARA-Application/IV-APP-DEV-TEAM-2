@@ -116,7 +116,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
         itemBuilder: (context, index) {
           return index == currentIndex
               ? Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.symmetric(horizontal:width*0.02),
                   child: Padding(
                     padding: EdgeInsets.only(
                         top: height * 0.001,
@@ -153,7 +153,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
                   ),
                 )
               : Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.symmetric(horizontal:width*0.02),
                   child: Padding(
                     padding: EdgeInsets.only(
                         top: height * 0.001,
