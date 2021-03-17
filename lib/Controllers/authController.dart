@@ -50,6 +50,7 @@ class AuthController extends GetxController {
         'email': user.value.email,
         'userType': userType,
       });
+      this.userType=userType;
       Get.offAll(() => StudentHomePage(0));
 
       isSignedIn = true.obs;
@@ -89,12 +90,12 @@ class AuthController extends GetxController {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      user.value = userCredential.user;
+      user = userCredential.user.obs;
       DocumentSnapshot userDoc = await FirebaseFirestore.instance
           .collection("Users")
           .doc(user.value.uid)
           .get();
-      userType = userDoc.data()['userType'].obs;
+      userType = userDoc.data()['userType'];
       Get.offAll(() => StudentHomePage(0));
       isSignedIn = true.obs;
     } on FirebaseAuthException catch (e) {

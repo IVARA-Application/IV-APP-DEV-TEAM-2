@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/student_screens/drawer.dart';
 
 class StudentSubject extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   String cls;
-  List topics=['Topic 1','Topic 2','Topic 3','Topic 4','Topic 5'];
+  List topics = ['Topic 1', 'Topic 2', 'Topic 3', 'Topic 4', 'Topic 5'];
   StudentSubject({cls}) {
     this.cls = cls;
   }
@@ -47,21 +48,34 @@ class StudentSubject extends StatelessWidget {
                         fontWeight: FontWeight.w300,
                         fontSize: height * 0.03),
                   ),
-                  SizedBox(height:height*0.03),
+                  SizedBox(height: height * 0.03),
                   Expanded(
                     child: ListView.builder(
                         itemCount: topics.length,
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.symmetric(vertical:height*0.015,horizontal:width*0.08),
-                            child: Container(
-                              padding:EdgeInsets.symmetric(vertical:height*0.01),
-                              width: width * 0.8,
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.circular(height * 0.01),
-                                  color: Colors.white),
-                              child: Center(child: Text(topics[index],style:TextStyle(color:kDarkBlue,fontSize: height*0.028))),
+                          return GestureDetector(
+                            onTap: (){
+                              MethodChannel channel=MethodChannel("channel");
+                              channel.invokeMethod("openUnityClass7");
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: height * 0.015,
+                                  horizontal: width * 0.08),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: height * 0.01),
+                                width: width * 0.8,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.circular(height * 0.01),
+                                    color: Colors.white),
+                                child: Center(
+                                    child: Text(topics[index],
+                                        style: TextStyle(
+                                            color: kDarkBlue,
+                                            fontSize: height * 0.028))),
+                              ),
                             ),
                           );
                         }),
