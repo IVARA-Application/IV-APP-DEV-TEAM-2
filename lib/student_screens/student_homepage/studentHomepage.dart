@@ -188,7 +188,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
                                     : Colors.transparent),
                             child: Padding(
                               padding: EdgeInsets.all(
-                                  currentIndex == 3 ? height * 0.067 : 0),
+                                  currentIndex == 3 ? height * 0.006 : 0),
                               child: Center(
                                 child: Image.asset('assets/chat.png',
                                     height: currentIndex == 3
