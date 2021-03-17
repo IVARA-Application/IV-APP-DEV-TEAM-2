@@ -49,13 +49,11 @@ class _EntranceExamState extends State<EntranceExam> {
         ),
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        centerTitle: true,
       ),
       body: Container(
         decoration: kBGdecoration,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          
           children: [
             SizedBox(height: 56),
             Text(

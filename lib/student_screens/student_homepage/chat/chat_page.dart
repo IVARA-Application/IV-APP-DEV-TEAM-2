@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_ivara_app/parent_screens/parents_home_screen.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/chat/chat_subject_group.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/24X7_doubt.dart';
 
 List subjects = [
   {'subjectName': 'Subject 1', 'icon': 'assets/subject.png'},
@@ -21,7 +22,7 @@ class StudentChatPage extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: height * 0.15,
+          height: height * 0.12,
         ),
         SizedBox(
           height: height * 0.7,
@@ -34,7 +35,10 @@ class StudentChatPage extends StatelessWidget {
                         vertical: height * 0.008, horizontal: width * 0.1),
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(ParentsHomeScreen());
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SubjectChatPage()));
                       },
                       child: Card(
                         child: Padding(

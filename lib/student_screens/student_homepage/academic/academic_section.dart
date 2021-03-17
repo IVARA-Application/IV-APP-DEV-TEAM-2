@@ -227,6 +227,8 @@ class StudentAcademicSection extends StatelessWidget {
                   ),
                 )),
           ),
+       
+       
         ],
       ),
     );

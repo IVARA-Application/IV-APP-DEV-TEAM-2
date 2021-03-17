@@ -116,7 +116,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
         itemBuilder: (context, index) {
           return index == currentIndex
               ? Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.symmetric(horizontal:width*0.02),
                   child: Padding(
                     padding: EdgeInsets.only(
                         top: height * 0.001,
@@ -153,7 +153,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
                   ),
                 )
               : Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.symmetric(horizontal:width*0.02),
                   child: Padding(
                     padding: EdgeInsets.only(
                         top: height * 0.001,
@@ -197,7 +197,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
     return Container(
       child: Column(
         children: [
-          SizedBox(height: height * 0.06),
+          SizedBox(height: height * 0.1),
           Text('Timetable Record',
               style: TextStyle(
                   fontSize: height * 0.03,

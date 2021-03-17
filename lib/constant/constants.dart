@@ -24,8 +24,8 @@ const BoxDecoration kPBGdecoration = BoxDecoration(
   ),
 );
 
-TextTheme ftt(BuildContext c) {
-  return Theme.of(c).textTheme;
+TextTheme ftt(BuildContext context) {
+  return Theme.of(context).textTheme;
 }
 
 ShapeBorder kCardShape = RoundedRectangleBorder(

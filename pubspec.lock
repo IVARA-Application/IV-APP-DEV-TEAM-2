@@ -230,6 +230,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+  flutter_datetime_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_datetime_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.5.0"
   flutter_downloader:
     dependency: "direct main"
     description:
@@ -282,13 +289,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
-  glassmorphism:
-    dependency: "direct main"
-    description:
-      name: glassmorphism
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.6"
   google_fonts:
     dependency: "direct main"
     description:
@@ -496,7 +496,21 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.1"
+    version: "1.8.0"
+  sqflite:
+    dependency: transitive
+    description:
+      name: sqflite
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0+2"
+  sqflite_common:
+    dependency: transitive
+    description:
+      name: sqflite_common
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0+2"
   stack_trace:
     dependency: transitive
     description:

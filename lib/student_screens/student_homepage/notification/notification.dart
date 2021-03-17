@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StudentNotification extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class StudentNotification extends StatefulWidget {
 class _StudentNotificationState extends State<StudentNotification> {
   int dateIndex = -1;
   int notificationIndex = -1;
+  final firestoreInstance = FirebaseFirestore.instance;
   List notifications = [
     {
       'date': 'Today',
@@ -40,6 +42,36 @@ class _StudentNotificationState extends State<StudentNotification> {
       ]
     }
   ];
+
+  List parseData(Map data) {
+    List<String> keys = data.keys.toList();
+    List notification = [];
+
+    for (int i = keys.length - 1; i >= 0; i--) {
+      notification.add({'date': keys[i], 'notification': data[keys[i]]});
+    }
+    return notification;
+  }
+
+  void getData() async {
+    print('getting data');
+    final data = await firestoreInstance
+        .collection('Notification')
+        .doc('School Name')
+        .collection('Class 7')
+        .doc('Section A')
+        .get()
+        .then((value) => value.data());
+    setState(() {
+      notifications = parseData(data);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   Widget makeNotificationCards(notif, height, width, dateIndexPassed) {
     return ListView.builder(

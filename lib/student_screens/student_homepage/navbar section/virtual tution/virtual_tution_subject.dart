@@ -51,14 +51,13 @@ class _TutionCoursesSubjectState extends State<TutionCoursesSubject> {
         ),
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        centerTitle: true,
       ),
       body: Container(
         decoration: kBGdecoration,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 56),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.15),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 30, vertical: 10.0),

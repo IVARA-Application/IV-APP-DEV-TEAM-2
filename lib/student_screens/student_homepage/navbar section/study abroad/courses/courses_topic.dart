@@ -1,15 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
-class CoursesTopicPage extends StatelessWidget {
-  static String id = 'CoursesTopicPage';
-  const CoursesTopicPage({Key key}) : super(key: key);
+import '../../../../drawer.dart';
+import '../../navbar.dart';
 
+class CoursesTopicPage extends StatefulWidget {
+  List courses;
+  int index;
+  static String id = 'CoursesTopicPage';
+  CoursesTopicPage(this.courses, this.index);
+
+  @override
+  _CoursesTopicPageState createState() =>
+      _CoursesTopicPageState(courses, index);
+}
+
+class _CoursesTopicPageState extends State<CoursesTopicPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  List courses;
+  int index;
+  _CoursesTopicPageState(this.courses, this.index);
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: StudentDrawer(),
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -39,211 +56,173 @@ class CoursesTopicPage extends StatelessWidget {
               child: Center(
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/icons/tab.png',
-                                width: 40,
-                                height: 40,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/icons/back.png',
-                                width: 40,
-                                height: 40,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                    Padding(
+                      padding: EdgeInsets.only(top: screenHeight * 0.09),
+                      child: Text(
+                        "Courses",
+                        style: TextStyle(fontSize: 25, color: Colors.white),
+                      ),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(
-                              top: screenHeight * 0.035),
-                          child: Text(
-                            "Courses",
-                            style: TextStyle(fontSize: 25, color: Colors.white),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: screenHeight*0.01,
-                              bottom: screenHeight * 0.1),
-                          child: Text(
-                            "English",
-                            style: TextStyle(fontSize: 17, color: Colors.white),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: GestureDetector(
-                            onTap: () => {},
-                            child: Padding(
-                              padding: EdgeInsets.only(left: screenWidth*0.1),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: screenHeight * 0.1,
-                                    width: screenWidth * 0.4,
-                                    color: Colors.transparent,
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(10.0),
-                                        bottomLeft: Radius.circular(10.0)),),
-                                        child: new Center(
-                                          child: new Text(
-                                            "Topic 1",
-                                            style: TextStyle(
-                                                color: Color(0xFF697AE4),
-                                                fontSize: 18),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        )),
-                                  ),
-                                Container(
-                                  height: screenHeight * 0.1,
-                                  width: screenWidth * 0.4,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/focus1.png'),
-                                        fit: BoxFit.contain,
-                                        ),
-                                        color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(10.0),
-                                        bottomRight: Radius.circular(10.0)),
-                                  ),
-                                ),
-                                ],
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: screenHeight * 0.01, bottom: screenHeight * 0.1),
+                      child: Text(
+                        courses[index]['subjectName'],
+                        style: TextStyle(fontSize: 17, color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: GestureDetector(
+                        onTap: () => {},
+                        child: Padding(
+                          padding: EdgeInsets.only(left: screenWidth * 0.1),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: screenHeight * 0.1,
+                                width: screenWidth * 0.4,
+                                color: Colors.transparent,
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10.0),
+                                          bottomLeft: Radius.circular(10.0)),
+                                    ),
+                                    child: new Center(
+                                      child: new Text(
+                                        "Topic 1",
+                                        style: TextStyle(
+                                            color: Color(0xFF697AE4),
+                                            fontSize: 18),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )),
                               ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: GestureDetector(
-                            onTap: () => {},
-                            child: Padding(
-                              padding: EdgeInsets.only(left: screenWidth*0.1),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: screenHeight * 0.1,
-                                    width: screenWidth * 0.4,
-                                    color: Colors.transparent,
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(10.0),
-                                        bottomLeft: Radius.circular(10.0)),),
-                                        child: new Center(
-                                          child: new Text(
-                                            "Topic 2",
-                                            style: TextStyle(
-                                                color: Color(0xFF697AE4),
-                                                fontSize: 18),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        )),
+                              Container(
+                                height: screenHeight * 0.1,
+                                width: screenWidth * 0.4,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image:
+                                        AssetImage('assets/images/focus1.png'),
+                                    fit: BoxFit.contain,
                                   ),
-                                Container(
-                                  height: screenHeight * 0.1,
-                                  width: screenWidth * 0.4,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/focus1.png'),
-                                        fit: BoxFit.contain,
-                                        ),
-                                        color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(10.0),
-                                        bottomRight: Radius.circular(10.0)),
-                                  ),
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(10.0),
+                                      bottomRight: Radius.circular(10.0)),
                                 ),
-                                ],
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: GestureDetector(
-                            onTap: () => {},
-                            child: Padding(
-                              padding: EdgeInsets.only(left: screenWidth*0.1),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: screenHeight * 0.1,
-                                    width: screenWidth * 0.4,
-                                    color: Colors.transparent,
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(10.0),
-                                        bottomLeft: Radius.circular(10.0)),),
-                                        child: new Center(
-                                          child: new Text(
-                                            "Topic 3",
-                                            style: TextStyle(
-                                                color: Color(0xFF697AE4),
-                                                fontSize: 18),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        )),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: GestureDetector(
+                        onTap: () => {},
+                        child: Padding(
+                          padding: EdgeInsets.only(left: screenWidth * 0.1),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: screenHeight * 0.1,
+                                width: screenWidth * 0.4,
+                                color: Colors.transparent,
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10.0),
+                                          bottomLeft: Radius.circular(10.0)),
+                                    ),
+                                    child: new Center(
+                                      child: new Text(
+                                        "Topic 2",
+                                        style: TextStyle(
+                                            color: Color(0xFF697AE4),
+                                            fontSize: 18),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )),
+                              ),
+                              Container(
+                                height: screenHeight * 0.1,
+                                width: screenWidth * 0.4,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image:
+                                        AssetImage('assets/images/focus1.png'),
+                                    fit: BoxFit.contain,
                                   ),
-                                Container(
-                                  height: screenHeight * 0.1,
-                                  width: screenWidth * 0.4,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/focus1.png'),
-                                        fit: BoxFit.contain,
-                                        ),
-                                        color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(10.0),
-                                        bottomRight: Radius.circular(10.0)),
-                                  ),
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(10.0),
+                                      bottomRight: Radius.circular(10.0)),
                                 ),
-                                ],
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                      ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: GestureDetector(
+                        onTap: () => {},
+                        child: Padding(
+                          padding: EdgeInsets.only(left: screenWidth * 0.1),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: screenHeight * 0.1,
+                                width: screenWidth * 0.4,
+                                color: Colors.transparent,
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10.0),
+                                          bottomLeft: Radius.circular(10.0)),
+                                    ),
+                                    child: new Center(
+                                      child: new Text(
+                                        "Topic 3",
+                                        style: TextStyle(
+                                            color: Color(0xFF697AE4),
+                                            fontSize: 18),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )),
+                              ),
+                              Container(
+                                height: screenHeight * 0.1,
+                                width: screenWidth * 0.4,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image:
+                                        AssetImage('assets/images/focus1.png'),
+                                    fit: BoxFit.contain,
+                                  ),
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(10.0),
+                                      bottomRight: Radius.circular(10.0)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
+            StudentNavbar(_scaffoldKey),
           ],
         ),
       ),

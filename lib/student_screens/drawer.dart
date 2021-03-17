@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:new_ivara_app/Controllers/authController.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/study_abroad.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/24X7_doubt.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/E-books/ebooks.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/entrance%20exam/entrance_exam.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/heal_my_mind.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/skill_development.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/student_details.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/virtual%20tution/virtual_tution_class.dart';
 
 class StudentDrawer extends StatefulWidget {
   @override
@@ -38,12 +45,12 @@ class _StudentDrawerState extends State<StudentDrawer> {
                       ),
                     ),
                     SizedBox(
-                      height: height * 0.005,
+                      height: height * 0.003,
                     ),
                     Text('Ankit Sharma',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: height * 0.03,
+                            fontSize: height * 0.025,
                             fontWeight: FontWeight.w600)),
                     Align(
                       alignment: Alignment.centerRight,
@@ -134,6 +141,8 @@ class _StudentDrawerState extends State<StudentDrawer> {
               setState(() {
                 currentIndex = 2;
               });
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SkillDevelopment()));
             },
             child: Padding(
               padding: EdgeInsets.only(
@@ -166,6 +175,8 @@ class _StudentDrawerState extends State<StudentDrawer> {
               setState(() {
                 currentIndex = 3;
               });
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => EntranceExam()));
             },
             child: Padding(
               padding: EdgeInsets.only(
@@ -232,6 +243,8 @@ class _StudentDrawerState extends State<StudentDrawer> {
               setState(() {
                 currentIndex = 5;
               });
+
+              Get.to(StudentDetails());
             },
             child: Padding(
               padding: EdgeInsets.only(
@@ -264,6 +277,8 @@ class _StudentDrawerState extends State<StudentDrawer> {
               setState(() {
                 currentIndex = 6;
               });
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => TutionClasses()));
             },
             child: Padding(
               padding: EdgeInsets.only(
@@ -282,6 +297,40 @@ class _StudentDrawerState extends State<StudentDrawer> {
                     textAlign: TextAlign.center,
                   ),
                   currentIndex == 6
+                      ? Container(
+                          height: height * 0.003,
+                          width: width * 0.15,
+                          color: kDarkBlue)
+                      : Center()
+                ],
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                currentIndex = 7;
+              });
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => StudentEbooks()));
+            },
+            child: Padding(
+              padding: EdgeInsets.only(
+                  left: height * 0.03,
+                  top: height * 0.01,
+                  bottom: height * 0.01),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'E-Book & E-Test Series',
+                    style: TextStyle(
+                        fontSize: height * 0.025,
+                        fontWeight: FontWeight.w500,
+                        color: kDarkBlue),
+                    textAlign: TextAlign.center,
+                  ),
+                  currentIndex == 7
                       ? Container(
                           height: height * 0.003,
                           width: width * 0.15,
@@ -322,7 +371,9 @@ class _StudentDrawerState extends State<StudentDrawer> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Get.find<AuthController>().signOut();
+            },
             child: Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: height * 0.03, vertical: height * 0.00),

@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
+import 'package:new_ivara_app/constant/constants.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/healMyMindsFunctions/scheduleCallMethods.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
+import '../../../drawer.dart';
+import '../navbar.dart';
 
 class ScheduleACallPage extends StatefulWidget {
   static String id = 'ScheduleACallPage';
@@ -11,6 +16,7 @@ class ScheduleACallPage extends StatefulWidget {
 }
 
 class _ScheduleACallPageState extends State<ScheduleACallPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController slotController = TextEditingController();
@@ -31,11 +37,10 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
     if (form.validate()) {
       form.save();
       await ScheduleACallMethods.onSubmit(
-        name: nameController.text,
-        phoneNumber: phoneNumberController.text,
-        problem: problemController.text,
-        slot: slotController.text
-      );
+          name: nameController.text,
+          phoneNumber: phoneNumberController.text,
+          problem: problemController.text,
+          slot: slotController.text);
       nameController.text = phoneNumberController.text =
           slotController.text = problemController.text = "";
       setState(() {
@@ -44,73 +49,27 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
     }
   }
 
+  DateTime selectedtime;
+  bool pressed = false;
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: StudentDrawer(),
       body: SingleChildScrollView(
         child: Stack(
           children: [
             Container(
               width: screenWidth,
               height: screenHeight,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  //     stops: [
-                  //   0.1,
-                  //   0.4,
-                  //   0.6,
-                  //   0.9
-                  // ],
-                  colors: [
-                    Color(0xFF8569C5),
-                    Color(0xFFC579B5),
-                    Color(0xFFF48380),
-                    Color(0xFFF3D37B),
-                  ],
-                ),
-              ),
+              decoration: kBGdecoration,
             ),
             SafeArea(
               child: Center(
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () => {Navigator.pop(context)},
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/icons/tab.png',
-                                width: 40,
-                                height: 40,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/icons/back.png',
-                                width: 40,
-                                height: 40,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                     Form(
                       key: formKey,
                       child: Column(
@@ -118,7 +77,7 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
                           children: <Widget>[
                             Padding(
                               padding: EdgeInsets.symmetric(
-                                  vertical: screenHeight * 0.035),
+                                  vertical: screenHeight * 0.09),
                               child: Text(
                                 "Schedule A Call",
                                 style: TextStyle(
@@ -188,55 +147,67 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
                                   vertical: screenHeight * 0.015,
                                   horizontal: screenWidth * 0.07),
                               child: Container(
-                                height: 62,
-                                child: DropDownFormField(
-                                  titleText: 'Book Slot',
-                                  hintText: 'Please choose one',
-                                  value: _myActivity,
-                                  onSaved: (value) {
-                                    setState(() {
-                                      _myActivity = value;
-                                    });
-                                    slotController.text = value;
+                                height: 50,
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.white, width: 0.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.white)),
+                                      labelText: 'E-mail Id',
+                                      labelStyle:
+                                          TextStyle(color: Colors.white)),
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Please enter E-mail id';
+                                    }
+                                    return null;
                                   },
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _myActivity = value;
-                                    });
-                                    slotController.text = value;
-                                  },
-                                  dataSource: [
-                                    {
-                                      "display": "9-10 AM",
-                                      "value": "9-10 AM",
-                                    },
-                                    {
-                                      "display": "10-11 AM",
-                                      "value": "10-11 AM",
-                                    },
-                                    {
-                                      "display": "11-12 PM",
-                                      "value": "11-12 PM",
-                                    },
-                                    {
-                                      "display": "12-1 PM",
-                                      "value": "12-1 PM",
-                                    },
-                                    {
-                                      "display": "1-2 PM",
-                                      "value": "1-2 PM",
-                                    },
-                                    {
-                                      "display": "2-3 PM",
-                                      "value": "2-3 PM",
-                                    },
-                                    {
-                                      "display": "3-4 PM",
-                                      "value": "3-4 PM",
-                                    },
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: screenHeight * 0.015,
+                                  horizontal: screenWidth * 0.07),
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white)),
+                                child: Column(
+                                  children: [
+                                    TextButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            pressed = true;
+
+                                            DatePicker.showDateTimePicker(
+                                                context,
+                                                showTitleActions: true,
+                                                onChanged: (date) {
+                                              print(
+                                                  'change $date in time zone ' +
+                                                      date.timeZoneOffset
+                                                          .inHours
+                                                          .toString());
+                                            }, onConfirm: (date) {
+                                              selectedtime = date;
+                                            }, currentTime: DateTime.now());
+                                          });
+                                        },
+                                        child: Text(
+                                          'Time Slot',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: screenWidth * 0.05),
+                                        )),
+                                    pressed
+                                        ? _displayDateTime(selectedtime)
+                                        : SizedBox(),
                                   ],
-                                  textField: 'display',
-                                  valueField: 'value',
                                 ),
                               ),
                             ),
@@ -314,9 +285,93 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
                 ),
               ),
             ),
+            StudentNavbar(_scaffoldKey),
           ],
         ),
       ),
     );
+  }
+
+  Widget _displayDateTime(selectedDateTime) {
+    return Center(
+        child: Text(
+      "$selectedtime",
+      style: TextStyle(fontSize: 15),
+    ));
+  }
+}
+
+class CustomPicker extends CommonPickerModel {
+  String digits(int value, int length) {
+    return '$value'.padLeft(length, "0");
+  }
+
+  CustomPicker({DateTime currentTime, LocaleType locale})
+      : super(locale: locale) {
+    this.currentTime = currentTime ?? DateTime.now();
+    this.setLeftIndex(this.currentTime.hour);
+    this.setMiddleIndex(this.currentTime.minute);
+    this.setRightIndex(this.currentTime.second);
+  }
+
+  @override
+  String leftStringAtIndex(int index) {
+    if (index >= 0 && index < 24) {
+      return this.digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String middleStringAtIndex(int index) {
+    if (index >= 0 && index < 60) {
+      return this.digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String rightStringAtIndex(int index) {
+    if (index >= 0 && index < 60) {
+      return this.digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String leftDivider() {
+    return "|";
+  }
+
+  @override
+  String rightDivider() {
+    return "|";
+  }
+
+  @override
+  List<int> layoutProportions() {
+    return [1, 2, 1];
+  }
+
+  @override
+  DateTime finalTime() {
+    return currentTime.isUtc
+        ? DateTime.utc(
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            this.currentLeftIndex(),
+            this.currentMiddleIndex(),
+            this.currentRightIndex())
+        : DateTime(
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            this.currentLeftIndex(),
+            this.currentMiddleIndex(),
+            this.currentRightIndex());
   }
 }

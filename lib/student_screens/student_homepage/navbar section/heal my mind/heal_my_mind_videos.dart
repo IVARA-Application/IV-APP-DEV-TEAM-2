@@ -1,8 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:new_ivara_app/student_screens/drawer.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/heal my mind/videos.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/navbar.dart';
 
 class HealMyMindVideosPage extends StatefulWidget {
   static String id = 'HealMyMindVideosPage';
@@ -11,33 +12,30 @@ class HealMyMindVideosPage extends StatefulWidget {
 }
 
 class _HealMyMindVideosPageState extends State<HealMyMindVideosPage> {
-  contentBox(BuildContext context, videoUrl) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            elevation: 0,
-            backgroundColor: Colors.white,
-            child: Container(
-              height: screenHeight * 0.21,
-              width: double.infinity,
-              color: Colors.transparent,
-              child: Padding(
-                padding: const EdgeInsets.all(0.0),
-                child: VideoDisplay(
-                  videoURL: videoUrl,
-                ),
-              ),
-            ),
-          );
-        });
-  }
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  List videos = [
+    {
+      'name': 'Video 1',
+      'description': 'description',
+      'url':
+          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+      'image': 'assets/images/thumbnail.jpg'
+    },
+    {
+      'name': 'Video 2',
+      'description': 'description',
+      'url':
+          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+      'image': 'assets/images/thumbnail.jpg'
+    },
+    {
+      'name': 'Video 3',
+      'description': 'description',
+      'url':
+          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+      'image': 'assets/images/thumbnail.jpg'
+    }
+  ];
   @override
   Widget build(BuildContext context) {
     int index = 0;
@@ -45,6 +43,8 @@ class _HealMyMindVideosPageState extends State<HealMyMindVideosPage> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: StudentDrawer(),
       body: Stack(
         children: [
           Container(
@@ -69,155 +69,100 @@ class _HealMyMindVideosPageState extends State<HealMyMindVideosPage> {
               ),
             ),
           ),
-          SafeArea(
-              child: Center(
+          Center(
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () => {Navigator.pop(context)},
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: ClipOval(
-                          child: Image.asset(
-                            'assets/icons/tab.png',
-                            width: 40,
-                            height: 40,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: ClipOval(
-                          child: Image.asset(
-                            'assets/icons/back.png',
-                            width: 40,
-                            height: 40,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                FutureBuilder<QuerySnapshot>(
-                    future: FirebaseFirestore.instance
-                        .collection("HealMyMindVideos")
-                        .get(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                      if (snapshot.hasError) {
-                        return Center(
-                          child: Icon(Icons.error_outline),
-                        );
-                      }
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: screenHeight * 0.035),
-                            child: Text(
-                              "Heal My Mind Videos",
-                              style:
-                                  TextStyle(fontSize: 25, color: Colors.white),
-                            ),
-                          ),
-                          ListView.builder(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: snapshot.data.docs.length,
-                              itemBuilder: (context, index) {
-                                return getListTile(
-                                  screenHeight: screenHeight,
-                                  screenWidth: screenWidth,
-                                  title: snapshot.data.docs[index]['title'],
-                                  videoUrl: snapshot.data.docs[index]
-                                      ['videoUrl'],
-                                  videoThumnail: snapshot.data.docs[index]
-                                      ['videoThumbnail'],
-                                );
-                              })
-                        ],
-                      );
-                    })
-              ],
-            ),
-          ))
-        ],
-      ),
-    );
-  }
-
-  Widget getListTile(
-      {screenHeight, screenWidth, title, videoUrl, videoThumnail}) {
-    return GestureDetector(
-      onTap: () {
-        contentBox(context, videoUrl);
-      },
-      child: Padding(
-        padding:
-            EdgeInsets.only(top: screenWidth * 0.07, left: screenWidth * 0.07),
-        child: Row(
-          children: [
-            Stack(
-              children: [
-                Container(
-                  height: screenHeight * 0.12,
-                  width: screenWidth * 0.38,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(videoThumnail),
-                        fit: BoxFit.cover,
-                        colorFilter:
-                            ColorFilter.mode(Colors.black45, BlendMode.darken)),
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10.0),
-                        bottomLeft: Radius.circular(10.0)),
-                  ),
-                ),
-                Positioned(
-                  child: Icon(
-                    Icons.play_arrow,
-                    color: Colors.white,
-                    size: 50,
-                  ),
-                  top: screenHeight * 0.03,
-                  left: screenWidth * 0.12,
-                )
-              ],
-            ),
-            Stack(
-              children: [
-                Container(
-                  height: screenHeight * 0.12,
-                  width: screenWidth * 0.48,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(10.0),
-                        bottomRight: Radius.circular(10.0)),
-                  ),
-                ),
-                Positioned(
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: screenHeight * 0.15, bottom: screenHeight * 0.03),
                   child: Text(
-                    title,
-                    style: TextStyle(color: Colors.black, fontSize: 22),
+                    "Heal My Mind Videos",
+                    style: TextStyle(fontSize: 25, color: Colors.white),
                   ),
-                  top: screenHeight * 0.04,
-                  left: screenWidth * 0.04,
-                )
+                ),
+                Expanded(
+                    child: ListView.builder(
+                        itemCount: videos.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          VideosCardPage(videos, index)));
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  top: screenWidth * 0.07,
+                                  left: screenWidth * 0.07),
+                              child: Row(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      Container(
+                                        height: screenHeight * 0.12,
+                                        width: screenWidth * 0.38,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  videos[index]['image']),
+                                              fit: BoxFit.cover,
+                                              colorFilter: ColorFilter.mode(
+                                                  Colors.black45,
+                                                  BlendMode.darken)),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(10.0),
+                                              bottomLeft:
+                                                  Radius.circular(10.0)),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        child: Icon(
+                                          Icons.play_arrow,
+                                          color: Colors.white,
+                                          size: 50,
+                                        ),
+                                        top: screenHeight * 0.03,
+                                        left: screenWidth * 0.12,
+                                      )
+                                    ],
+                                  ),
+                                  Stack(
+                                    children: [
+                                      Container(
+                                        height: screenHeight * 0.12,
+                                        width: screenWidth * 0.48,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(10.0),
+                                              bottomRight:
+                                                  Radius.circular(10.0)),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        child: Text(
+                                          videos[index]['name'],
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 22),
+                                        ),
+                                        top: screenHeight * 0.04,
+                                        left: screenWidth * 0.04,
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        })),
               ],
-            )
-          ],
-        ),
+            ),
+          ),
+          StudentNavbar(_scaffoldKey),
+        ],
       ),
     );
   }
