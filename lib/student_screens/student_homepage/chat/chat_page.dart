@@ -38,7 +38,9 @@ class StudentChatPage extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SubjectChatPage()));
+                                builder: (context) => SubjectChatPage(
+                                  subjectName: subjects[i]['subjectName'],
+                                )));
                       },
                       child: Card(
                         child: Padding(
