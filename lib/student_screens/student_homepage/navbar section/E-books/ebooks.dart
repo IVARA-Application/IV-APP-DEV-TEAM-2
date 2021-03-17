@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/E-books/eBooksAndTestSeries.dart';
 
 import '../../../drawer.dart';
 import '../navbar.dart';
@@ -34,7 +35,7 @@ class _StudentEbooksState extends State<StudentEbooks> {
                 setState(() {
                   currentIndex=index;
                 });
-                
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>StudentEbook()));
               },
               style: ElevatedButton.styleFrom(
                 shape: kCardShape,
