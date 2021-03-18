@@ -54,9 +54,16 @@ class StudentSubject extends StatelessWidget {
                         itemCount: topics.length,
                         itemBuilder: (context, index) {
                           return GestureDetector(
-                            onTap: (){
-                              MethodChannel channel=MethodChannel("channel");
-                              channel.invokeMethod("openUnityClass7");
+                            onTap: () {
+                              MethodChannel channel = MethodChannel("channel");
+                              if (index == 0) {
+                                print("OPENUNITYCLASS 6");
+                                channel.invokeMethod("openUnityClass6");
+                              }
+                              if (index == 1) {
+                                print("OPENUNITYCLASS 7");
+                                channel.invokeMethod("openUnityClass7");
+                              }
                             },
                             child: Padding(
                               padding: EdgeInsets.symmetric(
