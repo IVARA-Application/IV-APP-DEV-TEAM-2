@@ -1,270 +1,121 @@
 import 'package:flutter/material.dart';
-import 'package:new_ivara_app/constant/constants.dart';
-import 'package:new_ivara_app/student_screens/drawer.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/academic/test_card.dart';
 
-class StudentUpcomingTest extends StatefulWidget {
+class TestPage extends StatefulWidget {
+  static String id = 'TestPage';
+  const TestPage({Key key}) : super(key: key);
+
   @override
-  _StudentUpcomingTestState createState() => _StudentUpcomingTestState();
+  _TestPageState createState() => _TestPageState();
 }
 
-class _StudentUpcomingTestState extends State<StudentUpcomingTest> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+class _TestPageState extends State<TestPage> {
+  CountDownController _controller = CountDownController();
+
+  int index = 0;
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    List<TestCard> testCard = [
+      TestCard(subject: 'Physics', topic: 'Refraction', seconds: 700),
+      TestCard(subject: 'Maths', topic: 'Integral', seconds: 15200),
+      TestCard(subject: 'Chemistry', topic: 'Carbon', seconds: 2200),
+      TestCard(subject: 'Biology', topic: 'Plants', seconds: 500)
+    ];
+    Widget testCardTemplate(testCard) {
+      return TestCardWidget(
+        screenHeight: screenHeight,
+        screenWidth: screenWidth,
+        controller: _controller,
+        testCard: testCard,
+      );
+    }
+
     return Scaffold(
-      key: _scaffoldKey,
-      drawer: StudentDrawer(),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              decoration: kBGdecoration,
-              height: double.infinity,
-              width: double.infinity,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: height * 0.1,
-                  ),
-                  Text(
-                    'Upcoming Tests',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w300,
-                        fontSize: height * 0.03),
-                  ),
-                  SizedBox(height: height * 0.03),
+      body: Stack(
+        children: [
+          Container(
+            width: screenWidth,
+            height: screenHeight,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                //     stops: [
+                //   0.1,
+                //   0.4,
+                //   0.6,
+                //   0.9
+                // ],
+                colors: [
+                  Color(0xFF8569C5),
+                  Color(0xFFC579B5),
+                  Color(0xFFF48380),
+                  Color(0xFFF3D37B),
                 ],
               ),
             ),
-            Positioned(
-                height: height * 0.08,
-                width: width,
-                child: Row(
-                  children: [
-                    TextButton(
-                        onPressed: () {
-                          _scaffoldKey.currentState.openDrawer();
-                        },
-                        child: Image.asset('assets/drawer.png')),
-                    Spacer(),
-                    TextButton(
-                        onPressed: () {
-                          _scaffoldKey.currentState.openDrawer();
-                        },
-                        child: Image.asset('assets/back.png')),
-                  ],
-                )),
-            // Positioned(
-            //   top: height * 0.85,
-            //   left: width * 0.05,
-            //   child: Container(
-            //       decoration: BoxDecoration(
-            //         borderRadius:
-            //             BorderRadius.all(Radius.circular(height * 0.1)),
-            //         color: Color(0xFF697AE4),
-            //       ),
-            //       width: width * 0.9,
-            //       height: height * 0.08,
-            //       child: Padding(
-            //         padding: EdgeInsets.symmetric(horizontal: width * 0.02),
-            //         child: Row(
-            //           mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //           children: [
-            //             TextButton(
-            //               onPressed: () {
-            //                 setState(() {
-            //                   currentIndex = 0;
-            //                 });
-            //               },
-            //               child: Column(
-            //                 children: [
-            //                   Container(
-            //                     decoration: BoxDecoration(
-            //                         borderRadius: BorderRadius.all(
-            //                             Radius.circular(height)),
-            //                         color: currentIndex == 0
-            //                             ? Colors.white
-            //                             : Colors.transparent),
-            //                     child: Padding(
-            //                       padding: EdgeInsets.all(
-            //                           currentIndex == 0 ? height * 0.007 : 0),
-            //                       child: Center(
-            //                         child: Image.asset('assets/home.png',
-            //                             height: currentIndex == 0
-            //                                 ? height * 0.02
-            //                                 : height * 0.03,
-            //                             color: currentIndex == 0
-            //                                 ? Color(0xFF08F7F8)
-            //                                 : Colors.white),
-            //                       ),
-            //                     ),
-            //                   ),
-            //                   Spacer(),
-            //                   Text('Home',
-            //                       style: TextStyle(
-            //                           fontSize: height * 0.015,
-            //                           color: Colors.white))
-            //                 ],
-            //               ),
-            //             ),
-            //             TextButton(
-            //               onPressed: () {
-            //                 setState(() {
-            //                   currentIndex = 1;
-            //                 });
-            //               },
-            //               child: Column(
-            //                 children: [
-            //                   Container(
-            //                     decoration: BoxDecoration(
-            //                         borderRadius: BorderRadius.all(
-            //                             Radius.circular(height)),
-            //                         color: currentIndex == 1
-            //                             ? Colors.white
-            //                             : Colors.transparent),
-            //                     child: Padding(
-            //                       padding: EdgeInsets.all(
-            //                           currentIndex == 1 ? height * 0.007 : 0),
-            //                       child: Center(
-            //                         child: Image.asset(
-            //                             'assets/notification.png',
-            //                             height: currentIndex == 1
-            //                                 ? height * 0.02
-            //                                 : height * 0.03,
-            //                             color: currentIndex == 1
-            //                                 ? Color(0xFF08F7F8)
-            //                                 : Colors.white),
-            //                       ),
-            //                     ),
-            //                   ),
-            //                   Spacer(),
-            //                   Text('Notification',
-            //                       style: TextStyle(
-            //                           fontSize: height * 0.015,
-            //                           color: Colors.white))
-            //                 ],
-            //               ),
-            //             ),
-            //             TextButton(
-            //               onPressed: () {
-            //                 setState(() {
-            //                   currentIndex = 2;
-            //                 });
-            //               },
-            //               child: Column(
-            //                 children: [
-            //                   Container(
-            //                     decoration: BoxDecoration(
-            //                         borderRadius: BorderRadius.all(
-            //                             Radius.circular(height)),
-            //                         color: currentIndex == 2
-            //                             ? Colors.white
-            //                             : Colors.transparent),
-            //                     child: Padding(
-            //                       padding: EdgeInsets.all(
-            //                           currentIndex == 2 ? height * 0.007 : 0),
-            //                       child: Center(
-            //                         child: Image.asset('assets/calendar.png',
-            //                             height: currentIndex == 2
-            //                                 ? height * 0.02
-            //                                 : height * 0.03,
-            //                             color: currentIndex == 2
-            //                                 ? Color(0xFF08F7F8)
-            //                                 : Colors.white),
-            //                       ),
-            //                     ),
-            //                   ),
-            //                   Spacer(),
-            //                   Text('Calendar',
-            //                       style: TextStyle(
-            //                           fontSize: height * 0.015,
-            //                           color: Colors.white))
-            //                 ],
-            //               ),
-            //             ),
-            //             TextButton(
-            //               onPressed: () {
-            //                 setState(() {
-            //                   currentIndex = 3;
-            //                 });
-            //               },
-            //               child: Column(
-            //                 children: [
-            //                   Container(
-            //                     decoration: BoxDecoration(
-            //                         borderRadius: BorderRadius.all(
-            //                             Radius.circular(height)),
-            //                         color: currentIndex == 3
-            //                             ? Colors.white
-            //                             : Colors.transparent),
-            //                     child: Padding(
-            //                       padding: EdgeInsets.all(
-            //                           currentIndex == 3 ? height * 0.007 : 0),
-            //                       child: Center(
-            //                         child: Image.asset('assets/chat.png',
-            //                             height: currentIndex == 3
-            //                                 ? height * 0.02
-            //                                 : height * 0.03,
-            //                             color: currentIndex == 3
-            //                                 ? Color(0xFF08F7F8)
-            //                                 : Colors.white),
-            //                       ),
-            //                     ),
-            //                   ),
-            //                   Spacer(),
-            //                   Text('Chat',
-            //                       style: TextStyle(
-            //                           fontSize: height * 0.015,
-            //                           color: Colors.white))
-            //                 ],
-            //               ),
-            //             ),
-            //             TextButton(
-            //               onPressed: () {
-            //                 setState(() {
-            //                   currentIndex = 4;
-            //                 });
-            //               },
-            //               child: Column(
-            //                 children: [
-            //                   Container(
-            //                     decoration: BoxDecoration(
-            //                         borderRadius: BorderRadius.all(
-            //                             Radius.circular(height)),
-            //                         color: currentIndex == 4
-            //                             ? Colors.white
-            //                             : Colors.transparent),
-            //                     child: Padding(
-            //                       padding: EdgeInsets.all(
-            //                           currentIndex == 4 ? height * 0.007 : 0),
-            //                       child: Center(
-            //                         child: Image.asset('assets/report.png',
-            //                             height: currentIndex == 4
-            //                                 ? height * 0.02
-            //                                 : height * 0.03,
-            //                             color: currentIndex == 4
-            //                                 ? Color(0xFF08F7F8)
-            //                                 : Colors.white),
-            //                       ),
-            //                     ),
-            //                   ),
-            //                   Spacer(),
-            //                   Text('Report',
-            //                       style: TextStyle(
-            //                           fontSize: height * 0.015,
-            //                           color: Colors.white))
-            //                 ],
-            //               ),
-            //             )
-            //           ],
-            //         ),
-            //       )),
-            // )
-          ],
-        ),
+          ),
+          SingleChildScrollView(
+            child: SafeArea(
+                child: Center(
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: ClipOval(
+                            child: Image.asset(
+                              'assets/icons/tab.png',
+                              width: 40,
+                              height: 40,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: ClipOval(
+                            child: Image.asset(
+                              'assets/icons/back.png',
+                              width: 40,
+                              height: 40,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: screenHeight * 0.03),
+                    child: Text(
+                      "Heal My Mind",
+                      style: TextStyle(fontSize: 25, color: Colors.white),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(0),
+                    child: Column(
+                        children: testCard
+                            .map((TestCard) => testCardTemplate(TestCard))
+                            .toList()),
+                  )
+                ],
+              ),
+            )),
+          ),
+        ],
       ),
     );
   }

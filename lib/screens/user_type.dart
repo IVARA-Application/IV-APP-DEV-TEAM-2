@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
 import 'package:new_ivara_app/student_screens/auth/login.dart';
+import 'package:new_ivara_app/teacher_screen/teacher_homepage.dart';
 
 class UserType extends StatefulWidget {
   static String id = 'UserType';
@@ -96,7 +97,10 @@ class _UserTypeState extends State<UserType> {
                   setState(() {
                     _method = value;
                   });
-                  foo("teacher");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TeacherHomepage()));
                 },
               ),
               UserTypeButton(
