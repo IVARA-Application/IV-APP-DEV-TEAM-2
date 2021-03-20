@@ -113,7 +113,7 @@ class AuthController extends GetxController {
   }
 
   Future<bool> scheduleACall(
-      name, phoneno,bookSlot, description) async {
+      name, phoneno,bookSlot, description,email) async {
     bool isSuccessfull = false;
     DocumentReference doc =
         await FirebaseFirestore.instance.collection("ScheduleACall").add(
@@ -124,6 +124,7 @@ class AuthController extends GetxController {
         'bookSlot': bookSlot,
         'description': description,
         'uid': user.value.uid,
+        'email':email
       },
     );
     if (doc.id != null) {

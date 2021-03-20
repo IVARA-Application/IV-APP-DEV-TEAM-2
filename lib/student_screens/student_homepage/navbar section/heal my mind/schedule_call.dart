@@ -19,8 +19,8 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController slotController = TextEditingController();
   TextEditingController problemController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   String _myActivity;
   String _myActivityResult;
   final formKey = new GlobalKey<FormState>();
@@ -40,9 +40,10 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
           name: nameController.text,
           phoneNumber: phoneNumberController.text,
           problem: problemController.text,
-          slot: slotController.text);
-      nameController.text = phoneNumberController.text =
-          slotController.text = problemController.text = "";
+          email: emailController.text,
+          slot: selectedtime.toString());
+      nameController.text = emailController.text=
+          phoneNumberController.text = problemController.text = "";
       setState(() {
         _myActivityResult = _myActivity;
       });
@@ -149,6 +150,7 @@ class _ScheduleACallPageState extends State<ScheduleACallPage> {
                               child: Container(
                                 height: 50,
                                 child: TextFormField(
+                                  controller: emailController,
                                   decoration: InputDecoration(
                                       enabledBorder: const OutlineInputBorder(
                                         borderSide: const BorderSide(

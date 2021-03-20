@@ -2,9 +2,9 @@ import 'package:get/get.dart';
 import 'package:new_ivara_app/Controllers/authController.dart';
 
 class ScheduleACallMethods {
-  static Future onSubmit({name, phoneNumber, slot, problem}) async {
+  static Future onSubmit({name, phoneNumber, slot, problem,email}) async {
     var value = await Get.find<AuthController>()
-        .scheduleACall(name, phoneNumber, slot, problem);
+        .scheduleACall(name, phoneNumber, slot, problem,email);
 
     print(value);
     if (value) {
