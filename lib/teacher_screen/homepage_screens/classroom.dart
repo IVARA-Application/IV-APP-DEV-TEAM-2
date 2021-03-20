@@ -168,13 +168,7 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                         ),
                                       ))),
                               GestureDetector(
-                                onTap: () => {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ScheduleACallPage()))
-                                },
+                                onTap: () => {},
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 1.0),
                                   child: Container(
@@ -223,13 +217,7 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                         ),
                                       ))),
                               GestureDetector(
-                                onTap: () => {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ScheduleACallPage()))
-                                },
+                                onTap: () => {},
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 1.0),
                                   child: Container(
@@ -278,13 +266,7 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                         ),
                                       ))),
                               GestureDetector(
-                                onTap: () => {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ScheduleACallPage()))
-                                },
+                                onTap: () => {},
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 1.0),
                                   child: Container(
