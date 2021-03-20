@@ -22,7 +22,7 @@ class _StudentEbooksState extends State<StudentEbooks> {
     'Class 8th',
     'Class 9th'
   ];
-  int currentIndex=-1;
+  int currentIndex = -1;
 
   Widget makeTabs(height, width) {
     return ListView.builder(
@@ -33,9 +33,16 @@ class _StudentEbooksState extends State<StudentEbooks> {
             child: ElevatedButton(
               onPressed: () {
                 setState(() {
-                  currentIndex=index;
+                  currentIndex = index;
                 });
-                Navigator.push(context,MaterialPageRoute(builder: (context)=>StudentEbook()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StudentEbook(
+                      classes[index],
+                    ),
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 shape: kCardShape,
@@ -57,7 +64,10 @@ class _StudentEbooksState extends State<StudentEbooks> {
                     children: [
                       Icon(Icons.brightness_1_outlined,
                           color: kDarkBlue, size: height * 0.03),
-                      currentIndex==index?Icon(Icons.circle, color: kDarkBlue, size: height * 0.02):Center(),
+                      currentIndex == index
+                          ? Icon(Icons.circle,
+                              color: kDarkBlue, size: height * 0.02)
+                          : Center(),
                     ],
                   )
                 ],

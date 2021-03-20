@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/E-books/PDFViewer.dart';
 
 import '../../../drawer.dart';
 import '../navbar.dart';
-
+import 'package:get/get.dart';
 class StudentEbook extends StatefulWidget {
+  String _class;
+  StudentEbook(this._class);
   @override
   _StudentEbookState createState() => _StudentEbookState();
 }
@@ -30,9 +33,11 @@ class _StudentEbookState extends State<StudentEbook> {
             padding: EdgeInsets.symmetric(vertical: height * 0.01),
             child: ElevatedButton(
               onPressed: () {
-                setState(() {
-                  currentIndex = index;
-                });
+                Get.to(()=>PDFViewer(
+                  widget._class,
+                  subjects[index],
+                  'EBook'
+                ));
               },
               style: ElevatedButton.styleFrom(
                 shape: kCardShape,
@@ -56,13 +61,15 @@ class _StudentEbookState extends State<StudentEbook> {
                     ],
                   ),
                   Tab(
-                      icon: Container(
-                          height: height * 0.04,
-                          width: height * 0.04,
-                          child: Image.asset(
-                            "assets/file_download.png",
-                            fit: BoxFit.cover,
-                          ))),
+                    icon: Container(
+                      height: height * 0.04,
+                      width: height * 0.04,
+                      child: Image.asset(
+                        "assets/file_download.png",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -78,9 +85,11 @@ class _StudentEbookState extends State<StudentEbook> {
             padding: EdgeInsets.symmetric(vertical: height * 0.01),
             child: ElevatedButton(
               onPressed: () {
-                setState(() {
-                  currentIndex = index;
-                });
+                Get.to(()=>PDFViewer(
+                  widget._class,
+                  subjects[index],
+                  'ETest'
+                ));
               },
               style: ElevatedButton.styleFrom(
                 shape: kCardShape,

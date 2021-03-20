@@ -27,11 +27,13 @@ class MainActivity: FlutterActivity() {
         }
     }
     fun openUnityClass6(){
-   //     var intent = Intent(this, UnityPlayerActivity::class.java);
-    //    startActivity(intent);
+       // var intent = Intent(this, UnityPlayerActivity::class.java);
+       // intent.putExtra("arguments",0);
+       // startActivity(intent);
     }
     fun openUnityClass7(){
-     //   var intent = Intent(this, UnityPlayerActivity::class.java);
-     //   startActivity(intent);
+       // var intent = Intent(this, UnityPlayerActivity::class.java);
+       // intent.putExtra("arguments",1);
+       // startActivity(intent);
     }
 }

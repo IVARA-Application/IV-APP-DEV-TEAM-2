@@ -13,7 +13,7 @@ void main() async{
   ));
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-   await FlutterDownloader.initialize(
+  await FlutterDownloader.initialize(
       debug: false // optional: set false to disable printing logs to console
       );
   runApp(MyApp());
