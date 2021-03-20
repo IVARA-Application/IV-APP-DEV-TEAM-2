@@ -6,6 +6,7 @@ import 'package:new_ivara_app/student_screens/student_homepage/navbar section/he
 import 'package:new_ivara_app/teacher_screen/homepage_screens/attendance.dart';
 import 'package:new_ivara_app/teacher_screen/homepage_screens/chat.dart';
 import 'package:new_ivara_app/teacher_screen/homepage_screens/classroom.dart';
+import 'package:new_ivara_app/teacher_screen/homepage_screens/marks.dart';
 
 class TeacherHomepage extends StatelessWidget {
   static String id = 'TeacherHomepage';
@@ -174,7 +175,7 @@ class TeacherHomepage extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              TeacherChatPage()))
+                                              TeacherMarks()))
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 1.0),
