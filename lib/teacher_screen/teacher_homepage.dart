@@ -6,6 +6,8 @@ import 'package:new_ivara_app/student_screens/student_homepage/navbar section/he
 import 'package:new_ivara_app/teacher_screen/homepage_screens/attendance.dart';
 import 'package:new_ivara_app/teacher_screen/homepage_screens/chat.dart';
 import 'package:new_ivara_app/teacher_screen/homepage_screens/classroom.dart';
+import 'package:new_ivara_app/teacher_screen/homepage_screens/marks.dart';
+import 'package:new_ivara_app/teacher_screen/homepage_screens/profile.dart';
 
 class TeacherHomepage extends StatelessWidget {
   static String id = 'TeacherHomepage';
@@ -63,12 +65,17 @@ class TeacherHomepage extends StatelessWidget {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProfilePage()));
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: ClipOval(
                               child: Image.asset(
-                                'assets/icons/back.png',
+                                'assets/profile.png',
                                 width: 40,
                                 height: 40,
                                 fit: BoxFit.cover,
@@ -173,8 +180,7 @@ class TeacherHomepage extends StatelessWidget {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              TeacherChatPage()))
+                                          builder: (context) => TeacherMarks()))
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 1.0),
@@ -279,13 +285,7 @@ class TeacherHomepage extends StatelessWidget {
                                         ),
                                       ))),
                               GestureDetector(
-                                onTap: () => {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ScheduleACallPage()))
-                                },
+                                onTap: () => {},
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 1.0),
                                   child: Container(
@@ -389,13 +389,7 @@ class TeacherHomepage extends StatelessWidget {
                                         ),
                                       ))),
                               GestureDetector(
-                                onTap: () => {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ScheduleACallPage()))
-                                },
+                                onTap: () => {},
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 1.0),
                                   child: Container(
