@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:new_ivara_app/screens/user_type.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/studentHomepage.dart';
+import 'package:new_ivara_app/teacher_screen/teacher_homepage.dart';
 
 class AuthController extends GetxController {
   RxBool isSignedIn = false.obs;
@@ -29,9 +30,14 @@ class AuthController extends GetxController {
               .doc(user.value.uid)
               .get();
           userType = userDoc.data()['userType'];
-          isSignedIn = true.obs;
+
           print("User is signed in");
-          Get.offAll(() => StudentHomePage(0));
+          if (userType == "student") {
+            Get.offAll(() => StudentHomePage(0));
+          } else if (userType == "teacher") {
+            Get.offAll(() => TeacherHomepage());
+          }
+          isSignedIn = true.obs;
         }
       },
     );
@@ -50,8 +56,12 @@ class AuthController extends GetxController {
         'email': user.value.email,
         'userType': userType,
       });
-      this.userType=userType;
-      Get.offAll(() => StudentHomePage(0));
+      this.userType = userType;
+      if (userType == "student") {
+        Get.offAll(() => StudentHomePage(0));
+      } else if (userType == "teacher") {
+        Get.offAll(() => TeacherHomepage());
+      }
 
       isSignedIn = true.obs;
     } on FirebaseAuthException catch (e) {
@@ -96,7 +106,12 @@ class AuthController extends GetxController {
           .doc(user.value.uid)
           .get();
       userType = userDoc.data()['userType'];
-      Get.offAll(() => StudentHomePage(0));
+      if (userType == "student") {
+        Get.offAll(() => StudentHomePage(0));
+      } else if (userType == "teacher") {
+        Get.offAll(() => TeacherHomepage());
+      }
+
       isSignedIn = true.obs;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -113,7 +128,7 @@ class AuthController extends GetxController {
   }
 
   Future<bool> scheduleACall(
-      name, phoneno,bookSlot, description,email) async {
+      name, phoneno, bookSlot, description, email) async {
     bool isSuccessfull = false;
     DocumentReference doc =
         await FirebaseFirestore.instance.collection("ScheduleACall").add(
@@ -124,7 +139,7 @@ class AuthController extends GetxController {
         'bookSlot': bookSlot,
         'description': description,
         'uid': user.value.uid,
-        'email':email
+        'email': email
       },
     );
     if (doc.id != null) {
