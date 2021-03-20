@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/chat/chat_subject_group.dart';
-import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/24X7_doubt.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/24X7DoubtPortal/24X7_doubt.dart';
 
 List subjects = [
   {'subjectName': 'Subject 1', 'icon': 'assets/subject.png'},

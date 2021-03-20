@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:new_ivara_app/Controllers/authController.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/study abroad/study_abroad.dart';
-import 'package:new_ivara_app/student_screens/student_homepage/navbar section/24X7_doubt.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/24X7DoubtPortal/24X7_doubt.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/E-books/ebooks.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/entrance%20exam/entrance_exam.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/heal_my_mind.dart';
