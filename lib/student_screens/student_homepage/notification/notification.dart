@@ -10,41 +10,11 @@ class _StudentNotificationState extends State<StudentNotification> {
   int dateIndex = -1;
   int notificationIndex = -1;
   final firestoreInstance = FirebaseFirestore.instance;
-  List notifications = [
-    {
-      'date': 'Today',
-      'notification': [
-        {
-          'subject': 'English',
-          'content': 'Description of message',
-          'time': '08:33 a.m'
-        },
-        {
-          'subject': 'Mathematics',
-          'content': 'Description of message',
-          'time': '09:53 a.m'
-        }
-      ]
-    },
-    {
-      'date': 'Yesterday',
-      'notification': [
-        {
-          'subject': 'History',
-          'content': 'Description of message',
-          'time': '12:33 a.m'
-        },
-        {
-          'subject': 'Physics',
-          'content': 'Description of message',
-          'time': '01:53 p.m'
-        }
-      ]
-    }
-  ];
+  List notifications = [];
 
   List parseData(Map data) {
     List<String> keys = data.keys.toList();
+    keys.sort();
     List notification = [];
 
     for (int i = keys.length - 1; i >= 0; i--) {
