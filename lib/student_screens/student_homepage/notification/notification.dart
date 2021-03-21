@@ -161,6 +161,21 @@ class _StudentNotificationState extends State<StudentNotification> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    // FirebaseFirestore.instance
+    //     .collection("Notification")
+    //     .doc("School Name")
+    //     .collection("Class 7")
+    //     .doc("Section A")
+    //     .set(
+    //   {
+    //     '03-02-2000': FieldValue.arrayUnion(
+    //       [
+    //         {'content': "sdfdsfdsf", 'subject': 'Hindi', 'time': "09-53 AM"}
+    //       ],
+    //     ),
+    //   },
+    //   SetOptions(merge: true),
+    // );
     return Column(
       children: [
         SizedBox(height: height * 0.1),
