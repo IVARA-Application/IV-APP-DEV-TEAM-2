@@ -2,11 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/student_screens/drawer.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/ar/ar_topics.dart';
 
 class StudentSubject extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   String cls;
-  List topics = ['Topic 1', 'Topic 2', 'Topic 3', 'Topic 4', 'Topic 5'];
+  Map<String, List<String>> topics = {
+    '4th': [],
+    '5th': [],
+    '6th': [],
+    '7th': [],
+    '8th': [],
+    '9th': ['Physics','Chemistry','Biology','SST'],
+    '10th': [],
+    '11th': [],
+    '12th': [],
+  };
   StudentSubject({cls}) {
     this.cls = cls;
   }
@@ -51,19 +62,16 @@ class StudentSubject extends StatelessWidget {
                   SizedBox(height: height * 0.03),
                   Expanded(
                     child: ListView.builder(
-                        itemCount: topics.length,
+                        itemCount: topics[cls].length,
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                              MethodChannel channel = MethodChannel("channel");
-                              if (index == 0) {
-                                print("OPENUNITYCLASS 6");
-                                channel.invokeMethod("openUnityClass6");
-                              }
-                              if (index == 1) {
-                                print("OPENUNITYCLASS 7");
-                                channel.invokeMethod("openUnityClass7");
-                              }
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context)=>ARTopics(
+                                  cls:cls,
+                                  subject: topics[cls][index],
+                                )
+                              ));
                             },
                             child: Padding(
                               padding: EdgeInsets.symmetric(
@@ -78,7 +86,7 @@ class StudentSubject extends StatelessWidget {
                                         BorderRadius.circular(height * 0.01),
                                     color: Colors.white),
                                 child: Center(
-                                    child: Text(topics[index],
+                                    child: Text(topics[cls][index],
                                         style: TextStyle(
                                             color: kDarkBlue,
                                             fontSize: height * 0.028))),

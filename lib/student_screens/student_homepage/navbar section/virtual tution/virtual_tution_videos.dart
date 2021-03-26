@@ -4,6 +4,7 @@ import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/videos.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/virtual%20tution/chapterVideosUrl.dart';
 import 'package:video_player/video_player.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/heal my mind/videos.dart';
 
@@ -11,14 +12,17 @@ const String loremIpsum =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
 class TutionVideos extends StatefulWidget {
-  const TutionVideos({Key key}) : super(key: key);
+  final String class_;
+  final String subject;
+  final String chapterNumber;
+  const TutionVideos({Key key, this.chapterNumber, this.class_, this.subject})
+      : super(key: key);
 
   @override
   _TutionVideosState createState() => _TutionVideosState();
 }
 
 class _TutionVideosState extends State<TutionVideos> {
-  Widget _child = Card1();
   bool isExpanded = false;
 
   @override
@@ -56,20 +60,52 @@ class _TutionVideosState extends State<TutionVideos> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: List.generate(
-                    10,
-                    (i) => InkWell(
-                      onTap: () => setState(() {
-                        _child = isExpanded ? Card1() : Card2();
-                        // !isExpanded ? _controller.forward() : _controller.reverse();
-                        isExpanded = !isExpanded;
-                      }),
-                      child: AnimatedContainer(
-                        duration: Duration(milliseconds: 400),
-                        width: isExpanded ? _width * 0.7 : _width * 0.3,
-                        // height: isExpanded ? _height * 0.5 : _height * 0.1,
-                        child: _child,
-                      ),
-                    ),
+                    ChapterVidesUrl
+                        .chapterVidesUrl[widget.class_][widget.subject]
+                            [widget.chapterNumber]
+                        .length,
+                    (i) {
+                      String topic = ChapterVidesUrl
+                          .chapterVidesUrl[widget.class_][widget.subject]
+                              [widget.chapterNumber][i]
+                          .videoName;
+                      String topicNumber = ChapterVidesUrl
+                          .chapterVidesUrl[widget.class_][widget.subject]
+                              [widget.chapterNumber][i]
+                          .topicNumber
+                          .toString();
+                      String videoDescription = ChapterVidesUrl
+                          .chapterVidesUrl[widget.class_][widget.subject]
+                              [widget.chapterNumber][i]
+                          .description;
+                      String videoUrl = ChapterVidesUrl
+                          .chapterVidesUrl[widget.class_][widget.subject]
+                              [widget.chapterNumber][i]
+                          .url;
+                      print(topic + topicNumber);
+                      return InkWell(
+                        onTap: () => setState(() {
+                          // !isExpanded ? _controller.forward() : _controller.reverse();
+                          isExpanded = !isExpanded;
+                        }),
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 400),
+                          width: isExpanded ? _width * 0.7 : _width * 0.3,
+                          // height: isExpanded ? _height * 0.5 : _height * 0.1,
+                          child: !isExpanded
+                              ? Card1(
+                                  topic: topic,
+                                  topicNumber: topicNumber,
+                                )
+                              : Card2(
+                                  topic: topic,
+                                  topicNumber: topicNumber,
+                                  videoDescription: videoDescription,
+                                  videoUrl: videoUrl,
+                                ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
@@ -82,7 +118,9 @@ class _TutionVideosState extends State<TutionVideos> {
 }
 
 class Card1 extends StatelessWidget {
-  const Card1({Key key}) : super(key: key);
+  final String topicNumber;
+  final String topic;
+  Card1({Key key, this.topicNumber, this.topic}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +129,7 @@ class Card1 extends StatelessWidget {
           .copyWith(right: MediaQuery.of(context).size.width * 0.3),
       shape: kCardShape,
       child: ListTile(
-          title: Text('1.1 Video Title',
+          title: Text(topicNumber + ". " + topic,
               style: Theme.of(context).textTheme.headline5),
           trailing: Icon(
             FontAwesomeIcons.arrowCircleRight,
@@ -102,7 +140,17 @@ class Card1 extends StatelessWidget {
 }
 
 class Card2 extends StatelessWidget {
-  const Card2({Key key}) : super(key: key);
+  final String topic;
+  final String topicNumber;
+  final String videoUrl;
+  final String videoDescription;
+  const Card2({
+    Key key,
+    this.topic,
+    this.topicNumber,
+    this.videoUrl,
+    this.videoDescription,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +163,7 @@ class Card2 extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              title: Text('1.1 Video Title',
+              title: Text(topicNumber + ". " + topic,
                   style: Theme.of(context).textTheme.headline5),
               trailing: Icon(
                 FontAwesomeIcons.arrowCircleRight,
@@ -125,13 +173,12 @@ class Card2 extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.3,
               child: CustomVideoPlayer(
-                videoPlayerController: VideoPlayerController.network(
-                    'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'),
+                videoPlayerController: VideoPlayerController.network(videoUrl),
               ),
             ),
             Flexible(
               child: Text(
-                loremIpsum,
+                videoDescription,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
             )

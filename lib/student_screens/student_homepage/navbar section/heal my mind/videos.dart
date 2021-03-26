@@ -89,7 +89,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
         aspectRatio: 16 / 9,
         autoInitialize: true,
         autoPlay: true,
-        looping: widget.loop??false,
+        looping: widget.loop ?? false,
         errorBuilder: (constext, errorMessage) {
           return Center(
             child: Padding(

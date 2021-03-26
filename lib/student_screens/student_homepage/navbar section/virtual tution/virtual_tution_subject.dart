@@ -5,26 +5,61 @@ import 'package:new_ivara_app/shared/custom_icon_button.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/virtual%20tution/virtual_tution_chapter.dart';
 
 class TutionCoursesSubject extends StatefulWidget {
-  const TutionCoursesSubject({Key key}) : super(key: key);
+  final String class_;
+  const TutionCoursesSubject({Key key, this.class_}) : super(key: key);
 
   @override
   _TutionCoursesSubjectState createState() => _TutionCoursesSubjectState();
 }
 
 class _TutionCoursesSubjectState extends State<TutionCoursesSubject> {
-  List<String> subjects = [
-    'English',
-    'Hindi',
-    'Maths',
-    'Physics',
-    'Chemistry',
-    'Geography',
-    'Arts',
-    'Music',
-    'Kuch bhi',
-    'Kuch aur',
-    'Aur kuch',
-  ];
+  Map<String, List<String>> subjects = {
+    '4': [
+      'English',
+      'Hindi',
+      'Maths',
+      'Physics',
+      'Chemistry',
+      'Geography',
+      'Arts',
+      'Music',
+    ],
+    '5': [],
+    '6': [
+      'English',
+      'Hindi',
+      'Maths',
+      'Physics',
+      'Chemistry',
+      'Geography',
+      'Arts',
+      'Music',
+    ],
+    '7': [
+      'English',
+      'Hindi',
+      'Maths',
+      'Physics',
+      'Chemistry',
+      'Geography',
+      'Arts',
+      'Music',
+    ],
+    '8': [],
+    '9': [
+      'English',
+      'Hindi',
+      'Maths',
+      'Physics',
+      'Chemistry',
+      'Geography',
+      'Arts',
+      'Music',
+    ],
+    '10': [],
+    '11': [],
+    '12': []
+  };
 
   int selectedRadio;
   @override
@@ -79,7 +114,7 @@ class _TutionCoursesSubjectState extends State<TutionCoursesSubject> {
                 physics: BouncingScrollPhysics(),
                 child: Column(
                   children: List.generate(
-                    subjects.length,
+                    subjects[widget.class_].length,
                     (i) => Card(
                       elevation: 4.0,
                       margin: EdgeInsets.symmetric(
@@ -92,14 +127,17 @@ class _TutionCoursesSubjectState extends State<TutionCoursesSubject> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (_) =>
-                                    TutionChapter(subject: subjects[i])),
+                              builder: (_) => TutionChapter(
+                                subject: subjects[widget.class_][i],
+                                class_: widget.class_,
+                              ),
+                            ),
                           );
                         },
                         controlAffinity: ListTileControlAffinity.trailing,
                         shape: kCardShape,
                         title: Text(
-                          subjects[i],
+                          subjects[widget.class_][i],
                           style: ftt(context)
                               .headline5
                               .copyWith(color: kLightBlue),

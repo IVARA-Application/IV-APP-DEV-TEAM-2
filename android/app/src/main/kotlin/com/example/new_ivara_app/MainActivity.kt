@@ -17,7 +17,8 @@ class MainActivity: FlutterActivity() {
             // Note: this method is invoked on the main thread.
             // TODO
             if(call.method.equals("openUnityClass6")){
-                openUnityClass6();
+                openUnityClass6(call.argument<Int>("arguments"));
+
             }else if(call.method.equals("openUnityClass7")){
                 openUnityClass7();
             }
@@ -26,14 +27,14 @@ class MainActivity: FlutterActivity() {
             }
         }
     }
-    fun openUnityClass6(){
+    fun openUnityClass6(arguments: Int?){
        // var intent = Intent(this, UnityPlayerActivity::class.java);
-       // intent.putExtra("arguments",0);
+       // intent.putExtra("arguments",arguments);
        // startActivity(intent);
     }
     fun openUnityClass7(){
-       // var intent = Intent(this, UnityPlayerActivity::class.java);
-       // intent.putExtra("arguments",1);
-       // startActivity(intent);
+      //  var intent = Intent(this, UnityPlayerActivity::class.java);
+      //  intent.putExtra("arguments",2);
+      //  startActivity(intent);
     }
 }

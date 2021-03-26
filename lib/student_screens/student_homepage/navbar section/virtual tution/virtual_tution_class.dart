@@ -70,7 +70,9 @@ class _TutionClassesState extends State<TutionClasses> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (_) => TutionCoursesSubject()),
+                                builder: (_) => TutionCoursesSubject(
+                                      class_: (i + 4).toString(),
+                                    )),
                           );
                         },
                         controlAffinity: ListTileControlAffinity.trailing,

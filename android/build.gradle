@@ -16,10 +16,10 @@ allprojects {
     repositories {
         google()
         jcenter()
-        //  flatDir{
-        //       dirs "${project(':unityLibrary').projectDir}/libs"
+        // flatDir {
+        //     dirs "${project(':unityLibrary').projectDir}/libs"
 
-        //   }
+        // }
     }
 }
 
