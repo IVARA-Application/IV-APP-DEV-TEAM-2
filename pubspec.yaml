@@ -50,6 +50,7 @@ dependencies:
   circular_countdown_timer: ^0.1.0
   flutter_cached_pdfview: ^0.4.0-nullsafety
 
+  carousel_slider: ^3.0.0
 
 dev_dependencies:
   flutter_test:
