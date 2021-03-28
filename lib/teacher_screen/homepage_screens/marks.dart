@@ -186,7 +186,7 @@ class _TeacherMarksState extends State<TeacherMarks> {
           height: double.infinity,
           width: double.infinity,
           child: SingleChildScrollView(
-                      child: Container(
+            child: Container(
               padding: EdgeInsets.symmetric(horizontal: width * 0.06),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
