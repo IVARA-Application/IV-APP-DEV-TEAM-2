@@ -26,23 +26,11 @@ class _ClassroomPageState extends State<ClassroomPage> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    nameList = [
-      {
-        "display": "Aman",
-        "value": "Aman",
-      },
-      {
-        "display": "Mayank",
-        "value": "Mayank",
-      },
-      {
-        "display": "Nanda",
-        "value": "Nanda",
-      },
-      {
-        "display": "Tarun",
-        "value": "Tarun",
-      },
+    List<String> nameList = [
+      "Aman",
+      "Mayank",
+      "Nanda",
+      "Tarun",
     ];
     return Scaffold(
       body: Stack(
@@ -127,25 +115,30 @@ class _ClassroomPageState extends State<ClassroomPage> {
                               horizontal: screenWidth * 0.15,
                               vertical: screenHeight * 0.01),
                           child: Container(
-                            color: Colors.white,
-                            child: DropDownFormField(
-                              hintText: 'Name of the Student',
-                              value: _myActivity,
-                              onSaved: (value) {
-                                setState(() {
-                                  _myActivity = value;
-                                });
-                              },
-                              onChanged: (value) {
-                                setState(() {
-                                  _myActivity = value;
-                                });
-                              },
-                              dataSource: nameList,
-                              textField: 'display',
-                              valueField: 'value',
-                            ),
-                          ),
+                              width: screenWidth * 0.8,
+                              height: screenHeight * 0.05,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                    isDense: true,
+                                    elevation: 0,
+                                    hint: Text('Name of Student'),
+                                    icon: Icon(Icons.keyboard_arrow_down),
+                                    items: nameList.map((String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                    onChanged: (_) {},
+                                  ),
+                                ),
+                              )),
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 25),

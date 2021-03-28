@@ -239,7 +239,7 @@ class _TeacherMarksState extends State<TeacherMarks> {
                       width: double.infinity,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
-                          color: Colors.white.withOpacity(0.5)),
+                          color: Colors.white.withOpacity(0.7)),
                       child: Column(
                         children: [
                           SizedBox(

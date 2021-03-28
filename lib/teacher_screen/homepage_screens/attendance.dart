@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:new_ivara_app/teacher_screen/homepage_screens/previousAttendance.dart';
 
-class ParentAttendance extends StatefulWidget {
+class TeacherAttendance extends StatefulWidget {
   static String id = 'ParentAttendance';
   @override
-  _ParentAttendanceState createState() => _ParentAttendanceState();
+  _TeacherAttendanceState createState() => _TeacherAttendanceState();
 }
 
-class _ParentAttendanceState extends State<ParentAttendance> {
+class _TeacherAttendanceState extends State<TeacherAttendance> {
   Color blue = Color(0xFF076FA0);
   List<Map> attendanceList = [
     {'name': 'Hemanth', 'absent': true},
