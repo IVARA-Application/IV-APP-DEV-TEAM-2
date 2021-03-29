@@ -211,7 +211,7 @@ class _PreviousAttendanceState extends State<PreviousAttendance> {
                       vertical: screenHeight * 0.008,
                       horizontal: screenWidth * 0.05),
                   child: Card(
-                    color: Colors.white54,
+                    color: Colors.white.withOpacity(0.7),
                     elevation: 5,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
@@ -244,10 +244,10 @@ class _PreviousAttendanceState extends State<PreviousAttendance> {
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(screenHeight * 0.04),
                                 ),
-                                color: Colors.white),
+                                color: Colors.white.withOpacity(0.7)),
                             child: Column(
                               children: [
-                                SizedBox(height: screenHeight * 0.05),
+                                SizedBox(height: screenHeight * 0.03),
                                 Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: screenWidth * 0.05),

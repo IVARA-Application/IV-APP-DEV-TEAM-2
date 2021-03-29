@@ -242,7 +242,7 @@ class TeacherHomepage extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              ParentAttendance()))
+                                              TeacherAttendance()))
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 1.0),
