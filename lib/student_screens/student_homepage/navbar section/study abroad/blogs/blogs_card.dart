@@ -82,16 +82,14 @@ class _BlogsCardPageState extends State<BlogsCardPage> {
                             dotBgColor: Colors.transparent,
                             dotVerticalPadding: 5,
                             dotPosition: DotPosition.bottomCenter,
-                            images: [
-                              Image.asset(
-                                'assets/images/thumbnail.jpg',
-                                fit: BoxFit.cover,
-                              ),
-                              Image.asset(
-                                'assets/images/lab1(1).png',
-                                fit: BoxFit.cover,
-                              )
-                            ],
+                            images: blogs
+                                .map(
+                                  (e) => Image.network(
+                                    e['image'],
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                                .toList(),
                           ),
                         ),
                         Container(
