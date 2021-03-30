@@ -5,6 +5,7 @@ import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
 import 'package:new_ivara_app/parent_screens/parents_home_screen.dart';
 import 'package:new_ivara_app/student_screens/auth/login.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/studentHomepage.dart';
 import 'package:new_ivara_app/teacher_screen/teacher_homepage.dart';
 
 class UserType extends StatefulWidget {
@@ -87,6 +88,10 @@ class _UserTypeState extends State<UserType> {
                   });
 
                   foo("student");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => StudentHomePage(0)));
                 },
               ),
               UserTypeButton(
