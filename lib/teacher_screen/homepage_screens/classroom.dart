@@ -4,6 +4,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/heal my mind/schedule_call.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/heal my mind/chat_councellor.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/heal my mind/heal_my_mind_videos.dart';
+import 'package:new_ivara_app/teacher_screen/homepage_screens/chat.dart';
 
 class ClassroomPage extends StatefulWidget {
   static String id = 'ClassroomPage';
@@ -259,7 +260,13 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                         ),
                                       ))),
                               GestureDetector(
-                                onTap: () => {},
+                                onTap: () => {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              TeacherChatPage()))
+                                },
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 1.0),
                                   child: Container(

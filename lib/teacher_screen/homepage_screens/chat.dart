@@ -10,7 +10,6 @@ import 'package:new_ivara_app/Controllers/authController.dart';
 import 'package:new_ivara_app/student_screens/drawer.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/24X7DoubtPortal/DoubtPortalMethods.dart';
 import 'dart:io';
-
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/imageView.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/navbar.dart';
 import 'package:path_provider/path_provider.dart';
