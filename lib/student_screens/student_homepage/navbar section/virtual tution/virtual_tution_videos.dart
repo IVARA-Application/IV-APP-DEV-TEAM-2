@@ -17,7 +17,7 @@ class TutionVideos extends StatefulWidget {
   final String chapterNumber;
   const TutionVideos({Key key, this.chapterNumber, this.class_, this.subject})
       : super(key: key);
-
+  
   @override
   _TutionVideosState createState() => _TutionVideosState();
 }
@@ -29,7 +29,9 @@ class _TutionVideosState extends State<TutionVideos> {
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     // double _height = MediaQuery.of(context).size.height;
-
+    print(widget.class_);
+    print(widget.subject);
+    print(widget.chapterNumber);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
