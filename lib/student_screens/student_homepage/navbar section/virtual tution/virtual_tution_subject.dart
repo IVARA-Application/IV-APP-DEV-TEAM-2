@@ -88,6 +88,7 @@ class _TutionCoursesSubjectState extends State<TutionCoursesSubject> {
         backgroundColor: Colors.transparent,
       ),
       body: Container(
+        width: MediaQuery.of(context).size.width,
         decoration: kBGdecoration,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
