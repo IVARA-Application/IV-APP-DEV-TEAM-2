@@ -10,6 +10,8 @@ class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   Rx<User> user;
   String userType = "";
+  String name="";
+  String phoneNumber="";
   @override
   void onInit() {
     // TODO: implement onInit
@@ -22,6 +24,7 @@ class AuthController extends GetxController {
       (User user1) async {
         if (user1 == null) {
           print('User is currently signed out!');
+         
         } else {
           user = user1.obs;
           print(user.value.email);
@@ -37,13 +40,15 @@ class AuthController extends GetxController {
           } else if (userType == "teacher") {
             Get.offAll(() => TeacherHomepage());
           }
+        
           isSignedIn = true.obs;
+
         }
       },
     );
   }
 
-  Future signup(String email, String password, String userType) async {
+  Future signup(String email, String password, String userType,String name,String phoneNumber) async {
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -55,6 +60,8 @@ class AuthController extends GetxController {
         'uid': user.value.uid,
         'email': user.value.email,
         'userType': userType,
+        'name':name,
+        'phoneNumber':phoneNumber,
       });
       this.userType = userType;
       if (userType == "student") {
