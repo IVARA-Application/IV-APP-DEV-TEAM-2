@@ -116,7 +116,7 @@ class TestCardWidget extends StatelessWidget {
                         strokeWidth: 8.0,
                         strokeCap: StrokeCap.butt,
                         textStyle: TextStyle(
-                            fontSize: screenWidth * 0.04, color: Colors.black),
+                            fontSize: screenWidth * 0.035, color: Colors.black),
                         isReverse: true,
                         isReverseAnimation: false,
                         isTimerTextShown: true,
