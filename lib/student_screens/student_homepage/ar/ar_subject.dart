@@ -13,9 +13,9 @@ class StudentSubject extends StatelessWidget {
     '6th': [],
     '7th': [],
     '8th': [],
-    '9th': ['Physics','Chemistry','Biology','SST'],
+    '9th': ['Physics', 'Chemistry', 'Biology', 'SST'],
     '10th': [],
-    '11th': [],
+    '11th': ['Biology', 'Geography', 'History'],
     '12th': [],
   };
   StudentSubject({cls}) {
@@ -67,11 +67,10 @@ class StudentSubject extends StatelessWidget {
                           return GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context)=>ARTopics(
-                                  cls:cls,
-                                  subject: topics[cls][index],
-                                )
-                              ));
+                                  builder: (context) => ARTopics(
+                                        cls: cls,
+                                        subject: topics[cls][index],
+                                      )));
                             },
                             child: Padding(
                               padding: EdgeInsets.symmetric(
