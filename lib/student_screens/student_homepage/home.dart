@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/ARLabs/ar_labs.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/academic/academic_section.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/studentHomepage.dart';
 
@@ -81,6 +83,8 @@ class StudentHome extends StatelessWidget {
                 onTap: () {
                   MethodChannel channel = MethodChannel("channel");
                   channel.invokeMethod("openUnityClass6", {'arguments': 9});
+
+                  Get.to(ARLabs());
                 }),
             SizedBox(
               width: width * 0.08,
