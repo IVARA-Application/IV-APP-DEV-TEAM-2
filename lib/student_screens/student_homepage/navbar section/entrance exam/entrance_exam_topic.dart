@@ -59,7 +59,7 @@ class _EntranceExamTopicState extends State<EntranceExamTopic> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 56),
+            SizedBox(height: 80),
             Text(
               "Entrance Exam Preparation",
               style: ftt(context).headline5.copyWith(color: Colors.white),
@@ -81,11 +81,16 @@ class _EntranceExamTopicState extends State<EntranceExamTopic> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => CustomVideoPlayer(
-                              fullScreenByDefault: true,
-                              videoPlayerController:
-                                  VideoPlayerController.network(
-                                "https://firebasestorage.googleapis.com/v0/b/iv---mobile-app-2.appspot.com/o/HealMyMindVideos%2FChemistry%20Teacher.mp4?alt=media&token=2f57d676-3c8d-4e14-8cf9-d9f977222adf",
+                            builder: (_) => Scaffold(
+                              backgroundColor: Colors.transparent,
+                              body: Center(
+                                child: CustomVideoPlayer(
+                                  // fullScreenByDefault: true,
+                                  videoPlayerController:
+                                      VideoPlayerController.network(
+                                    "https://firebasestorage.googleapis.com/v0/b/iv---mobile-app-2.appspot.com/o/HealMyMindVideos%2FChemistry%20Teacher.mp4?alt=media&token=2f57d676-3c8d-4e14-8cf9-d9f977222adf",
+                                  ),
+                                ),
                               ),
                             ),
                           ),
