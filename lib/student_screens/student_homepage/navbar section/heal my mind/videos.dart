@@ -73,7 +73,8 @@ class _VideosCardPageState extends State<VideosCardPage> {
 class CustomVideoPlayer extends StatefulWidget {
   final VideoPlayerController videoPlayerController;
   final bool loop;
-  CustomVideoPlayer({this.videoPlayerController, this.loop});
+  final fullScreenByDefault;
+  CustomVideoPlayer({this.videoPlayerController, this.loop, this.fullScreenByDefault});
 
   @override
   _CustomVideoPlayerState createState() => _CustomVideoPlayerState();
@@ -85,6 +86,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   void initState() {
     super.initState();
     _chewieController = ChewieController(
+        fullScreenByDefault: widget.fullScreenByDefault ?? false,
         videoPlayerController: widget.videoPlayerController,
         aspectRatio: 16 / 9,
         autoInitialize: true,

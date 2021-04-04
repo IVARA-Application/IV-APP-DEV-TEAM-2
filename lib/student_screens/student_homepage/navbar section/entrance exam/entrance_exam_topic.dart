@@ -3,7 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/videos.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/skill_development.dart';
+import 'package:video_player/video_player.dart';
 
 class EntranceExamTopic extends StatefulWidget {
   final String topic;
@@ -78,7 +80,15 @@ class _EntranceExamTopicState extends State<EntranceExamTopic> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => SkillDevelopment()),
+                          MaterialPageRoute(
+                            builder: (_) => CustomVideoPlayer(
+                              fullScreenByDefault: true,
+                              videoPlayerController:
+                                  VideoPlayerController.network(
+                                "https://firebasestorage.googleapis.com/v0/b/iv---mobile-app-2.appspot.com/o/HealMyMindVideos%2FChemistry%20Teacher.mp4?alt=media&token=2f57d676-3c8d-4e14-8cf9-d9f977222adf",
+                              ),
+                            ),
+                          ),
                         );
                       },
                       child: Card(
