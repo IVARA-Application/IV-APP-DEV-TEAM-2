@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:new_ivara_app/constant/constants.dart';
 import 'package:new_ivara_app/parent_screens/parents_home_screen.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
+import 'package:video_player/video_player.dart';
+
+import 'heal my mind/videos.dart';
 
 List<Map<String, dynamic>> courses = [
   {
@@ -84,7 +87,23 @@ class SkillDevelopment extends StatelessWidget {
                       for (var sub in course['subject']) ...[
                         ElevatedButton(
                           onPressed: () {
-                            Get.to(ParentsHomeScreen());
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => Scaffold(
+                                  backgroundColor: Colors.transparent,
+                                  body: Center(
+                                    child: CustomVideoPlayer(
+                                      
+                                      videoPlayerController:
+                                          VideoPlayerController.network(
+                                        "https://firebasestorage.googleapis.com/v0/b/iv---mobile-app-2.appspot.com/o/HealMyMindVideos%2FChemistry%20Teacher.mp4?alt=media&token=2f57d676-3c8d-4e14-8cf9-d9f977222adf",
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
                           },
                           child: Text(
                             sub,

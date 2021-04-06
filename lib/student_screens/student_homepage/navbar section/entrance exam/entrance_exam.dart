@@ -55,7 +55,7 @@ class _EntranceExamState extends State<EntranceExam> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 56),
+            SizedBox(height: 80),
             Text(
               "Entrance Exam Preparation",
               style: ftt(context).headline5.copyWith(color: Colors.white),
