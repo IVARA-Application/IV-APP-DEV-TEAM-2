@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:new_ivara_app/Controllers/authController.dart';
 
 class StudentNotification extends StatefulWidget {
   @override
@@ -14,8 +17,15 @@ class _StudentNotificationState extends State<StudentNotification> {
 
   List parseData(Map data) {
     List<String> keys = data.keys.toList();
-    keys.sort();
+    var inputFormat = DateFormat('dd-MM-yyyy');
+    keys.sort((a,b){
+      DateTime aDateTime=inputFormat.parse(a);
+      DateTime bDateTime=inputFormat.parse(b);
+      return aDateTime.isAfter(bDateTime)?1:0;
+    });
     List notification = [];
+    print(keys);
+    DateTime dateTime=inputFormat.parse(keys[0]);
 
     for (int i = keys.length - 1; i >= 0; i--) {
       notification.add({'date': keys[i], 'notification': data[keys[i]]});
@@ -25,11 +35,13 @@ class _StudentNotificationState extends State<StudentNotification> {
 
   void getData() async {
     print('getting data');
+    String clasS="Class "+Get.find<AuthController>().clasS;
+    String section="Section "+Get.find<AuthController>().section;
     final data = await firestoreInstance
         .collection('Notification')
         .doc('School Name')
-        .collection('Class 7')
-        .doc('Section A')
+        .collection(clasS)
+        .doc(section)
         .get()
         .then((value) => value.data());
     setState(() {

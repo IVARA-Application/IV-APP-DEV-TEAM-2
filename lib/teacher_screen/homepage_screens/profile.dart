@@ -79,25 +79,25 @@ class ProfilePage extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 30,
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                         Container(
-                          height: screenHeight * 0.48,
+                          height: screenHeight * 0.5,
                           width: screenWidth * 0.8,
                           decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Colors.white.withOpacity(0.7),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(30))),
                           child: Column(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.all(40.0),
+                                padding: EdgeInsets.all(screenHeight*0.04),
                                 child: CircleAvatar(
-                                  radius: 75,
+                                  radius: screenHeight*0.09,
                                   backgroundColor: Color(0xFFF3D37B),
                                   child: CircleAvatar(
-                                    radius: 70,
+                                    radius: screenHeight*0.085,
                                     backgroundColor: Colors.transparent,
                                     backgroundImage: AssetImage(
                                       'assets/profile.png',
@@ -109,44 +109,51 @@ class ProfilePage extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          'Name',
-                                          style: TextStyle(
-                                              fontSize: screenWidth * 0.035,
-                                              color: Color(0xFF697AE4)),
+                                  Container(
+                                    padding:EdgeInsets.only(left:screenWidth*0.05),
+                                    width:screenWidth*0.4,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            'Name',
+                                            style: TextStyle(
+                                                fontSize: screenWidth * 0.035,
+                                                color: Color(0xFF697AE4)),
+                                          ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          'Mobile No.',
-                                          style: TextStyle(
-                                              fontSize: screenWidth * 0.035,
-                                              color: Color(0xFF697AE4)),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            'Mobile No.',
+                                            style: TextStyle(
+                                                fontSize: screenWidth * 0.035,
+                                                color: Color(0xFF697AE4)),
+                                          ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          'Email ID',
-                                          style: TextStyle(
-                                              fontSize: screenWidth * 0.035,
-                                              color: Color(0xFF697AE4)),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            'Email ID',
+                                            style: TextStyle(
+                                                fontSize: screenWidth * 0.035,
+                                                color: Color(0xFF697AE4)),
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                   Container(
+                                    padding: EdgeInsets.symmetric(horizontal:8),
                                     width: 2,
                                     color: Color(0xFF697AE4),
-                                    height: screenHeight * 0.1,
+                                    height: screenHeight * 0.18,
                                   ),
                                   Expanded(
                                     child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),

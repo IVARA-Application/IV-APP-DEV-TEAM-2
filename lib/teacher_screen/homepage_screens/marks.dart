@@ -186,7 +186,7 @@ class _TeacherMarksState extends State<TeacherMarks> {
           height: double.infinity,
           width: double.infinity,
           child: SingleChildScrollView(
-                      child: Container(
+            child: Container(
               padding: EdgeInsets.symmetric(horizontal: width * 0.06),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -239,7 +239,7 @@ class _TeacherMarksState extends State<TeacherMarks> {
                       width: double.infinity,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
-                          color: Colors.white.withOpacity(0.5)),
+                          color: Colors.white.withOpacity(0.7)),
                       child: Column(
                         children: [
                           SizedBox(

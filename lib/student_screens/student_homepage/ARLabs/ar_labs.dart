@@ -1,26 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:new_ivara_app/constant/colours.dart';
-import 'package:new_ivara_app/student_screens/drawer.dart';
-import 'package:new_ivara_app/student_screens/student_homepage/ar/ar_topics.dart';
+import 'package:new_ivara_app/constant/constants.dart';
 
-class StudentSubject extends StatelessWidget {
+import '../../drawer.dart';
+import 'ar_class.dart';
+
+class ARLabs extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  String cls;
-  Map<String, List<String>> topics = {
-    '4th': [],
-    '5th': [],
-    '6th': [],
-    '7th': [],
-    '8th': [],
-    '9th': ['Physics', 'Chemistry', 'Biology', 'SST'],
-    '10th': [],
-    '11th': ['Biology', 'Geography', 'History'],
-    '12th': [],
-  };
-  StudentSubject({cls}) {
-    this.cls = cls;
-  }
+  final List<String> classes = ['9th', '10th', '11th', '12th'];
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -32,19 +20,7 @@ class StudentSubject extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: [0.1, 0.5, 0.7, 0.9],
-                  colors: [
-                    Color(0xFF8569C5),
-                    Color(0xFFC579B5),
-                    Color(0xFFF48380),
-                    Color(0xFFF3d37B),
-                  ],
-                ),
-              ),
+              decoration: kBGdecoration,
               height: double.infinity,
               width: double.infinity,
               child: Column(
@@ -53,47 +29,47 @@ class StudentSubject extends StatelessWidget {
                     height: height * 0.1,
                   ),
                   Text(
-                    'Class $cls',
+                    'AR Labs',
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w300,
                         fontSize: height * 0.03),
                   ),
-                  SizedBox(height: height * 0.03),
                   Expanded(
-                    child: ListView.builder(
-                        itemCount: topics[cls].length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ARTopics(
-                                        cls: cls,
-                                        subject: topics[cls][index],
-                                      )));
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: height * 0.015,
-                                  horizontal: width * 0.08),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: height * 0.01),
-                                width: width * 0.8,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.circular(height * 0.01),
-                                    color: Colors.white),
-                                child: Center(
-                                    child: Text(topics[cls][index],
-                                        style: TextStyle(
-                                            color: kDarkBlue,
-                                            fontSize: height * 0.028))),
+                    child: GridView.count(
+                        crossAxisCount: 2,
+                        childAspectRatio: 3,
+                        padding: EdgeInsets.all(height * 0.05),
+                        mainAxisSpacing: height * 0.02,
+                        crossAxisSpacing: width * 0.03,
+                        children: classes.map((String cls) {
+                          return GridTile(
+                            child: GestureDetector(
+                              onTap: () {
+                                Get.to(ARLabsTopic(cls: cls));
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.all(height * 0.005),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.circular(height * 0.01),
+                                      color: Colors.white),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text('Class $cls',
+                                          style: TextStyle(color: kDarkBlue)),
+                                      SizedBox(width: width * 0.03),
+                                      Image.asset('assets/class.png')
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                           );
-                        }),
-                  )
+                        }).toList()),
+                  ),
                 ],
               ),
             ),

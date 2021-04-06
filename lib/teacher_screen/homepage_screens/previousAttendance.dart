@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:new_ivara_app/teacher_screen/homepage_screens/Methods/uploadAttendanceMethods.dart';
 
 class PreviousAttendance extends StatefulWidget {
+  int clasS;
+  PreviousAttendance(this.clasS);
   static String id = 'PreviousAttendance';
   @override
   _PreviousAttendanceState createState() => _PreviousAttendanceState();
@@ -8,14 +11,13 @@ class PreviousAttendance extends StatefulWidget {
 
 class _PreviousAttendanceState extends State<PreviousAttendance> {
   Color blue = Color(0xFF076FA0);
-  List<Map> attendanceList = [
-    {'name': 'Hemanth', 'absent': true},
-    {'name': 'Khushwant', 'absent': false},
-    {'name': 'Tarun', 'absent': false},
-    {'name': 'Hemanth', 'absent': true},
-    {'name': 'Khushwant', 'absent': false},
-    {'name': 'Tarun', 'absent': false},
-  ];
+  String currentDate = '01';
+  String currentMonth = 'Jan';
+  String currentYear = "2021";
+  String currentDay = "Mon";
+  bool isLoading = false;
+  List<Map> attendanceList = [];
+  List<Map<String, dynamic>> studentList;
   var months = [
     'Jan',
     'Feb',
@@ -41,15 +43,15 @@ class _PreviousAttendanceState extends State<PreviousAttendance> {
     'Sat',
   ];
   var date = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
     '10',
     '11',
     '12',
@@ -60,7 +62,8 @@ class _PreviousAttendanceState extends State<PreviousAttendance> {
   ];
   int currentday = 0;
 
-  Widget makeDropDown(List<String> dropdownList, screenWidth, screenHeight) {
+  Widget makeDropDown(
+      List<String> dropdownList, screenWidth, screenHeight, String type) {
     return Padding(
       padding: EdgeInsets.all(screenWidth * 0.02),
       child: Container(
@@ -73,6 +76,13 @@ class _PreviousAttendanceState extends State<PreviousAttendance> {
           child: DropdownButton<String>(
             isDense: true,
             elevation: 10,
+            value: type == "date"
+                ? currentDate
+                : type == "month"
+                    ? currentMonth
+                    : type == "year"
+                        ? currentYear
+                        : currentDay,
             hint: Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
               child: Text(
@@ -91,7 +101,9 @@ class _PreviousAttendanceState extends State<PreviousAttendance> {
                 ),
               );
             }).toList(),
-            onChanged: (_) {},
+            onChanged: (value) async {
+              onDropDownChanged(type, value);
+            },
           ),
         ),
       ),
@@ -112,24 +124,138 @@ class _PreviousAttendanceState extends State<PreviousAttendance> {
             SizedBox(
               height: screenHeight * 0.08,
               width: screenWidth * 0.1,
-              child: IconButton(
-                onPressed: () {},
-                icon: Stack(
-                  children: [
-                    Icon(Icons.brightness_1,
-                        color: attendanceList[index]['absent']
-                            ? Colors.red
-                            : Color(0XFF00e600)),
-                    Icon(Icons.radio_button_unchecked),
-                  ],
-                ),
-              ),
+              child: attendanceList[index]['isRecordPresent']
+                  ? IconButton(
+                      onPressed: () {},
+                      icon: Stack(
+                        children: [
+                          Icon(Icons.brightness_1,
+                              color: attendanceList[index]['absent']
+                                  ? Colors.red
+                                  : Color(0XFF00e600)),
+                          Icon(Icons.radio_button_unchecked),
+                        ],
+                      ),
+                    )
+                  : Text("-"),
             ),
             SizedBox(width: screenWidth * 0.05)
           ]),
         );
       },
     );
+  }
+
+  void onDropDownChanged(String type,String value) async{
+    if (type == "days") {
+      setState(() {
+        currentDay = value;
+      });
+    } else if (type == 'date') {
+      setState(() {
+        currentDate = value;
+      });
+    } else if (type == "month") {
+      setState(() {
+        currentMonth = value;
+      });
+    } else if (type == "year") {
+      setState(() {
+        currentYear = value;
+      });
+    }
+    setState(() {
+      isLoading = true;
+    });
+    String month;
+    switch (currentMonth) {
+      case 'Jan':
+        month = "01";
+        break;
+      case 'Feb':
+        month = "02";
+        break;
+      case 'March':
+        month = "03";
+        break;
+      case 'April':
+        month = "04";
+        break;
+      case 'May':
+        month = "05";
+        break;
+      case 'June':
+        month = "06";
+        break;
+      case 'July':
+        month = "07";
+        break;
+      case 'Aug':
+        month = "08";
+        break;
+      case 'Sept':
+        month = "09";
+        break;
+      case 'Oct':
+        month = "10";
+        break;
+      case 'Nov':
+        month = "11";
+        break;
+      case 'Dec':
+        month = "12";
+        break;
+      default:
+        month = "01";
+    }
+    await makeAttendanceList(currentDate, month, currentYear);
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getAttendace();
+  }
+
+  void getAttendace() async {
+    setState(() {
+      isLoading = true;
+    });
+    studentList =
+        await UploadAttendanceMethods.getPreviousAttendance(widget.clasS);
+    await makeAttendanceList('01', '01', '2021');
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  Future makeAttendanceList(String date, String month, String year) async {
+    attendanceList = [];
+    await Future.forEach(studentList, (student) {
+      Map attendance = student['attendance'];
+      if (attendance.containsKey(date + '-' + month + '-' + year)) {
+        attendanceList.add(
+          {
+            'id': student['uid'],
+            'name': student['name'],
+            'absent': attendance[date + '-' + month + '-' + year],
+            'isRecordPresent': true,
+          },
+        );
+      } else {
+        attendanceList.add(
+          {
+            'id': student['uid'],
+            'name': student['name'],
+            'isRecordPresent': false,
+          },
+        );
+      }
+    });
   }
 
   @override
@@ -211,7 +337,7 @@ class _PreviousAttendanceState extends State<PreviousAttendance> {
                       vertical: screenHeight * 0.008,
                       horizontal: screenWidth * 0.05),
                   child: Card(
-                    color: Colors.white54,
+                    color: Colors.white.withOpacity(0.7),
                     elevation: 5,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
@@ -221,10 +347,14 @@ class _PreviousAttendanceState extends State<PreviousAttendance> {
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            makeDropDown(days, screenWidth, screenHeight),
-                            makeDropDown(date, screenWidth, screenHeight),
-                            makeDropDown(months, screenWidth, screenHeight),
-                            makeDropDown(years, screenWidth, screenHeight),
+                            makeDropDown(
+                                days, screenWidth, screenHeight, "days"),
+                            makeDropDown(
+                                date, screenWidth, screenHeight, "date"),
+                            makeDropDown(
+                                months, screenWidth, screenHeight, "month"),
+                            makeDropDown(
+                                years, screenWidth, screenHeight, "year"),
                           ],
                         ),
                       ],
@@ -244,10 +374,10 @@ class _PreviousAttendanceState extends State<PreviousAttendance> {
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(screenHeight * 0.04),
                                 ),
-                                color: Colors.white),
+                                color: Colors.white.withOpacity(0.7)),
                             child: Column(
                               children: [
-                                SizedBox(height: screenHeight * 0.05),
+                                SizedBox(height: screenHeight * 0.03),
                                 Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: screenWidth * 0.05),
@@ -271,10 +401,12 @@ class _PreviousAttendanceState extends State<PreviousAttendance> {
                                     ],
                                   ),
                                 ),
-                                Expanded(
-                                  child: getAttendanceList(
-                                      screenHeight, screenWidth),
-                                ),
+                                isLoading
+                                    ? CircularProgressIndicator()
+                                    : Expanded(
+                                        child: getAttendanceList(
+                                            screenHeight, screenWidth),
+                                      ),
                               ],
                             )),
                       ),

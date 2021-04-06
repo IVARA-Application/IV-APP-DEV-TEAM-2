@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:new_ivara_app/constant/colours.dart';
 
 class TestCard {
   String subject;
@@ -37,14 +38,14 @@ class TestCardWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
         top: screenHeight * 0.04,
-        left: screenWidth * 0.06,
-        right: screenWidth * 0.06,
+        left: screenWidth * 0.08,
+        right: screenWidth * 0.08,
       ),
       child: GestureDetector(
         onTap: () => {},
         child: Container(
             width: screenWidth,
-            height: screenHeight * 0.18,
+            height: screenHeight * 0.2,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
@@ -53,53 +54,50 @@ class TestCardWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Container(
-                  width: screenWidth * 0.038,
+                  width: screenWidth * 0.03,
                   height: screenHeight * 0.28,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(10),
                       topLeft: Radius.circular(10),
                     ),
-                    color: Color(0xFF697AE4),
+                    color: kPurple,
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: screenHeight * 0.04,
-                        ),
-                        child: Text(
-                          testCard.subject,
-                          style: TextStyle(
-                            fontSize: 23,
-                            color: Color(0xFF697AE4),
-                          ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: screenHeight * 0.04,
+                      ),
+                      child: Text(
+                        testCard.subject,
+                        style: TextStyle(
+                          fontSize: 23,
+                          color: kDarkBlue,
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: screenHeight * 0.004,
-                        ),
-                        child: Text(
-                          'Today, 12:00 PM',
-                          style: TextStyle(fontSize: 13, color: Colors.grey),
-                        ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: screenHeight * 0.004,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: screenHeight * 0.004,
-                        ),
-                        child: Text(
-                          'Topic : ' + testCard.topic,
-                          style: TextStyle(fontSize: 13, color: Colors.grey),
-                        ),
+                      child: Text(
+                        'Today, 12:00 PM',
+                        style: TextStyle(fontSize: 13, color: Colors.grey),
                       ),
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: screenHeight * 0.004,
+                      ),
+                      child: Text(
+                        'Topic : ' + testCard.topic,
+                        style: TextStyle(fontSize: 13, color: Colors.grey),
+                      ),
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: EdgeInsets.only(
@@ -110,15 +108,15 @@ class TestCardWidget extends StatelessWidget {
                       CircularCountDownTimer(
                         duration: testCard.seconds,
                         controller: _controller,
-                        width: screenWidth * 0.30,
+                        width: screenWidth * 0.25,
                         height: screenHeight * 0.40,
                         ringColor: Color(0xFFF3D37B),
                         fillColor: Colors.white,
                         backgroundColor: Color(0xFFECECEC),
-                        strokeWidth: 10.0,
+                        strokeWidth: 8.0,
                         strokeCap: StrokeCap.butt,
                         textStyle: TextStyle(
-                            fontSize: screenWidth * 0.04, color: Colors.black),
+                            fontSize: screenWidth * 0.035, color: Colors.black),
                         isReverse: true,
                         isReverseAnimation: false,
                         isTimerTextShown: true,

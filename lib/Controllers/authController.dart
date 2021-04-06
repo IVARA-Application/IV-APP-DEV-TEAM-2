@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
+import 'package:new_ivara_app/Controllers/notificationController.dart';
 import 'package:new_ivara_app/screens/user_type.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/studentHomepage.dart';
 import 'package:new_ivara_app/teacher_screen/teacher_homepage.dart';
@@ -10,6 +12,10 @@ class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   Rx<User> user;
   String userType = "";
+  String name = "";
+  String phoneNumber = "";
+  String clasS = "7";
+  String section = "A";
   @override
   void onInit() {
     // TODO: implement onInit
@@ -25,10 +31,20 @@ class AuthController extends GetxController {
         } else {
           user = user1.obs;
           print(user.value.email);
+          String messagingToken =
+              await Get.find<NotificationController>().messaging.getToken();
           DocumentSnapshot userDoc = await FirebaseFirestore.instance
               .collection("Users")
               .doc(user.value.uid)
               .get();
+          FirebaseFirestore.instance
+              .collection("Users")
+              .doc(user.value.uid)
+              .set(
+                  {'token': messagingToken},
+                  SetOptions(
+                    merge: true,
+                  ));
           userType = userDoc.data()['userType'];
 
           print("User is signed in");
@@ -37,13 +53,15 @@ class AuthController extends GetxController {
           } else if (userType == "teacher") {
             Get.offAll(() => TeacherHomepage());
           }
+
           isSignedIn = true.obs;
         }
       },
     );
   }
 
-  Future signup(String email, String password, String userType) async {
+  Future signup(String email, String password, String userType, String name,
+      String phoneNumber) async {
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -51,10 +69,15 @@ class AuthController extends GetxController {
         password: password,
       );
       user = userCredential.user.obs;
+      String messagingToken =
+          await Get.find<NotificationController>().messaging.getToken();
       FirebaseFirestore.instance.collection("Users").doc(user.value.uid).set({
         'uid': user.value.uid,
         'email': user.value.email,
         'userType': userType,
+        'name': name,
+        'phoneNumber': phoneNumber,
+        'token': messagingToken,
       });
       this.userType = userType;
       if (userType == "student") {

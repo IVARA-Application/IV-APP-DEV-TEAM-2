@@ -107,7 +107,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         label: "Register",
                         onTap: () {
                           Get.find<AuthController>().signup(
-                              _emailC.text, _passC.text, widget.userType);
+                              _emailC.text, _passC.text, widget.userType,_nameC.text,_phoneC.text);
                         }),
                     Row(
                       children: [

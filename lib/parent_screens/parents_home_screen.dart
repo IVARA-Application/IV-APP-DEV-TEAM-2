@@ -6,6 +6,9 @@ import 'package:new_ivara_app/parent_screens/parent_academic_section.dart';
 import 'package:new_ivara_app/parent_screens/teachers_list.dart';
 import 'package:new_ivara_app/shared/glow_circle_avatar.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
+import 'package:new_ivara_app/teacher_screen/homepage_screens/attendance.dart';
+
+import 'attendance.dart';
 
 class ParentsHomeScreen extends StatelessWidget {
   const ParentsHomeScreen({Key key}) : super(key: key);
@@ -51,7 +54,9 @@ class ParentsHomeScreen extends StatelessWidget {
             CustomCard(
               imgPath: 'assets/images/attendance(1).png',
               title: 'Attendance',
-              onTap: () {},
+              onTap: () {
+                Get.to(ParentAttendance());
+              },
             ),
           ],
         ),

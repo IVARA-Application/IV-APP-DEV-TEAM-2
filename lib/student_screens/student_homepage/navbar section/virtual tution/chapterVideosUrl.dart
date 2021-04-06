@@ -15,21 +15,21 @@ class ChapterVidesUrl {
             description: "Lorem ipsum",
           ),
           VideoModel(
-            topicNumber: 1,
+            topicNumber: 2,
             url:
                 "https://firebasestorage.googleapis.com/v0/b/iv---mobile-app-2.appspot.com/o/HealMyMindVideos%2FChemistry%20Teacher.mp4?alt=media&token=2f57d676-3c8d-4e14-8cf9-d9f977222adf",
-            videoName: "Physics Title 1",
+            videoName: "Physics Title 2",
             description: "Lorem ipsum",
           ),
           VideoModel(
-            topicNumber: 1,
+            topicNumber: 3,
             url:
                 "https://firebasestorage.googleapis.com/v0/b/iv---mobile-app-2.appspot.com/o/HealMyMindVideos%2FChemistry%20Teacher.mp4?alt=media&token=2f57d676-3c8d-4e14-8cf9-d9f977222adf",
-            videoName: "Physics Title 1",
+            videoName: "Physics Title 3",
             description: "Lorem ipsum",
           ),
           VideoModel(
-            topicNumber: 1,
+            topicNumber: 4,
             url:
                 "https://firebasestorage.googleapis.com/v0/b/iv---mobile-app-2.appspot.com/o/HealMyMindVideos%2FChemistry%20Teacher.mp4?alt=media&token=2f57d676-3c8d-4e14-8cf9-d9f977222adf",
             videoName: "Physics Title 1",
