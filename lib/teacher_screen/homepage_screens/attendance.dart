@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:new_ivara_app/teacher_screen/homepage_screens/Methods/uploadAttendanceMethods.dart';
 import 'package:new_ivara_app/teacher_screen/homepage_screens/previousAttendance.dart';
 
 class TeacherAttendance extends StatefulWidget {
+  int clasS = 7;
   static String id = 'ParentAttendance';
   @override
   _TeacherAttendanceState createState() => _TeacherAttendanceState();
@@ -9,14 +11,8 @@ class TeacherAttendance extends StatefulWidget {
 
 class _TeacherAttendanceState extends State<TeacherAttendance> {
   Color blue = Color(0xFF076FA0);
-  List<Map> attendanceList = [
-    {'name': 'Hemanth', 'absent': true},
-    {'name': 'Khushwant', 'absent': false},
-    {'name': 'Tarun', 'absent': false},
-    {'name': 'Hemanth', 'absent': true},
-    {'name': 'Khushwant', 'absent': false},
-    {'name': 'Tarun', 'absent': false},
-  ];
+  bool isLoading = false;
+  List<Map<String, dynamic>> attendanceList;
 
   Widget getAttendanceList(screenHeight, screenWidth) {
     return ListView.builder(
@@ -39,8 +35,12 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                   setState(() {
                     if (attendanceList[index]['absent']) {
                       attendanceList[index]['absent'] = false;
+                      UploadAttendanceMethods.changeAttendance(
+                          attendanceList[index]['id'], false);
                     } else {
                       attendanceList[index]['absent'] = true;
+                      UploadAttendanceMethods.changeAttendance(
+                          attendanceList[index]['id'], true);
                     }
                   });
                 },
@@ -63,6 +63,23 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
         );
       },
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getAttendance();
+  }
+
+  void getAttendance() async {
+    setState(() {
+      isLoading = true;
+    });
+    attendanceList = await UploadAttendanceMethods.getAttendance(widget.clasS);
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -154,7 +171,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                PreviousAttendance()));
+                                                PreviousAttendance(widget.clasS)));
                                   },
                                   icon: Icon(
                                     Icons.event,
@@ -213,10 +230,12 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                                         ],
                                       ),
                                     ),
-                                    Expanded(
-                                      child: getAttendanceList(
-                                          screenHeight, screenWidth),
-                                    ),
+                                    isLoading
+                                        ? CircularProgressIndicator()
+                                        : Expanded(
+                                            child: getAttendanceList(
+                                                screenHeight, screenWidth),
+                                          ),
                                   ],
                                 )),
                           ),

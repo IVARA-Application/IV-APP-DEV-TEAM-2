@@ -28,9 +28,9 @@ class MainActivity: FlutterActivity() {
         }
     }
     fun openUnityClass6(arguments: Int?){
-      //  var intent = Intent(this, UnityPlayerActivity::class.java);
-      //  intent.putExtra("arguments",arguments);
-      //  startActivity(intent);
+       //  var intent = Intent(this, UnityPlayerActivity::class.java);
+       //  intent.putExtra("arguments",arguments);
+       //  startActivity(intent);
     }
     fun openUnityClass7(){
       //  var intent = Intent(this, UnityPlayerActivity::class.java);
