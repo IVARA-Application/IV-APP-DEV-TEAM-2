@@ -78,6 +78,24 @@ class AuthController extends GetxController {
         'name': name,
         'phoneNumber': phoneNumber,
         'token': messagingToken,
+        'class':7,
+        'marks': {
+          'Sessionals': [
+            {'subjectName': 'Hindi', 'marks': 0},
+            {'subjectName': 'English', 'marks': 0},
+            {'subjectName': 'Maths', 'marks': 0},
+          ],
+          'Half-Yearly': [
+            {'subjectName': 'Hindi', 'marks': 0},
+            {'subjectName': 'English', 'marks': 0},
+            {'subjectName': 'Maths', 'marks': 0},
+          ],
+          'Finals': [
+            {'subjectName': 'Hindi', 'marks': 0},
+            {'subjectName': 'English', 'marks': 0},
+            {'subjectName': 'Maths', 'marks': 0},
+          ]
+        }
       });
       this.userType = userType;
       if (userType == "student") {

@@ -1,9 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:new_ivara_app/teacher_screen/homepage_screens/Methods/marksMethods.dart';
 
 class TeacherMarks extends StatefulWidget {
+  int clasS = 7;
+  String currentExamType;
+  TeacherMarks(this.currentExamType);
   @override
   _TeacherMarksState createState() => _TeacherMarksState();
 }
@@ -11,43 +16,13 @@ class TeacherMarks extends StatefulWidget {
 class _TeacherMarksState extends State<TeacherMarks> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<String> subjects = ['Maths', 'Physics', 'Hindi', 'English'];
-  List<String> examType = ['Exam Type', 'Sessionals', 'Half-Yearly', 'Finals'];
+  List<String> examType = ['Sessionals', 'Half-Yearly', 'Finals'];
 
-  List marks = [
-    {
-      'name': 'Hemanth',
-      'marks': [
-        {'subjectName': 'Physics', 'marks': '18'},
-        {'subjectName': 'Chemistry', 'marks': '20'},
-        {'subjectName': 'Biology', 'marks': '15'}
-      ]
-    },
-    {
-      'name': 'Khushwant',
-      'marks': [
-        {'subjectName': 'Physics', 'marks': '18'},
-        {'subjectName': 'Chemistry', 'marks': '20'},
-        {'subjectName': 'Biology', 'marks': '15'}
-      ]
-    },
-    {
-      'name': 'Tarun',
-      'marks': [
-        {'subjectName': 'Physics', 'marks': '18'},
-        {'subjectName': 'Chemistry', 'marks': '20'},
-        {'subjectName': 'Biology', 'marks': '15'}
-      ]
-    },
-    {
-      'name': 'Hemanth',
-      'marks': [
-        {'subjectName': 'Physics', 'marks': '18'},
-        {'subjectName': 'Chemistry', 'marks': '20'},
-        {'subjectName': 'Biology', 'marks': '15'}
-      ]
-    }
-  ];
-  Widget makeDropDown({List<String> list, onchanged}) {
+  bool isLoading = false;
+  List<Map<String, dynamic>> studentList = [];
+  List marks = [];
+  CarouselController buttonCarouselController;
+  Widget makeDropDown({List<String> list, onchanged, String type}) {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -59,6 +34,7 @@ class _TeacherMarksState extends State<TeacherMarks> {
             isDense: true,
             elevation: 0,
             hint: Text(list[0]),
+            value: type == "exam" ? widget.currentExamType : "Maths",
             icon: Icon(Icons.keyboard_arrow_down),
             items: list.map((String value) {
               return DropdownMenuItem<String>(
@@ -74,13 +50,15 @@ class _TeacherMarksState extends State<TeacherMarks> {
   }
 
   Widget makeStudentList(height, width) {
+    print("MAKESTUDENTLIST CALEED");
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
       child: ListView.builder(
           itemCount: marks.length,
           itemBuilder: (context, index) {
-            CarouselController buttonCarouselController = CarouselController();
+            buttonCarouselController = CarouselController();
+
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -113,49 +91,75 @@ class _TeacherMarksState extends State<TeacherMarks> {
                             options: CarouselOptions(
                               viewportFraction: 1.0,
                               enlargeCenterPage: false,
+                              initialPage: 0,
                             ),
-                            items: marks[index]['marks'].map<Widget>((i) {
-                              return Builder(
-                                builder: (BuildContext context) {
-                                  return Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      margin:
-                                          EdgeInsets.symmetric(horizontal: 5.0),
-                                      child: Center(
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              i['subjectName'],
-                                              style: TextStyle(
-                                                color: kPurple,
-                                              ),
+                            items: marks[index]['marks'].map<Widget>(
+                              (i) {
+                                return Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 5.0),
+                                    child: Center(
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            i['subjectName'],
+                                            style: TextStyle(
+                                              color: kPurple,
                                             ),
-                                            Spacer(),
-                                            Container(
-                                              width: width * 0.08,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
-                                                  color: Colors.white),
-                                              child: Center(
-                                                child: TextField(
-                                                  textAlign: TextAlign.center,
-                                                  decoration: InputDecoration(
-                                                      contentPadding:
-                                                          EdgeInsets.only(
-                                                              bottom: height *
-                                                                  0.015),
-                                                      border: InputBorder.none,
-                                                      hintText: i['marks']),
+                                          ),
+                                          Spacer(),
+                                          Container(
+                                            width: width * 0.08,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                                color: Colors.white),
+                                            child: Center(
+                                              child: TextFormField(
+                                                textAlign: TextAlign.center,
+                                                onChanged: (value) async {
+                                                  print(value);
+                                                  int flag = -1;
+                                                  Future.forEach(
+                                                      marks[index]['marks'],
+                                                      (listMarks) {
+                                                    flag++;
+                                                    if (listMarks[
+                                                            'subjectName'] ==
+                                                        i['subjectName']) {
+                                                      if (value.isNotEmpty) {
+                                                        marks[index]['marks']
+                                                                    [flag]
+                                                                ['marks'] =
+                                                            int.parse(value);
+                                                        MarksMethod.updateMarks(
+                                                          uid: marks[index]
+                                                              ['uid'],
+                                                          examType: widget
+                                                              .currentExamType,
+                                                          marks: marks[index]
+                                                              ['marks'],
+                                                        );
+                                                        print(marks[index]
+                                                            ['marks']);
+                                                      }
+                                                    }
+                                                  });
+                                                },
+                                                initialValue:
+                                                    i['marks'].toString(),
+                                                decoration: InputDecoration(
+                                                  border: InputBorder.none,
                                                 ),
                                               ),
-                                            )
-                                          ],
-                                        ),
-                                      ));
-                                },
-                              );
-                            }).toList(),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ));
+                              },
+                            ).toList(),
                           ),
                         ),
                         GestureDetector(
@@ -175,12 +179,74 @@ class _TeacherMarksState extends State<TeacherMarks> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getMarks();
+  }
+
+  void getMarks() async {
+    setState(() {
+      isLoading = true;
+    });
+    studentList = await MarksMethod.getMarks(widget.clasS);
+    await makeMarksList(widget.currentExamType);
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  Future makeMarksList(String examType) async {
+    marks = [];
+    await Future.forEach(studentList, (student) {
+      marks.add({
+        'uid': student['uid'],
+        'name': student['name'],
+        'marks': student['marks'][examType]
+      });
+    });
+    print(marks);
+  }
+
+  @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       key: _scaffoldKey,
       //drawer: StudentDrawer(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          FirebaseFirestore.instance
+              .collection("Users")
+              .where("userType", isEqualTo: "student")
+              .where("class", isEqualTo: 7)
+              .get()
+              .then((QuerySnapshot querySnapshot) {
+            querySnapshot.docs.forEach((doc) {
+              FirebaseFirestore.instance.collection("Users").doc(doc.id).set({
+                'marks': {
+                  'Sessionals': [
+                    {'subjectName': 'Hindi', 'marks': 10},
+                    {'subjectName': 'English', 'marks': 15},
+                    {'subjectName': 'Maths', 'marks': 20},
+                  ],
+                  'Half-Yearly': [
+                    {'subjectName': 'Hindi', 'marks': 10},
+                    {'subjectName': 'English', 'marks': 15},
+                    {'subjectName': 'Maths', 'marks': 20},
+                  ],
+                  'Finals': [
+                    {'subjectName': 'Hindi', 'marks': 10},
+                    {'subjectName': 'English', 'marks': 15},
+                    {'subjectName': 'Maths', 'marks': 20},
+                  ]
+                }
+              }, SetOptions(merge: true));
+            });
+          });
+        },
+      ),
       body: Container(
           decoration: kBGdecoration,
           height: double.infinity,
@@ -229,8 +295,20 @@ class _TeacherMarksState extends State<TeacherMarks> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      makeDropDown(list: subjects, onchanged: (_) {}),
-                      makeDropDown(list: examType, onchanged: (_) {})
+                      makeDropDown(
+                          list: subjects, onchanged: (_) {}, type: "subjects"),
+                      makeDropDown(
+                          list: examType,
+                          onchanged: (value) async {
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TeacherMarks(value),
+                              ),
+                            );
+                          },
+                          type: "exam")
                     ],
                   ),
                   SizedBox(height: height * 0.03),
@@ -269,9 +347,11 @@ class _TeacherMarksState extends State<TeacherMarks> {
                             ],
                           ),
                           Divider(color: Colors.white),
-                          Expanded(
-                            child: makeStudentList(height, width),
-                          )
+                          isLoading
+                              ? CircularProgressIndicator()
+                              : Expanded(
+                                  child: makeStudentList(height, width),
+                                )
                         ],
                       )),
                   SizedBox(height: height * 0.02),

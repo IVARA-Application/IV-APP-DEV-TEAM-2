@@ -189,7 +189,7 @@ class TeacherHomepage extends StatelessWidget {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => TeacherMarks()))
+                                          builder: (context) => TeacherMarks('Sessionals')))
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 1.0),
