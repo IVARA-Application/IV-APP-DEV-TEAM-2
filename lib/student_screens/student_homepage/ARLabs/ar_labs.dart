@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/ARLabs/arLabsTopic.dart';
 
 import '../../drawer.dart';
 import 'ar_class.dart';
@@ -45,7 +46,7 @@ class ARLabs extends StatelessWidget {
                         return GridTile(
                           child: GestureDetector(
                             onTap: () {
-                              Get.to(ARLabsTopic(cls: cls));
+                              Get.to(ARLabsTopics(cls: cls));
                             },
                             child: Padding(
                               padding: EdgeInsets.all(height * 0.005),
