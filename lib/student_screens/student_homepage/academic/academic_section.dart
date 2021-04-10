@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/academic/upcoming_test.dart';
+class StudentAcademicSection extends StatefulWidget {
+  @override
+  _StudentAcademicSectionState createState() => _StudentAcademicSectionState();
+}
 
-class StudentAcademicSection extends StatelessWidget {
+class _StudentAcademicSectionState extends State<StudentAcademicSection> {
+  List tests = [
+    {'testNo': '1', 'totalMarks': '20', 'marksObtained': '14'},
+    {'testNo': '2', 'totalMarks': '20', 'marksObtained': '16'},
+    {'testNo': '3', 'totalMarks': '20', 'marksObtained': '18'},
+    {'testNo': '4', 'totalMarks': '20', 'marksObtained': '10'},
+    {'testNo': '5', 'totalMarks': '20', 'marksObtained': '20'},
+    {'testNo': '6', 'totalMarks': '20', 'marksObtained': '17'},
+    {'testNo': '7', 'totalMarks': '20', 'marksObtained': '14'},
+    {'testNo': '8', 'totalMarks': '20', 'marksObtained': '15'},
+  ];
+  double currentPos=100;
+  ScrollController _scrollController;
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = new ScrollController();
+  }
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -63,57 +84,72 @@ class StudentAcademicSection extends StatelessWidget {
                             width: width * 0.05,
                           ),
                           Expanded(
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: 10,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: EdgeInsets.all(height * 0.01),
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                                height * 0.01),
-                                            color: Colors.white),
-                                        child: Padding(
+                                  child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                      controller: _scrollController,
+                                      children: tests.map((item) {
+                                        return Padding(
                                           padding:
                                               EdgeInsets.all(height * 0.01),
-                                          child: Column(
-                                            children: [
-                                              Text('Test 1',
-                                                  style: TextStyle(
-                                                    color: Color(0xFFF8B461),
-                                                  )),
-                                              Container(
-                                                  margin: EdgeInsets.symmetric(
-                                                      vertical: height * 0.003),
-                                                  width: width * 0.06,
-                                                  height: 2,
-                                                  color: kLightBlue
-                                                      .withOpacity(0.5)),
-                                              Row(
-                                                children: [
-                                                  Text('14/',
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color(0xFFF8B461),
-                                                      )),
-                                                  Text('20',
-                                                      style: TextStyle(
-                                                          color: Color(
-                                                              0xFFFF2609)))
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        )),
-                                  );
-                                }),
-                          ),
-                          Icon(
-                            Icons.keyboard_arrow_right,
-                            size: height * 0.05,
-                            color: Colors.white,
-                          )
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          height * 0.01),
+                                                  color: Colors.white),
+                                              child: Padding(
+                                                padding: EdgeInsets.all(
+                                                    height * 0.01),
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                        'Test ' +
+                                                            item['testNo'],
+                                                        style: TextStyle(
+                                                          color:
+                                                              Color(0xFFF8B461),
+                                                        )),
+                                                    Container(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                vertical:
+                                                                    height *
+                                                                        0.003),
+                                                        width: width * 0.06,
+                                                        height: 2,
+                                                        color: kLightBlue
+                                                            .withOpacity(0.5)),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                            item['marksObtained'] +
+                                                                '/',
+                                                            style: TextStyle(
+                                                              color: Color(
+                                                                  0xFFF8B461),
+                                                            )),
+                                                        Text(item['totalMarks'],
+                                                            style: TextStyle(
+                                                                color: Color(
+                                                                    0xFFFF2609)))
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              )),
+                                        );
+                                      }).toList())),
+                              GestureDetector(
+                                onTap:(){
+                                  _scrollController.animateTo(currentPos, duration: new Duration(seconds: 2), curve: Curves.ease);
+                                  currentPos=currentPos+100;
+                                },
+                                child: Icon(
+                                  Icons.keyboard_arrow_right,
+                                  size: height * 0.05,
+                                  color: Colors.white,
+                                ),
+                              )
                         ],
                       ),
                     )
