@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:new_ivara_app/Controllers/authController.dart';
 import 'package:new_ivara_app/constant/constants.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
 
-List<String> details = [
-  'Aman Nanda',
-  '2255887799',
-  'aman@gmail.com',
-  '2255887799',
-  'aman@gmail.com',
-  'ABC12345'
-];
+
 
 class StudentDetails extends StatelessWidget {
   StudentDetails({Key key}) : super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
+  List<String> details = [
+  Get.find<AuthController>().name,
+  Get.find<AuthController>().phoneNumber,
+  Get.find<AuthController>().user.value.email,
+];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

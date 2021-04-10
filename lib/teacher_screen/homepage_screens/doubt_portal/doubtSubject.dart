@@ -112,7 +112,10 @@ class DoubtSubjectPage extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    SubjectChatPage(subjects,i)));
+                                                    SubjectChatPageTeacher(
+                                                      subjects[i]
+                                                          ['subjectName'],
+                                                    )));
                                       },
                                       child: Card(
                                         child: Padding(

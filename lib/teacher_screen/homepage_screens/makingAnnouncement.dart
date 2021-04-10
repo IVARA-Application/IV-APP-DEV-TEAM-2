@@ -36,8 +36,12 @@ class _MakingAnnouncementPageState extends State<MakingAnnouncementPage> {
         subject: _myActivity,
         dateTime: DateTime.now(),
       );
+      classController.text="";
+      sectionController.text="";
+      contentController.text="";
       setState(() {
         _myActivityResult = _myActivity;
+        _myActivity='';
       });
     }
   }

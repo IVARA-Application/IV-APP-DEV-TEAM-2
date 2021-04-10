@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:new_ivara_app/constant/colours.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/ARLabs/arLabsTopic.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/ar/ar_topics.dart';
 
 import '../../drawer.dart';
 
   
-class ARLabsTopic extends StatelessWidget {
+class ARClass extends StatelessWidget {
   final String cls;
-  ARLabsTopic({Key key, @required this.cls}) : super(key: key);
+  ARClass({Key key, @required this.cls}) : super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   // String cls;
@@ -17,9 +18,9 @@ class ARLabsTopic extends StatelessWidget {
   // 
   final Map<String, List<String>> topics = {
     '9th': ['Physics', 'Chemistry', 'Biology', 'SST'],
-    '10th': [],
+    '10th': ['Physics'],
     '11th': ['Biology', 'Geography', 'History'],
-    '12th': [],
+    '12th': ['Physics'],
   };
 
   @override
@@ -68,7 +69,7 @@ class ARLabsTopic extends StatelessWidget {
                           return GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ARTopics(
+                                  builder: (context) => ARLabsTopics(
                                         cls: cls,
                                         subject: topics[cls][index],
                                       )));

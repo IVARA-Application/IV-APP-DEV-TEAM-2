@@ -89,10 +89,10 @@ class _UserTypeState extends State<UserType> {
                   });
 
                   foo("student");
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => StudentHomePage(0)));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => StudentHomePage(0)));
                 },
               ),
               UserTypeButton(
@@ -105,10 +105,10 @@ class _UserTypeState extends State<UserType> {
                     _method = value;
                   });
                   foo("teacher");
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => TeacherHomepage()));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => TeacherHomepage()));
                 },
               ),
               UserTypeButton(
@@ -121,10 +121,10 @@ class _UserTypeState extends State<UserType> {
                     _method = value;
                   });
                   foo("parent");
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ParentsHomeScreen()));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => ParentsHomeScreen()));
                 },
               ),
               SizedBox(height: 10),

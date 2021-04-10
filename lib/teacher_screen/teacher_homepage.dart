@@ -101,7 +101,7 @@ class TeacherHomepage extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               vertical: screenHeight * 0.035),
                           child: Text(
-                            "Hello, \n Hemanth",
+                            "Hello, \n ${Get.find<AuthController>().name}",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 30,

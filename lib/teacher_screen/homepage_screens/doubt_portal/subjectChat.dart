@@ -1,22 +1,30 @@
-import 'package:condition/condition.dart';
-import 'package:flutter/material.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-import 'package:new_ivara_app/constant/colours.dart';
-
-class SubjectChatPage extends StatefulWidget {
-  List subjects;
-  int index;
-  SubjectChatPage(this.subjects, this.index);
-
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:condition/condition.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:new_ivara_app/Controllers/authController.dart';
+import 'package:new_ivara_app/student_screens/drawer.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/chat/chat_subject_group_functions.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/imageView.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/navbar.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+class SubjectChatPageTeacher extends StatefulWidget {
+   int _class = 6;
+  String subjectName;
+  SubjectChatPageTeacher(this.subjectName);
   @override
-  _SubjectChatPageState createState() => _SubjectChatPageState(subjects, index);
+  _SubjectChatPageTeacherState createState() => _SubjectChatPageTeacherState();
 }
 
-class _SubjectChatPageState extends State<SubjectChatPage> {
-  File _imageFile;
+class _SubjectChatPageTeacherState extends State<SubjectChatPageTeacher> {
+ File _imageFile;
   String messageText;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final messageTextController = TextEditingController();
@@ -33,15 +41,20 @@ class _SubjectChatPageState extends State<SubjectChatPage> {
     });
   }
 
-  List subjects;
-  int index;
-  _SubjectChatPageState(this.subjects, this.index);
-
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    final uid = Get.find<AuthController>().user.value.uid;
+    CollectionReference chatRoomReference = FirebaseFirestore.instance
+        .collection("chatRoom")
+        .doc(widget._class.toString())
+        .collection(widget._class.toString())
+        .doc(widget.subjectName)
+        .collection(widget.subjectName);
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: StudentDrawer(),
       body: Stack(
         children: [
           Container(
@@ -66,214 +79,221 @@ class _SubjectChatPageState extends State<SubjectChatPage> {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 38.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: ClipOval(
-                      child: Image.asset(
-                        'assets/icons/tab.png',
-                        width: 40,
-                        height: 40,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: ClipOval(
-                      child: Image.asset(
-                        'assets/icons/back.png',
-                        width: 40,
-                        height: 40,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Conditioned.boolean(_imageFile == null,
-              trueBuilder: () => Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Center(
-                        child: Padding(
-                            padding: EdgeInsets.only(top: screenHeight * 0.15),
-                            child: Material(
-                              elevation: 5,
-                              child: Container(
-                                width: double.infinity,
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: screenWidth * 0.05,
-                                      vertical: screenHeight * 0.01),
-                                  child: Text(
-                                    subjects[index]['subjectName'],
-                                    style: TextStyle(
-                                        fontSize: screenHeight * 0.025,
-                                        color: kDarkBlue,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                              ),
-                            )),
-                      ),
-                      MessageStream(),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: screenHeight * 0.01,
-                            vertical: screenWidth * 0.02),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
+          SafeArea(
+            child: Conditioned.boolean(_imageFile == null,
+                trueBuilder: () => Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Center(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: screenHeight * 0.05),
+                            child: Text(
+                              widget.subjectName,
+                              style: TextStyle(
+                                  fontSize: 25, color: Colors.white),
+                            ),
                           ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              // Expanded(
-                              //   child: TextField(
-                              //     controller: messageTextController,
-                              //     onChanged: (value) {
-                              //       messageText = value;
-                              //     },
-                              //     decoration: InputDecoration(
-                              //       contentPadding: EdgeInsets.symmetric(
-                              //           vertical: 10.0, horizontal: 20.0),
-                              //       hintText: 'Type your message here...',
-                              //       border: InputBorder.none,
-                              //     ),
-                              //   ),
-                              // ),
-                              // FlatButton(
-                              //   onPressed: () {},
-                              //   child: Icon(LineAwesomeIcons.telegram_plane)
-                              // ),
+                        ),
+                        MessageStream(
+                            chatRoomReference,
+                            widget._class,
+                            Get.find<AuthController>()
+                                .user
+                                .value
+                                .uid
+                                .toString()),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenHeight * 0.01,
+                              vertical: screenWidth * 0.02),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                // Expanded(
+                                //   child: TextField(
+                                //     controller: messageTextController,
+                                //     onChanged: (value) {
+                                //       messageText = value;
+                                //     },
+                                //     decoration: InputDecoration(
+                                //       contentPadding: EdgeInsets.symmetric(
+                                //           vertical: 10.0, horizontal: 20.0),
+                                //       hintText: 'Type your message here...',
+                                //       border: InputBorder.none,
+                                //     ),
+                                //   ),
+                                // ),
+                                // FlatButton(
+                                //   onPressed: () {},
+                                //   child: Icon(LineAwesomeIcons.telegram_plane)
+                                // ),
 
-                              Expanded(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(35.0),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          offset: Offset(0, 3),
-                                          blurRadius: 5,
-                                          color: Colors.grey)
-                                    ],
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          child: TextField(
-                                            keyboardType:
-                                                TextInputType.multiline,
-                                            maxLines: null,
-                                            decoration: InputDecoration(
-                                                hintText: "Type Something...",
-                                                hintStyle: TextStyle(
-                                                    color: Color(0xFF697AE4)),
-                                                border: InputBorder.none),
+                                Expanded(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                          BorderRadius.circular(35.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            offset: Offset(0, 3),
+                                            blurRadius: 5,
+                                            color: Colors.grey)
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15),
+                                            child: TextField(
+                                              controller: messageTextController,
+                                              keyboardType:
+                                                  TextInputType.multiline,
+                                              maxLines: null,
+                                              decoration: InputDecoration(
+                                                  hintText:
+                                                      "Type Something...",
+                                                  hintStyle: TextStyle(
+                                                      color:
+                                                          Color(0xFF697AE4)),
+                                                  border: InputBorder.none),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      IconButton(
-                                        icon: Icon(Icons.photo_camera,
-                                            color: Color(0xFF697AE4)),
-                                        onPressed: () {
-                                          _pickImage(ImageSource.camera);
-                                        },
-                                      ),
-                                      IconButton(
-                                        icon: Icon(Icons.attach_file,
-                                            color: Color(0xFF697AE4)),
-                                        onPressed: () {
-                                          _pickImage(ImageSource.gallery);
-                                        },
-                                      )
-                                    ],
+                                        IconButton(
+                                          icon: Icon(Icons.photo_camera,
+                                              color: Color(0xFF697AE4)),
+                                          onPressed: () {
+                                            ChatSubjectGroupFunctions
+                                                .sendImageMessage(
+                                                    chatRoomReference,
+                                                    Get.find<AuthController>()
+                                                        .user
+                                                        .value
+                                                        .uid
+                                                        .toString(),
+                                                    Get.find<AuthController>()
+                                                        .user
+                                                        .value
+                                                        .email
+                                                        .toString());
+                                          },
+                                        ),
+                                        IconButton(
+                                          icon: Icon(Icons.attach_file,
+                                              color: Color(0xFF697AE4)),
+                                          onPressed: () {
+                                            ChatSubjectGroupFunctions.sendFiles(
+                                                chatRoomReference,
+                                                Get.find<AuthController>()
+                                                    .user
+                                                    .value
+                                                    .uid
+                                                    .toString(),
+                                                Get.find<AuthController>()
+                                                    .user
+                                                    .value
+                                                    .email
+                                                    .toString());
+                                          },
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(width: 15),
-                              Container(
-                                padding: const EdgeInsets.all(15.0),
-                                decoration: BoxDecoration(
-                                    color: Color(0xFF697AE4),
-                                    shape: BoxShape.circle),
-                                child: InkWell(
-                                  child: Icon(
-                                    LineAwesomeIcons.telegram,
-                                    color: Colors.white,
+                                SizedBox(width: 15),
+                                Container(
+                                  padding: const EdgeInsets.all(15.0),
+                                  decoration: BoxDecoration(
+                                      color: Color(0xFF697AE4),
+                                      shape: BoxShape.circle),
+                                  child: InkWell(
+                                    child: Icon(
+                                      LineAwesomeIcons.telegram,
+                                      color: Colors.white,
+                                    ),
+                                    onTap: () {
+                                      if (messageTextController.text
+                                          .trim()
+                                          .isNotEmpty) {
+                                        print("Message Send");
+                                        ChatSubjectGroupFunctions
+                                            .sendTextMessage(
+                                                chatRoomReference,
+                                                Get.find<AuthController>()
+                                                    .user
+                                                    .value
+                                                    .uid
+                                                    .toString(),
+                                                Get.find<AuthController>()
+                                                    .user
+                                                    .value
+                                                    .email,
+                                                messageTextController);
+                                      }
+                                    },
                                   ),
-                                  onLongPress: () {},
-                                ),
-                              )
-                            ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-              falseBuilder: () => Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.all(0),
-                        child: Container(
-                          height: screenHeight - (screenHeight * 0.1763),
-                          color: Colors.black,
-                          child: Image.file(_imageFile),
+                      ],
+                    ),
+                falseBuilder: () => Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.all(0),
+                          child: Container(
+                            height: screenHeight - (screenHeight * 0.1763),
+                            color: Colors.black,
+                            child: Image.file(_imageFile),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(0),
-                        child: Container(
-                            child: Row(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 0),
-                              child: Container(
+                        Padding(
+                          padding: EdgeInsets.all(0),
+                          child: Container(
+                              child: Row(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 0),
+                                child: Container(
+                                    height: screenHeight * 0.07,
+                                    width: screenWidth / 2,
+                                    color: Colors.redAccent,
+                                    child: IconButton(
+                                        icon: Icon(LineAwesomeIcons.times),
+                                        onPressed: () => {
+                                              setState(() {
+                                                _imageFile = null;
+                                              })
+                                            })),
+                              ),
+                              Container(
                                   height: screenHeight * 0.07,
                                   width: screenWidth / 2,
-                                  color: Colors.redAccent,
+                                  color: Colors.greenAccent,
                                   child: IconButton(
-                                      icon: Icon(LineAwesomeIcons.times),
-                                      onPressed: () => {
-                                            setState(() {
-                                              _imageFile = null;
-                                            })
-                                          })),
-                            ),
-                            Container(
-                                height: screenHeight * 0.07,
-                                width: screenWidth / 2,
-                                color: Colors.greenAccent,
-                                child: IconButton(
-                                    icon: Icon(LineAwesomeIcons.check),
-                                    onPressed: null))
-                          ],
-                        )),
-                      )
-                    ],
-                  )),
+                                      icon: Icon(LineAwesomeIcons.check),
+                                      onPressed: null))
+                            ],
+                          )),
+                        )
+                      ],
+                    )),
+          ),
+          StudentNavbar(_scaffoldKey),
         ],
       ),
     );
@@ -281,44 +301,74 @@ class _SubjectChatPageState extends State<SubjectChatPage> {
 }
 
 class MessageStream extends StatelessWidget {
+  CollectionReference chatRoomReference;
+  int _class;
+  String userId;
+  MessageStream(this.chatRoomReference, this._class, this.userId);
   @override
   Widget build(BuildContext context) {
-    List<Map<String, String>> messages = [
-      {'text': 'Thanks.', 'sender': 'Me', 'time': '08:20 PM'},
-      {
-        'text': 'No issues, let me look into your problem.',
-        'sender': 'Counsellor',
-        'time': '08:20 PM'
-      },
-      {
-        'text':
-            'But I was having a litte bit of problem regarding online lectures, videos arent loading.',
-        'sender': 'Me',
-        'time': '08:20 PM'
-      },
-      {
-        'text': 'Sorry to disturb you at the uneven hour.',
-        'sender': 'Me',
-        'time': '08:23 PM'
-      },
-      {'text': 'Hey David !', 'sender': 'Counsellor', 'time': '08:23 PM'},
-      {'text': 'Hello.', 'sender': 'Me', 'time': '08:20 PM'},
-    ];
-    List<MessageBubble> messageBubbles = [];
-    for (var message in messages) {
-      final messageText = message['text'];
-      final messageSender = message['sender'];
-      final messageTime = message['time'];
-      String currentUser = 'Me';
-      final messageBubble = MessageBubble(
-        text: messageText,
-        sender: messageSender,
-        time: messageTime,
-        isMe: messageSender == currentUser,
-      );
-      messageBubbles.add(messageBubble);
-    }
-    return Expanded(child: ListView(reverse: true, children: messageBubbles));
+    return StreamBuilder<QuerySnapshot>(
+        stream: chatRoomReference.orderBy('time', descending: true).snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Expanded(
+                child: Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ));
+          }
+          if (!snapshot.hasData) {
+            return Expanded(
+                child: Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ));
+          }
+          print(snapshot.data.docs.length);
+
+          List<Map<String, dynamic>> messages = [];
+          snapshot.data.docs.forEach((doc) {
+            messages.add({
+              'text': doc['message'],
+              'sender': doc['sender'],
+              'senderName': doc['senderName'],
+              'time': doc['time'].toDate(),
+              'type': doc['type'],
+              'imageUrl': doc['type'] == "text" ? "" : doc['imageUrl'],
+              'fileName': doc['type'] == 'file' ? doc['fileName'] : "",
+              'fileExtension':
+                  doc['type'] == 'file' ? doc['fileExtension'] : "",
+            });
+          });
+          List<MessageBubble> messageBubbles = [];
+          for (var message in messages) {
+            final messageText = message['text'];
+            final messageSender = message['sender'];
+            DateTime messageTime = message['time'];
+            String currentUser = userId;
+            String imageUrl = message['imageUrl'];
+            String type = message['type'];
+            String messageSenderName = message['senderName'];
+            String fileName = message['fileName'];
+            String fileExtension = message['fileExtension'];
+            final messageBubble = MessageBubble(
+              text: messageText,
+              sender: messageSender,
+              time: "${messageTime.hour}:${messageTime.minute}",
+              isMe: messageSender == currentUser,
+              imageUrl: imageUrl,
+              type: type,
+              senderName: messageSenderName,
+              fileName: fileName,
+              fileExtension: fileExtension,
+            );
+            messageBubbles.add(messageBubble);
+          }
+          return Expanded(
+              child: ListView(reverse: true, children: messageBubbles));
+        });
   }
 }
 
@@ -327,7 +377,22 @@ class MessageBubble extends StatelessWidget {
   final String sender;
   final String time;
   final bool isMe;
-  MessageBubble({this.text, this.sender, this.isMe, this.time});
+  final String imageUrl;
+  final String type;
+  final String senderName;
+  final String fileName;
+  final String fileExtension;
+  MessageBubble({
+    this.text,
+    this.sender,
+    this.isMe,
+    this.time,
+    this.imageUrl,
+    this.type,
+    this.senderName,
+    this.fileName,
+    this.fileExtension,
+  });
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -338,6 +403,22 @@ class MessageBubble extends StatelessWidget {
         crossAxisAlignment:
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(1),
+            child: Row(
+              mainAxisAlignment:
+                  isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(right: screenHeight * 0.02),
+                  child: Text(
+                    senderName,
+                    style: TextStyle(fontSize: 10, color: Color(0xFF697AE4)),
+                  ),
+                )
+              ],
+            ),
+          ),
           Material(
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(13),
@@ -353,11 +434,130 @@ class MessageBubble extends StatelessWidget {
                 crossAxisAlignment:
                     isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    text,
-                    style: TextStyle(
-                        color: isMe ? Color(0xFF697AE4) : Colors.white),
-                  ),
+                  type == "text"
+                      ? Text(
+                          text,
+                          style: TextStyle(
+                              color: isMe ? Color(0xFF697AE4) : Colors.white),
+                        )
+                      : type == "image"
+                          ? Container(
+                              width: screenWidth * 0.6,
+                              height: 100,
+                              child: imageUrl == ""
+                                  ? Center(
+                                      child: Container(
+                                        width: 20,
+                                        height: 20,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                        ),
+                                      ),
+                                    )
+                                  : ClipRRect(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(5)),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context)
+                                              .push(MaterialPageRoute(
+                                            builder: (context) =>
+                                                ImageView(imageUrl, senderName),
+                                          ));
+                                        },
+                                        child: Hero(
+                                          tag: imageUrl,
+                                          child: CachedNetworkImage(
+                                            imageUrl: imageUrl,
+                                            fit: BoxFit.fitWidth,
+                                            progressIndicatorBuilder: (context,
+                                                    url, downloadProgress) =>
+                                                Center(
+                                              child: Container(
+                                                width: 20,
+                                                height: 20,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                        strokeWidth: 2,
+                                                        value: downloadProgress
+                                                            .progress),
+                                              ),
+                                            ),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    Icon(Icons.error),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                            )
+                          : Container(
+                              width: screenWidth * 0.6,
+                              height: 40,
+                              child: imageUrl == ""
+                                  ? Center(
+                                      child: Container(
+                                        width: 20,
+                                        height: 20,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                        ),
+                                      ),
+                                    )
+                                  : InkWell(
+                                      onTap: () async {
+                                        print('dfdsfds');
+
+                                        final status =
+                                            await Permission.storage.request();
+                                        if (status.isGranted) {
+                                          final externalDir =
+                                              await getExternalStorageDirectory();
+
+                                          final taskId =
+                                              await FlutterDownloader.enqueue(
+                                            url: imageUrl,
+                                            showNotification: true,
+                                            fileName: fileName,
+                                            savedDir: externalDir.path,
+                                            openFileFromNotification: true,
+                                          );
+                                        } else {
+                                          print("Permission Denied");
+                                        }
+                                      },
+                                      child: Container(
+                                          child: Row(
+                                        children: [
+                                          Image.asset(
+                                            fileExtension == 'pdf'
+                                                ? 'assets/pdf.png'
+                                                : fileExtension == 'txt'
+                                                    ? 'assets/txt.png'
+                                                    : fileExtension == 'zip'
+                                                        ? 'assets/zip.png'
+                                                        : '',
+                                          ),
+                                          SizedBox(width: 5),
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.4,
+                                            child: Text(
+                                              "$fileName",
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                color: isMe
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      )),
+                                    ),
+                            ),
                   Padding(
                     padding: EdgeInsets.only(top: 5),
                     child: Text(

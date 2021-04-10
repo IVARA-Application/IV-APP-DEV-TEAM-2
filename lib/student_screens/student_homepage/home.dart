@@ -81,9 +81,6 @@ class StudentHome extends StatelessWidget {
                 height: height,
                 width: width,
                 onTap: () {
-                  MethodChannel channel = MethodChannel("channel");
-                  channel.invokeMethod("openUnityClass6", {'arguments': 9});
-
                   Get.to(ARLabs());
                 }),
             SizedBox(

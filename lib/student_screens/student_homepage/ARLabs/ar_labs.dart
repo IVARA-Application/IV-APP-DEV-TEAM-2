@@ -46,7 +46,7 @@ class ARLabs extends StatelessWidget {
                           return GridTile(
                             child: GestureDetector(
                               onTap: () {
-                                Get.to(ARLabsTopic(cls: cls));
+                                Get.to(ARClass(cls: cls));
                               },
                               child: Padding(
                                 padding: EdgeInsets.all(height * 0.005),
