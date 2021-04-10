@@ -78,37 +78,8 @@ class ARClass extends StatelessWidget {
                                 vertical: height * 0.015,
                                 horizontal: width * 0.08),
                             child: Container(
-              height: double.infinity,
-              width: double.infinity,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: height * 0.1,
-                  ),
-                  Text(
-                    'Class $cls',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w300,
-                        fontSize: height * 0.03),
-                  ),
-                  SizedBox(height: height * 0.03),
-                  Expanded(
-                    child: ListView.builder(
-                        itemCount: topics[cls].length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ARLabsTopics(
-                                        cls: cls,
-                                        subject: topics[cls][index],
-                                      )));
-                            },
-                            child: Padding(
                               padding: EdgeInsets.symmetric(
                                   vertical: height * 0.01),
-                              child:    Container(
                               width: width * 0.8,
                               decoration: BoxDecoration(
                                   borderRadius:
@@ -126,7 +97,7 @@ class ARClass extends StatelessWidget {
                 )
               ],
             ),
-                            ),
+          ),
           Positioned(
             top:height*0.03,
               height: height * 0.08,
@@ -145,7 +116,7 @@ class ARClass extends StatelessWidget {
                       },
                       child: Image.asset('assets/back.png')),
                 ],
-              ),)
+              )),
           // Positioned(
           //   top: height * 0.85,
           //   left: width * 0.05,
