@@ -21,7 +21,7 @@ class StudentNavbar extends StatelessWidget {
             Spacer(),
             TextButton(
                 onPressed: () {
-                  scaffoldKey.currentState.openDrawer();
+                  Navigator.pop(context);
                 },
                 child: Image.asset('assets/back.png')),
           ],

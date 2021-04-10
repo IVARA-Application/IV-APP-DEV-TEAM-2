@@ -24,6 +24,24 @@ class _StudentAcademicSectionState extends State<StudentAcademicSection> {
     super.initState();
     _scrollController = new ScrollController();
   }
+  List<String> subjects = ['Physics','Chemistry','Maths'];
+  Widget makeDropDown({List<String> list, onchanged,height}) {
+    return DropdownButtonHideUnderline(
+      child: DropdownButton<String>(
+        isDense: true,
+        elevation: 0,
+        hint: Text(list[0], style: TextStyle(color: kDarkBlue, fontSize: height * 0.025)),
+        icon: Icon(Icons.keyboard_arrow_down),
+        items: list.map((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+        onChanged: onchanged,
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -67,9 +85,7 @@ class _StudentAcademicSectionState extends State<StudentAcademicSection> {
                           vertical: height * 0.01, horizontal: width * 0.05),
                       child: Row(
                         children: [
-                          Text('Physics',
-                              style: TextStyle(
-                                  color: kDarkBlue, fontSize: height * 0.03)),
+                          makeDropDown(list:subjects,onchanged: (_){},height:height),
                           Spacer(),
                           Text('72/100',
                               style: TextStyle(
