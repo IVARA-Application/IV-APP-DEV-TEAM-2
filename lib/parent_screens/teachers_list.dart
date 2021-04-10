@@ -1,34 +1,46 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart ';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
 import 'package:new_ivara_app/shared/glow_circle_avatar.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
 
-List<Map<String, String>> _teacherinfo = [
-  {
-    'name': 'Samrithi',
-    'designation': 'class teacher',
-    'subject': 'maths',
-  },
-  {
-    'name': 'Divyansh',
-    'designation': null,
-    'subject': 'English',
-  },
-  {
-    'name': 'Pavani',
-    'designation': null,
-    'subject': 'Maths',
-  },
-  {
-    'name': 'Aman',
-    'designation': null,
-    'subject': 'Phyics',
-  },
-];
 
-class TeachersList extends StatelessWidget {
+
+class TeachersList extends StatefulWidget {
   const TeachersList({Key key}) : super(key: key);
+
+  @override
+  _TeachersListState createState() => _TeachersListState();
+}
+
+class _TeachersListState extends State<TeachersList> {
+  List<Map<String, String>> _teacherinfo = [];
+  bool isLoading = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getTeachersList();
+  }
+
+  void getTeachersList() async {
+    setState(() {
+      isLoading = true;
+    });
+    _teacherinfo=[];
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection("Users")
+        .where('userType', isEqualTo: 'teacher')
+        .get();
+    await Future.forEach(querySnapshot.docs, (doc) {
+      _teacherinfo.add(
+          {'name': doc['name'], 'designation': null, 'subject': 'English'});
+    });
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +52,7 @@ class TeachersList extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-         actions: [
+        actions: [
           GlowCircleAvatar(
             onTap: () {},
             imageProvider: AssetImage('assets/icons/profile.jpg'),
@@ -49,26 +61,34 @@ class TeachersList extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
       ),
-      body: Container(
-        decoration: kPBGdecoration,
-        child: Column(
-          children: [
-            SizedBox(height: 80),
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  for (var teacher in _teacherinfo)
-                    TeachersCard(
-                      teacherName: teacher['name'],
-                      subject: teacher['subject'],
-                      designation: teacher['designation'],
+      body: isLoading
+          ? Center(
+            child: Container(
+                child: Text("Loading..."),
+              ),
+          )
+          : SingleChildScrollView(
+              child: Container(
+                decoration: kPBGdecoration,
+                child: Column(
+                  children: [
+                    SizedBox(height: 80),
+                    SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          for (var teacher in _teacherinfo)
+                            TeachersCard(
+                              teacherName: teacher['name'],
+                              subject: teacher['subject'],
+                              designation: teacher['designation'],
+                            ),
+                        ],
+                      ),
                     ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }

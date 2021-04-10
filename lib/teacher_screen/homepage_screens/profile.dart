@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:new_ivara_app/Controllers/authController.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/heal my mind/schedule_call.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/heal my mind/chat_councellor.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar section/heal my mind/heal_my_mind_videos.dart';
@@ -158,7 +160,7 @@ class ProfilePage extends StatelessWidget {
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Text(
-                                            'Aman',
+                                            Get.find<AuthController>().name,
                                             style: TextStyle(
                                                 fontSize: screenWidth * 0.035,
                                                 color: Color(0xFF697AE4)),
@@ -167,7 +169,7 @@ class ProfilePage extends StatelessWidget {
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Text(
-                                            '+92 8634558863',
+                                            Get.find<AuthController>().phoneNumber,
                                             style: TextStyle(
                                                 fontSize: screenWidth * 0.035,
                                                 color: Color(0xFF697AE4)),
@@ -176,7 +178,7 @@ class ProfilePage extends StatelessWidget {
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Text(
-                                            'amandecembersharma@gmail.com',
+                                            Get.find<AuthController>().user.value.email,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                                 fontSize: screenWidth * 0.035,

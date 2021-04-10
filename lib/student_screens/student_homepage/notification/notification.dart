@@ -59,6 +59,7 @@ class _StudentNotificationState extends State<StudentNotification> {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: notif.length,
+      physics: NeverScrollableScrollPhysics(),
       itemBuilder: (context, i) {
         return Padding(
           padding: EdgeInsets.symmetric(vertical: height * 0.01),

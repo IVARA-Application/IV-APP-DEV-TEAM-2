@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:new_ivara_app/Controllers/notificationController.dart';
+import 'package:new_ivara_app/parent_screens/parents_home_screen.dart';
 import 'package:new_ivara_app/screens/user_type.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/studentHomepage.dart';
 import 'package:new_ivara_app/teacher_screen/teacher_homepage.dart';
@@ -46,12 +47,15 @@ class AuthController extends GetxController {
                     merge: true,
                   ));
           userType = userDoc.data()['userType'];
-
+          name = userDoc.data()['name'];
+          phoneNumber = userDoc.data()['phoneNumber'];
           print("User is signed in");
           if (userType == "student") {
             Get.offAll(() => StudentHomePage(0));
           } else if (userType == "teacher") {
             Get.offAll(() => TeacherHomepage());
+          } else if (userType == 'parent') {
+            Get.offAll(() => ParentsHomeScreen());
           }
 
           isSignedIn = true.obs;
@@ -78,7 +82,7 @@ class AuthController extends GetxController {
         'name': name,
         'phoneNumber': phoneNumber,
         'token': messagingToken,
-        'class':7,
+        'class': 7,
         'marks': {
           'Sessionals': [
             {'subjectName': 'Hindi', 'marks': 0},
@@ -98,10 +102,14 @@ class AuthController extends GetxController {
         }
       });
       this.userType = userType;
+      this.name = name;
+      this.phoneNumber = phoneNumber;
       if (userType == "student") {
         Get.offAll(() => StudentHomePage(0));
       } else if (userType == "teacher") {
         Get.offAll(() => TeacherHomepage());
+      } else if (userType == 'parent') {
+        Get.offAll(() => ParentsHomeScreen());
       }
 
       isSignedIn = true.obs;
@@ -147,10 +155,15 @@ class AuthController extends GetxController {
           .doc(user.value.uid)
           .get();
       userType = userDoc.data()['userType'];
+      name = userDoc.data()['name'];
+      phoneNumber = userDoc.data()['phoneNumber'];
+
       if (userType == "student") {
         Get.offAll(() => StudentHomePage(0));
       } else if (userType == "teacher") {
         Get.offAll(() => TeacherHomepage());
+      } else if (userType == 'parent') {
+        Get.offAll(() => ParentsHomeScreen());
       }
 
       isSignedIn = true.obs;

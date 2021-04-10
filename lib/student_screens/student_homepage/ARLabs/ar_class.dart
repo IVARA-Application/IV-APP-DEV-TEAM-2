@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:new_ivara_app/constant/colours.dart';
+import 'package:new_ivara_app/student_screens/student_homepage/ARLabs/arLabsTopic.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/ar/ar_topics.dart';
 
 import '../../drawer.dart';
 
   
-class ARLabsTopic extends StatelessWidget {
+class ARClass extends StatelessWidget {
   final String cls;
-  ARLabsTopic({Key key, @required this.cls}) : super(key: key);
+  ARClass({Key key, @required this.cls}) : super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   // String cls;
@@ -17,9 +18,9 @@ class ARLabsTopic extends StatelessWidget {
   // 
   final Map<String, List<String>> topics = {
     '9th': ['Physics', 'Chemistry', 'Biology', 'SST'],
-    '10th': [],
+    '10th': ['Physics'],
     '11th': ['Biology', 'Geography', 'History'],
-    '12th': [],
+    '12th': ['Physics'],
   };
 
   @override
@@ -77,8 +78,37 @@ class ARLabsTopic extends StatelessWidget {
                                 vertical: height * 0.015,
                                 horizontal: width * 0.08),
                             child: Container(
+              height: double.infinity,
+              width: double.infinity,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: height * 0.1,
+                  ),
+                  Text(
+                    'Class $cls',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300,
+                        fontSize: height * 0.03),
+                  ),
+                  SizedBox(height: height * 0.03),
+                  Expanded(
+                    child: ListView.builder(
+                        itemCount: topics[cls].length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => ARLabsTopics(
+                                        cls: cls,
+                                        subject: topics[cls][index],
+                                      )));
+                            },
+                            child: Padding(
                               padding: EdgeInsets.symmetric(
                                   vertical: height * 0.01),
+                              child:    Container(
                               width: width * 0.8,
                               decoration: BoxDecoration(
                                   borderRadius:
@@ -96,7 +126,7 @@ class ARLabsTopic extends StatelessWidget {
                 )
               ],
             ),
-          ),
+                            ),
           Positioned(
             top:height*0.03,
               height: height * 0.08,
@@ -115,7 +145,7 @@ class ARLabsTopic extends StatelessWidget {
                       },
                       child: Image.asset('assets/back.png')),
                 ],
-              )),
+              ),)
           // Positioned(
           //   top: height * 0.85,
           //   left: width * 0.05,
