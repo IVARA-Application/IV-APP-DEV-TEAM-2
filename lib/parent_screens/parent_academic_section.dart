@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/parent_screens/drawer.dart';
 import 'package:new_ivara_app/parent_screens/parents_upcoming_test.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
 import 'package:new_ivara_app/shared/glow_circle_avatar.dart';
+import 'package:new_ivara_app/teacher_screen/navbar.dart';
 
 class ParentAcademicSection extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class ParentAcademicSection extends StatefulWidget {
 }
 
 class _ParentAcademicSectionState extends State<ParentAcademicSection> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List tests = [
     {'testNo': '1', 'totalMarks': '20', 'marksObtained': '14'},
     {'testNo': '2', 'totalMarks': '20', 'marksObtained': '16'},
@@ -53,21 +56,8 @@ class _ParentAcademicSectionState extends State<ParentAcademicSection> {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        leading: CustomIconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: [
-          GlowCircleAvatar(
-            onTap: () {},
-            imageProvider: AssetImage('assets/icons/profile.jpg'),
-          ),
-        ],
-        elevation: 0.0,
-        backgroundColor: Colors.transparent,
-      ),
+      drawer: ParentDrawer(),
+      key:_scaffoldKey,
       body: Container(
         decoration: kPBGdecoration,
         width: double.infinity,
@@ -75,7 +65,9 @@ class _ParentAcademicSectionState extends State<ParentAcademicSection> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: height * 0.15),
+              SizedBox(height:height*0.03),
+              TeacherNavbar(_scaffoldKey),
+              SizedBox(height: height * 0.01),
               Text('Academic Section',
                   style: TextStyle(
                       fontSize: height * 0.03,

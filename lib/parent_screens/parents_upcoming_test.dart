@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/parent_screens/drawer.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
 import 'package:new_ivara_app/shared/glow_circle_avatar.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/academic/test_card.dart';
+
+import 'navbar.dart';
 class ParentsUpcomingTests extends StatefulWidget {
   @override
   _ParentsUpcomingTestsState createState() => _ParentsUpcomingTestsState();
@@ -11,6 +14,7 @@ class ParentsUpcomingTests extends StatefulWidget {
 
 class _ParentsUpcomingTestsState extends State<ParentsUpcomingTests> {
   CountDownController _controller = CountDownController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   int index = 0;
   @override
@@ -33,6 +37,8 @@ class _ParentsUpcomingTestsState extends State<ParentsUpcomingTests> {
     }
 
     return Scaffold(
+      drawer: ParentDrawer(),
+      key:_scaffoldKey,
       body: Stack(
         children: [
           Container(
@@ -56,64 +62,28 @@ class _ParentsUpcomingTestsState extends State<ParentsUpcomingTests> {
                 ],
               ),
             ),
-          ),
-          SingleChildScrollView(
+          child:SingleChildScrollView(
             child: SafeArea(
                 child: Center(
               child: Column(
                 children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: ClipOval(
-                            child: Image.asset(
-                              'assets/icons/tab.png',
-                              width: 40,
-                              height: 40,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: ClipOval(
-                            child: Image.asset(
-                              'assets/icons/back.png',
-                              width: 40,
-                              height: 40,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  ParentNavbar(_scaffoldKey),
                   Padding(
                     padding:
-                        EdgeInsets.symmetric(vertical: screenHeight * 0.03),
+                        EdgeInsets.symmetric(vertical: screenHeight * 0.01),
                     child: Text(
                       "Upcoming Tests",
                       style: TextStyle(fontSize: 25, color: Colors.white),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(0),
-                    child: Column(
-                        children: testCard
-                            .map((TestCard) => testCardTemplate(TestCard))
-                            .toList()),
-                  )
+                  Column(
+                      children: testCard
+                          .map((TestCard) => testCardTemplate(TestCard))
+                          .toList())
                 ],
               ),
             )),
-          ),
+          ),)
         ],
       ),
     );

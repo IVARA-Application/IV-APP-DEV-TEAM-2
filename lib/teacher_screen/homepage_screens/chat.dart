@@ -12,8 +12,11 @@ import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/
 import 'dart:io';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/heal%20my%20mind/imageView.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/navbar.dart';
+import 'package:new_ivara_app/teacher_screen/navbar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import '../drawer.dart';
 
 class TeacherChatPage extends StatefulWidget {
   int _class = 6;
@@ -51,174 +54,121 @@ class _TeacherChatPageState extends State<TeacherChatPage> {
         FirebaseFirestore.instance.collection("doubtPortalChats");
     return Scaffold(
       key: _scaffoldKey,
-      drawer: StudentDrawer(),
-      body: Stack(
-        children: [
-          Container(
-            width: screenWidth,
-            height: screenHeight,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                //     stops: [
-                //   0.1,
-                //   0.4,
-                //   0.6,
-                //   0.9
-                // ],
-                colors: [
-                  Color(0xFF8569C5),
-                  Color(0xFFC579B5),
-                  Color(0xFFF48380),
-                  Color(0xFFF3D37B),
-                ],
-              ),
-            ),
+      drawer: TeacherDrawer(),
+      body: Container(
+        width: screenWidth,
+        height: screenHeight,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            //     stops: [
+            //   0.1,
+            //   0.4,
+            //   0.6,
+            //   0.9
+            // ],
+            colors: [
+              Color(0xFF8569C5),
+              Color(0xFFC579B5),
+              Color(0xFFF48380),
+              Color(0xFFF3D37B),
+            ],
           ),
-          SafeArea(
-            child: Conditioned.boolean(_imageFile == null,
-                trueBuilder: () => Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Center(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: screenHeight * 0.05),
-                            child: Text(
-                              "Doubt Portal",
-                              style:
-                                  TextStyle(fontSize: 25, color: Colors.white),
-                            ),
-                          ),
+        ),
+      
+      child:SafeArea(
+        child: Conditioned.boolean(_imageFile == null,
+            trueBuilder: () => Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    TeacherNavbar(_scaffoldKey),
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: screenHeight * 0.05),
+                        child: Text(
+                          "Doubt Portal",
+                          style:
+                              TextStyle(fontSize: 25, color: Colors.white),
                         ),
-                        MessageStream(
-                            chatRoomReference,
-                            widget._class,
-                            Get.find<AuthController>()
-                                .user
-                                .value
-                                .uid
-                                .toString()),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: screenHeight * 0.01,
-                              vertical: screenWidth * 0.02),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                // Expanded(
-                                //   child: TextField(
-                                //     controller: messageTextController,
-                                //     onChanged: (value) {
-                                //       messageText = value;
-                                //     },
-                                //     decoration: InputDecoration(
-                                //       contentPadding: EdgeInsets.symmetric(
-                                //           vertical: 10.0, horizontal: 20.0),
-                                //       hintText: 'Type your message here...',
-                                //       border: InputBorder.none,
-                                //     ),
-                                //   ),
-                                // ),
-                                // FlatButton(
-                                //   onPressed: () {},
-                                //   child: Icon(LineAwesomeIcons.telegram_plane)
-                                // ),
+                      ),
+                    ),
+                    MessageStream(
+                        chatRoomReference,
+                        widget._class,
+                        Get.find<AuthController>()
+                            .user
+                            .value
+                            .uid
+                            .toString()),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: screenHeight * 0.01,
+                          vertical: screenWidth * 0.02),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            // Expanded(
+                            //   child: TextField(
+                            //     controller: messageTextController,
+                            //     onChanged: (value) {
+                            //       messageText = value;
+                            //     },
+                            //     decoration: InputDecoration(
+                            //       contentPadding: EdgeInsets.symmetric(
+                            //           vertical: 10.0, horizontal: 20.0),
+                            //       hintText: 'Type your message here...',
+                            //       border: InputBorder.none,
+                            //     ),
+                            //   ),
+                            // ),
+                            // FlatButton(
+                            //   onPressed: () {},
+                            //   child: Icon(LineAwesomeIcons.telegram_plane)
+                            // ),
 
-                                Expanded(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(35.0),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            offset: Offset(0, 3),
-                                            blurRadius: 5,
-                                            color: Colors.grey)
-                                      ],
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 15),
-                                            child: TextField(
-                                              controller: messageTextController,
-                                              keyboardType:
-                                                  TextInputType.multiline,
-                                              maxLines: null,
-                                              decoration: InputDecoration(
-                                                  hintText: "Type Something...",
-                                                  hintStyle: TextStyle(
-                                                      color: Color(0xFF697AE4)),
-                                                  border: InputBorder.none),
-                                            ),
-                                          ),
-                                        ),
-                                        IconButton(
-                                          icon: Icon(Icons.photo_camera,
-                                              color: Color(0xFF697AE4)),
-                                          onPressed: () {
-                                            DoubtPortalMethods.sendImageMessage(
-                                                chatRoomReference,
-                                                Get.find<AuthController>()
-                                                    .user
-                                                    .value
-                                                    .uid
-                                                    .toString(),
-                                                Get.find<AuthController>()
-                                                    .user
-                                                    .value
-                                                    .email
-                                                    .toString());
-                                          },
-                                        ),
-                                        IconButton(
-                                          icon: Icon(Icons.attach_file,
-                                              color: Color(0xFF697AE4)),
-                                          onPressed: () {
-                                            DoubtPortalMethods.sendFiles(
-                                                chatRoomReference,
-                                                Get.find<AuthController>()
-                                                    .user
-                                                    .value
-                                                    .uid
-                                                    .toString(),
-                                                Get.find<AuthController>()
-                                                    .user
-                                                    .value
-                                                    .email
-                                                    .toString());
-                                          },
-                                        )
-                                      ],
-                                    ),
-                                  ),
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(35.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        offset: Offset(0, 3),
+                                        blurRadius: 5,
+                                        color: Colors.grey)
+                                  ],
                                 ),
-                                SizedBox(width: 15),
-                                Container(
-                                  padding: const EdgeInsets.all(15.0),
-                                  decoration: BoxDecoration(
-                                      color: Color(0xFF697AE4),
-                                      shape: BoxShape.circle),
-                                  child: InkWell(
-                                    child: Icon(
-                                      LineAwesomeIcons.telegram,
-                                      color: Colors.white,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 15),
+                                        child: TextField(
+                                          controller: messageTextController,
+                                          keyboardType:
+                                              TextInputType.multiline,
+                                          maxLines: null,
+                                          decoration: InputDecoration(
+                                              hintText: "Type Something...",
+                                              hintStyle: TextStyle(
+                                                  color: Color(0xFF697AE4)),
+                                              border: InputBorder.none),
+                                        ),
+                                      ),
                                     ),
-                                    onTap: () {
-                                      if (messageTextController.text
-                                          .trim()
-                                          .isNotEmpty) {
-                                        print("Message Send");
-                                        DoubtPortalMethods.sendTextMessage(
+                                    IconButton(
+                                      icon: Icon(Icons.photo_camera,
+                                          color: Color(0xFF697AE4)),
+                                      onPressed: () {
+                                        DoubtPortalMethods.sendImageMessage(
                                             chatRoomReference,
                                             Get.find<AuthController>()
                                                 .user
@@ -228,66 +178,116 @@ class _TeacherChatPageState extends State<TeacherChatPage> {
                                             Get.find<AuthController>()
                                                 .user
                                                 .value
-                                                .email,
-                                            messageTextController);
-                                      }
-                                    },
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                falseBuilder: () => Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.all(0),
-                          child: Container(
-                            height: screenHeight - (screenHeight * 0.1763),
-                            color: Colors.black,
-                            child: Image.file(_imageFile),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(0),
-                          child: Container(
-                              child: Row(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 0),
-                                child: Container(
-                                    height: screenHeight * 0.07,
-                                    width: screenWidth / 2,
-                                    color: Colors.redAccent,
-                                    child: IconButton(
-                                        icon: Icon(LineAwesomeIcons.times),
-                                        onPressed: () => {
-                                              setState(() {
-                                                _imageFile = null;
-                                              })
-                                            })),
+                                                .email
+                                                .toString());
+                                      },
+                                    ),
+                                    IconButton(
+                                      icon: Icon(Icons.attach_file,
+                                          color: Color(0xFF697AE4)),
+                                      onPressed: () {
+                                        DoubtPortalMethods.sendFiles(
+                                            chatRoomReference,
+                                            Get.find<AuthController>()
+                                                .user
+                                                .value
+                                                .uid
+                                                .toString(),
+                                            Get.find<AuthController>()
+                                                .user
+                                                .value
+                                                .email
+                                                .toString());
+                                      },
+                                    )
+                                  ],
+                                ),
                               ),
-                              Container(
-                                  height: screenHeight * 0.07,
-                                  width: screenWidth / 2,
-                                  color: Colors.greenAccent,
-                                  child: IconButton(
-                                      icon: Icon(LineAwesomeIcons.check),
-                                      onPressed: null))
-                            ],
-                          )),
-                        )
-                      ],
-                    )),
-          ),
-          StudentNavbar(_scaffoldKey),
-        ],
-      ),
+                            ),
+                            SizedBox(width: 15),
+                            Container(
+                              padding: const EdgeInsets.all(15.0),
+                              decoration: BoxDecoration(
+                                  color: Color(0xFF697AE4),
+                                  shape: BoxShape.circle),
+                              child: InkWell(
+                                child: Icon(
+                                  LineAwesomeIcons.telegram,
+                                  color: Colors.white,
+                                ),
+                                onTap: () {
+                                  if (messageTextController.text
+                                      .trim()
+                                      .isNotEmpty) {
+                                    print("Message Send");
+                                    DoubtPortalMethods.sendTextMessage(
+                                        chatRoomReference,
+                                        Get.find<AuthController>()
+                                            .user
+                                            .value
+                                            .uid
+                                            .toString(),
+                                        Get.find<AuthController>()
+                                            .user
+                                            .value
+                                            .email,
+                                        messageTextController);
+                                  }
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+            falseBuilder: () => Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    TeacherNavbar(_scaffoldKey),
+                    Padding(
+                      padding: EdgeInsets.all(0),
+                      child: Container(
+                        height: screenHeight - (screenHeight * 0.1763),
+                        color: Colors.black,
+                        child: Image.file(_imageFile),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(0),
+                      child: Container(
+                          child: Row(
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 0),
+                            child: Container(
+                                height: screenHeight * 0.07,
+                                width: screenWidth / 2,
+                                color: Colors.redAccent,
+                                child: IconButton(
+                                    icon: Icon(LineAwesomeIcons.times),
+                                    onPressed: () => {
+                                          setState(() {
+                                            _imageFile = null;
+                                          })
+                                        })),
+                          ),
+                          Container(
+                              height: screenHeight * 0.07,
+                              width: screenWidth / 2,
+                              color: Colors.greenAccent,
+                              child: IconButton(
+                                  icon: Icon(LineAwesomeIcons.check),
+                                  onPressed: null))
+                        ],
+                      )),
+                    )
+                  ],
+                )),
+      ),),
     );
   }
 }

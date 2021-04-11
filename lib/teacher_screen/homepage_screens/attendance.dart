@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:new_ivara_app/teacher_screen/drawer.dart';
 import 'package:new_ivara_app/teacher_screen/homepage_screens/Methods/uploadAttendanceMethods.dart';
 import 'package:new_ivara_app/teacher_screen/homepage_screens/previousAttendance.dart';
+import 'package:new_ivara_app/teacher_screen/navbar.dart';
 
 class TeacherAttendance extends StatefulWidget {
   int clasS = 7;
@@ -10,6 +12,7 @@ class TeacherAttendance extends StatefulWidget {
 }
 
 class _TeacherAttendanceState extends State<TeacherAttendance> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   Color blue = Color(0xFF076FA0);
   bool isLoading = false;
   List<Map<String, dynamic>> attendanceList;
@@ -87,169 +90,135 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            width: screenWidth,
-            height: screenHeight,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                //     stops: [
-                //   0.1,
-                //   0.4,
-                //   0.6,
-                //   0.9
-                // ],
-                colors: [
-                  Color(0xFF8569C5),
-                  Color(0xFFC579B5),
-                  Color(0xFFF48380),
-                  Color(0xFFF3D37B),
-                ],
-              ),
-            ),
+      drawer: TeacherDrawer(),
+      key:_scaffoldKey,
+      body: Container(
+        width: screenWidth,
+        height: screenHeight,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            //     stops: [
+            //   0.1,
+            //   0.4,
+            //   0.6,
+            //   0.9
+            // ],
+            colors: [
+              Color(0xFF8569C5),
+              Color(0xFFC579B5),
+              Color(0xFFF48380),
+              Color(0xFFF3D37B),
+            ],
           ),
-          SafeArea(
-            child: Center(
-              child: Form(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        ),
+      
+      child:SafeArea(
+        child: Center(
+          child: Form(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TeacherNavbar(_scaffoldKey),
+                Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/icons/tab.png',
-                                width: 40,
-                                height: 40,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/icons/back.png',
-                                width: 40,
-                                height: 40,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: screenHeight * 0.04,
-                              vertical: screenHeight * 0.02),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('Attendance List',
-                                    style: TextStyle(
-                                        fontSize: 23,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w400)),
-                                IconButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                PreviousAttendance(widget.clasS)));
-                                  },
-                                  icon: Icon(
-                                    Icons.event,
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: screenHeight * 0.04,
+                          vertical: screenHeight * 0.02),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Attendance List',
+                                style: TextStyle(
+                                    fontSize: 23,
                                     color: Colors.white,
-                                  ),
-                                  iconSize: screenHeight * 0.05,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Expanded(
-                      child: Hero(
-                        //transitionOnUserGestures: true,
-                        tag: "Container",
-                        child: Material(
-                          color: Colors.transparent,
-                          child: Padding(
-                            padding: EdgeInsets.all(screenHeight * 0.05),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(screenHeight * 0.04),
-                                    ),
-                                    color: Colors.white),
-                                child: Column(
-                                  children: [
-                                    SizedBox(height: screenHeight * 0.05),
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: screenWidth * 0.08),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('Student List',
-                                              style: TextStyle(
-                                                  fontSize: screenWidth * 0.05,
-                                                  fontWeight: FontWeight.w800,
-                                                  color: Color(0xFF697AE4),
-                                                  decoration: TextDecoration
-                                                      .underline)),
-                                          VerticalDivider(
-                                            color: Colors.red,
-                                            width: 20,
-                                          ),
-                                          Text('Absent',
-                                              style: TextStyle(
-                                                  fontSize: screenWidth * 0.05,
-                                                  fontWeight: FontWeight.w800,
-                                                  color: Color(0xFF697AE4),
-                                                  decoration: TextDecoration
-                                                      .underline)),
-                                        ],
-                                      ),
-                                    ),
-                                    isLoading
-                                        ? CircularProgressIndicator()
-                                        : Expanded(
-                                            child: getAttendanceList(
-                                                screenHeight, screenWidth),
-                                          ),
-                                  ],
-                                )),
-                          ),
+                                    fontWeight: FontWeight.w400)),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            PreviousAttendance(widget.clasS)));
+                              },
+                              icon: Icon(
+                                Icons.event,
+                                color: Colors.white,
+                              ),
+                              iconSize: screenHeight * 0.05,
+                            )
+                          ],
                         ),
                       ),
                     ),
-                    TextButton(onPressed: () => {}, child: Text('Submit'))
                   ],
                 ),
-              ),
+                Expanded(
+                  child: Hero(
+                    //transitionOnUserGestures: true,
+                    tag: "Container",
+                    child: Material(
+                      color: Colors.transparent,
+                      child: Padding(
+                        padding: EdgeInsets.all(screenHeight * 0.05),
+                        child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(screenHeight * 0.04),
+                                ),
+                                color: Colors.white),
+                            child: Column(
+                              children: [
+                                SizedBox(height: screenHeight * 0.05),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: screenWidth * 0.08),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Student List',
+                                          style: TextStyle(
+                                              fontSize: screenWidth * 0.05,
+                                              fontWeight: FontWeight.w800,
+                                              color: Color(0xFF697AE4),
+                                              decoration: TextDecoration
+                                                  .underline)),
+                                      VerticalDivider(
+                                        color: Colors.red,
+                                        width: 20,
+                                      ),
+                                      Text('Absent',
+                                          style: TextStyle(
+                                              fontSize: screenWidth * 0.05,
+                                              fontWeight: FontWeight.w800,
+                                              color: Color(0xFF697AE4),
+                                              decoration: TextDecoration
+                                                  .underline)),
+                                    ],
+                                  ),
+                                ),
+                                isLoading
+                                    ? CircularProgressIndicator()
+                                    : Expanded(
+                                        child: getAttendanceList(
+                                            screenHeight, screenWidth),
+                                      ),
+                              ],
+                            )),
+                      ),
+                    ),
+                  ),
+                ),
+                TextButton(onPressed: () => {}, child: Text('Submit'))
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ),),
     );
   }
 }

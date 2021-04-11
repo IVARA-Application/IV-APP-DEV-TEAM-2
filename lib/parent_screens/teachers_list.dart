@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart ';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
+import 'package:new_ivara_app/parent_screens/drawer.dart';
+import 'package:new_ivara_app/parent_screens/navbar.dart';
 import 'package:new_ivara_app/shared/glow_circle_avatar.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
 
@@ -15,6 +17,7 @@ class TeachersList extends StatefulWidget {
 }
 
 class _TeachersListState extends State<TeachersList> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<Map<String, String>> _teacherinfo = [];
   bool isLoading = false;
   @override
@@ -44,51 +47,60 @@ class _TeachersListState extends State<TeachersList> {
 
   @override
   Widget build(BuildContext context) {
+    double height=MediaQuery.of(context).size.height;
     return Scaffold(
+      drawer: ParentDrawer(),
+      key:_scaffoldKey,
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        leading: CustomIconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: [
-          GlowCircleAvatar(
-            onTap: () {},
-            imageProvider: AssetImage('assets/icons/profile.jpg'),
-          ),
-        ],
-        elevation: 0.0,
-        backgroundColor: Colors.transparent,
-      ),
+      // appBar: AppBar(
+      //   leading: CustomIconButton(
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //   ),
+      //   actions: [
+      //     GlowCircleAvatar(
+      //       onTap: () {},
+      //       imageProvider: AssetImage('assets/icons/profile.jpg'),
+      //     ),
+      //   ],
+      //   elevation: 0.0,
+      //   backgroundColor: Colors.transparent,
+      // ),
       body: isLoading
           ? Center(
             child: Container(
                 child: Text("Loading..."),
               ),
           )
-          : SingleChildScrollView(
-              child: Container(
-                decoration: kPBGdecoration,
-                child: Column(
-                  children: [
-                    SizedBox(height: 80),
-                    SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          for (var teacher in _teacherinfo)
-                            TeachersCard(
-                              teacherName: teacher['name'],
-                              subject: teacher['subject'],
-                              designation: teacher['designation'],
-                            ),
-                        ],
+          : Container(
+            decoration: kPBGdecoration,
+            height: double.infinity,
+            child: SingleChildScrollView(
+                child: Container(
+                  
+                  child: Column(
+                    children: [
+
+                      SizedBox(height: height*0.03),
+                      ParentNavbar(_scaffoldKey),
+                      SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            for (var teacher in _teacherinfo)
+                              TeachersCard(
+                                teacherName: teacher['name'],
+                                subject: teacher['subject'],
+                                designation: teacher['designation'],
+                              ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
+          ),
     );
   }
 }

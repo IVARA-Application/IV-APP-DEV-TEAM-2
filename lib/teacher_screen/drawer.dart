@@ -10,13 +10,19 @@ import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/skill_development.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/student_details.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/virtual%20tution/virtual_tution_class.dart';
+import 'package:new_ivara_app/teacher_screen/teacher_homepage.dart';
 
-class StudentDrawer extends StatefulWidget {
+import 'homepage_screens/attendance.dart';
+import 'homepage_screens/classroom.dart';
+import 'homepage_screens/makingAnnouncement.dart';
+import 'homepage_screens/profile.dart';
+
+class TeacherDrawer extends StatefulWidget {
   @override
-  _StudentDrawerState createState() => _StudentDrawerState();
+  _TeacherDrawerState createState() => _TeacherDrawerState();
 }
 
-class _StudentDrawerState extends State<StudentDrawer> {
+class _TeacherDrawerState extends State<TeacherDrawer> {
   int currentIndex = -1;
   @override
   Widget build(BuildContext context) {
@@ -34,13 +40,18 @@ class _StudentDrawerState extends State<StudentDrawer> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: height * 0.01),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(height),
-                        child: Image.asset(
-                          'assets/profile.png',
-                          height: height * 0.1,
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(context,MaterialPageRoute(builder: (context)=>ProfilePage()));
+                      },
+                                          child: Padding(
+                        padding: EdgeInsets.only(left: height * 0.01),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(height),
+                          child: Image.asset(
+                            'assets/profile.png',
+                            height: height * 0.1,
+                          ),
                         ),
                       ),
                     ),
@@ -74,7 +85,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
                 currentIndex = 0;
               });
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HealMyMindPage()));
+                  MaterialPageRoute(builder: (context) => TeacherHomepage()));
             },
             child: Padding(
               padding: EdgeInsets.only(
@@ -85,7 +96,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'HealMyMind',
+                    'Home',
                     style: TextStyle(
                         fontSize: height * 0.025,
                         fontWeight: FontWeight.w500,
@@ -108,7 +119,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
                 currentIndex = 1;
               });
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => StudyAbroadPage()));
+                  MaterialPageRoute(builder: (context) => ClassroomPage()));
             },
             child: Padding(
               padding: EdgeInsets.only(
@@ -119,7 +130,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Study Abroad Support',
+                    'My Classroom',
                     style: TextStyle(
                         fontSize: height * 0.025,
                         fontWeight: FontWeight.w500,
@@ -142,7 +153,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
                 currentIndex = 2;
               });
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SkillDevelopment()));
+                  MaterialPageRoute(builder: (context) => TeacherAttendance()));
             },
             child: Padding(
               padding: EdgeInsets.only(
@@ -153,7 +164,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Skill Development',
+                    'Attendance List',
                     style: TextStyle(
                         fontSize: height * 0.025,
                         fontWeight: FontWeight.w500,
@@ -176,7 +187,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
                 currentIndex = 3;
               });
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => EntranceExam()));
+                  MaterialPageRoute(builder: (context) => MakingAnnouncementPage()));
             },
             child: Padding(
               padding: EdgeInsets.only(
@@ -187,7 +198,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Entrance Preperation',
+                    'Make Announcement',
                     style: TextStyle(
                         fontSize: height * 0.025,
                         fontWeight: FontWeight.w500,
@@ -204,142 +215,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
               ),
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                currentIndex = 4;
-              });
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DoubtPortalPage()));
-            },
-            child: Padding(
-              padding: EdgeInsets.only(
-                  left: height * 0.03,
-                  top: height * 0.01,
-                  bottom: height * 0.01),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '24 X 7 Doubt Portal',
-                    style: TextStyle(
-                        fontSize: height * 0.025,
-                        fontWeight: FontWeight.w500,
-                        color: kDarkBlue),
-                    textAlign: TextAlign.center,
-                  ),
-                  currentIndex == 4
-                      ? Container(
-                          height: height * 0.003,
-                          width: width * 0.15,
-                          color: kDarkBlue)
-                      : Center()
-                ],
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                currentIndex = 5;
-              });
-
-              Get.to(StudentDetails());
-            },
-            child: Padding(
-              padding: EdgeInsets.only(
-                  left: height * 0.03,
-                  top: height * 0.01,
-                  bottom: height * 0.01),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Student Personal Details',
-                    style: TextStyle(
-                        fontSize: height * 0.025,
-                        fontWeight: FontWeight.w500,
-                        color: kDarkBlue),
-                    textAlign: TextAlign.center,
-                  ),
-                  currentIndex == 5
-                      ? Container(
-                          height: height * 0.003,
-                          width: width * 0.15,
-                          color: kDarkBlue)
-                      : Center()
-                ],
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                currentIndex = 6;
-              });
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => TutionClasses()));
-            },
-            child: Padding(
-              padding: EdgeInsets.only(
-                  left: height * 0.03,
-                  top: height * 0.01,
-                  bottom: height * 0.01),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Virtual Tutions',
-                    style: TextStyle(
-                        fontSize: height * 0.025,
-                        fontWeight: FontWeight.w500,
-                        color: kDarkBlue),
-                    textAlign: TextAlign.center,
-                  ),
-                  currentIndex == 6
-                      ? Container(
-                          height: height * 0.003,
-                          width: width * 0.15,
-                          color: kDarkBlue)
-                      : Center()
-                ],
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                currentIndex = 7;
-              });
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => StudentEbooks()));
-            },
-            child: Padding(
-              padding: EdgeInsets.only(
-                  left: height * 0.03,
-                  top: height * 0.01,
-                  bottom: height * 0.01),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'E-Book & E-Test Series',
-                    style: TextStyle(
-                        fontSize: height * 0.025,
-                        fontWeight: FontWeight.w500,
-                        color: kDarkBlue),
-                    textAlign: TextAlign.center,
-                  ),
-                  currentIndex == 7
-                      ? Container(
-                          height: height * 0.003,
-                          width: width * 0.15,
-                          color: kDarkBlue)
-                      : Center()
-                ],
-              ),
-            ),
-          ),
+          
           Spacer(),
           GestureDetector(
             onTap: () {},
@@ -347,21 +223,6 @@ class _StudentDrawerState extends State<StudentDrawer> {
               padding: EdgeInsets.symmetric(horizontal: height * 0.03),
               child: Text(
                 'Contact Us',
-                style: TextStyle(
-                    fontSize: height * 0.025,
-                    fontWeight: FontWeight.w500,
-                    color: kDarkBlue),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: height * 0.03, vertical: height * 0.005),
-              child: Text(
-                'Home',
                 style: TextStyle(
                     fontSize: height * 0.025,
                     fontWeight: FontWeight.w500,
