@@ -121,10 +121,10 @@ class _UserTypeState extends State<UserType> {
                     _method = value;
                   });
                   foo("parent");
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => ParentsHomeScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ParentsHomeScreen()));
                 },
               ),
               SizedBox(height: 10),

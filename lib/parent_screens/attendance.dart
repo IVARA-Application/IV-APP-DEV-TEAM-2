@@ -46,7 +46,6 @@ class _ParentAttendanceState extends State<ParentAttendance> {
       'classNo': 'Class Number',
       'time': '09:00 AM',
       'duration': '01:30 hrs',
-      'present': true
     },
     {
       'subjectName': 'Chemistry',
@@ -55,7 +54,6 @@ class _ParentAttendanceState extends State<ParentAttendance> {
       'classNo': 'Class Number',
       'time': '10:40 AM',
       'duration': '01:30 hrs',
-      'present': false
     },
     {
       'subjectName': 'Maths',
@@ -64,7 +62,6 @@ class _ParentAttendanceState extends State<ParentAttendance> {
       'classNo': 'Class Number',
       'time': '10:40 AM',
       'duration': '01:30 hrs',
-      'present': true
     },
     {
       'subjectName': 'Computer',
@@ -73,9 +70,9 @@ class _ParentAttendanceState extends State<ParentAttendance> {
       'classNo': 'Class Number',
       'time': '10:40 AM',
       'duration': '01:30 hrs',
-      'present': true
     }
   ];
+  bool present = false;
 
   Widget makeDropDown({List<String> list, onchanged}) {
     return DropdownButtonHideUnderline(
@@ -182,7 +179,7 @@ class _ParentAttendanceState extends State<ParentAttendance> {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       drawer: ParentDrawer(),
-      key:_scaffoldKey,
+      key: _scaffoldKey,
       body: Container(
         width: double.infinity,
         decoration: kBGdecoration,
@@ -236,14 +233,27 @@ class _ParentAttendanceState extends State<ParentAttendance> {
                 ]),
               ),
             ),
-            SizedBox(height: height * 0.05),
+            SizedBox(height: height * 0.01),
+            Card(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: height * 0.005, horizontal: width * 0.22),
+                child: Text(present ? 'PRESENT' : 'ABSENT',
+                    style: TextStyle(
+                        color: present ? Color(0xFF6EFE96) : Colors.red,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 2,
+                        fontSize: height * 0.025)),
+              ),
+            ),
+            SizedBox(height: height * 0.01),
             Material(
               elevation: 5,
               borderRadius: BorderRadius.all(Radius.circular(height * 0.015)),
               color: Colors.transparent,
               child: Container(
-                height: height * 0.6,
-                width: width * 0.85,
+                height: height * 0.52,
+                width: width * 0.82,
                 decoration: BoxDecoration(
                   borderRadius:
                       BorderRadius.all(Radius.circular(height * 0.015)),
@@ -324,31 +334,9 @@ class _ParentAttendanceState extends State<ParentAttendance> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Text(classes[index]['subjectName'],
-                                          style: TextStyle(
-                                              fontSize: height * 0.028)),
-                                      Spacer(),
-                                      Card(
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: height * 0.005,
-                                              horizontal: width * 0.02),
-                                          child: Text(
-                                              classes[index]['present']
-                                                  ? 'Present'
-                                                  : 'Absent',
-                                              style: TextStyle(
-                                                  color: classes[index]
-                                                          ['present']
-                                                      ? Color(0xFF6EFE96)
-                                                      : Colors.red,
-                                                  fontWeight: FontWeight.w600)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                  Text(classes[index]['subjectName'],
+                                      style:
+                                          TextStyle(fontSize: height * 0.028)),
                                   Text(classes[index]['teacherName']),
                                   Text(classes[index]['id']),
                                   Text(classes[index]['classNo'])
