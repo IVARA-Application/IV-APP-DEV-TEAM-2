@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/teacher_screen/drawer.dart';
 import 'package:new_ivara_app/teacher_screen/homepage_screens/Methods/uploadAttendanceMethods.dart';
 import 'package:new_ivara_app/teacher_screen/homepage_screens/previousAttendance.dart';
@@ -125,8 +126,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: screenHeight * 0.04,
-                          vertical: screenHeight * 0.02),
+                          horizontal: screenHeight * 0.04,),
                       child: Center(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -213,7 +213,21 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                     ),
                   ),
                 ),
-                TextButton(onPressed: () => {}, child: Text('Submit'))
+                Center(
+                        child: Container(
+                            width: screenWidth * 0.25,
+                            height: screenHeight * 0.05,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular((8)),
+                                color: Colors.white),
+                            child: Center(
+                                child: Text('Submit',
+                                    style: TextStyle(
+                                        color: kDarkBlue,
+                                        fontSize: screenHeight * 0.025,
+                                        fontWeight: FontWeight.w500)))),
+                      ),
+              SizedBox(height:screenHeight*0.03)
               ],
             ),
           ),

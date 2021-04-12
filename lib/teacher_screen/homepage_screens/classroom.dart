@@ -8,6 +8,8 @@ import 'package:new_ivara_app/teacher_screen/homepage_screens/chat.dart';
 
 import '../drawer.dart';
 import '../navbar.dart';
+import 'attendance.dart';
+import 'marks.dart';
 
 class ClassroomPage extends StatefulWidget {
   
@@ -133,7 +135,9 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                     ),
                                   ))),
                           GestureDetector(
-                            onTap: () => {},
+                            onTap: () => {
+                              Navigator.push(context,MaterialPageRoute(builder: (context)=>TeacherMarks('Sessionals')))
+                            },
                             child: Padding(
                               padding: const EdgeInsets.only(top: 1.0),
                               child: Container(
@@ -182,7 +186,9 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                     ),
                                   ))),
                           GestureDetector(
-                            onTap: () => {},
+                            onTap: () => {
+                              Navigator.push(context,MaterialPageRoute(builder: (context)=>TeacherAttendance()))
+                            },
                             child: Padding(
                               padding: const EdgeInsets.only(top: 1.0),
                               child: Container(

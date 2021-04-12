@@ -105,10 +105,10 @@ class _UserTypeState extends State<UserType> {
                     _method = value;
                   });
                   foo("teacher");
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => TeacherHomepage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TeacherHomepage()));
                 },
               ),
               UserTypeButton(
