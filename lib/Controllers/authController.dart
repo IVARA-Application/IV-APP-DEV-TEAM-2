@@ -170,8 +170,22 @@ class AuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
+        Get.showSnackbar(new GetBar(
+          title: "No User",
+          message: "No user found for that email.",
+          duration: Duration(
+            seconds: 2,
+          ),
+        ));
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
+         Get.showSnackbar(new GetBar(
+          title: "Wrong Password!",
+          message: "Wrong password provided for that user.",
+          duration: Duration(
+            seconds: 2,
+          ),
+        ));
       }
     }
   }
