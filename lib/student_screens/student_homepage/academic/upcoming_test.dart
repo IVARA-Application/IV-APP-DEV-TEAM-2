@@ -100,7 +100,7 @@ class _TestPageState extends State<TestPage> {
                     padding:
                         EdgeInsets.symmetric(vertical: screenHeight * 0.03),
                     child: Text(
-                      "Heal My Mind",
+                      "Upcoming Test Schedule",
                       style: TextStyle(fontSize: 25, color: Colors.white),
                     ),
                   ),

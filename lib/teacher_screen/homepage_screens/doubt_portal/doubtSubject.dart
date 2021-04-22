@@ -5,14 +5,13 @@ import 'package:new_ivara_app/teacher_screen/homepage_screens/doubt_portal/subje
 import 'package:new_ivara_app/teacher_screen/navbar.dart';
 
 List subjects = [
-  {'subjectName': 'Subject 1', 'icon': 'assets/subject.png'},
-  {'subjectName': 'Subject 2', 'icon': 'assets/subject.png'},
-  {'subjectName': 'Subject 3', 'icon': 'assets/subject.png'},
-  {'subjectName': 'Subject 4', 'icon': 'assets/subject.png'},
-  {'subjectName': 'Subject 5', 'icon': 'assets/subject.png'},
-  {'subjectName': 'Subject 6', 'icon': 'assets/subject.png'},
-  {'subjectName': 'Subject 7', 'icon': 'assets/subject.png'},
-  {'subjectName': 'Subject 8', 'icon': 'assets/subject.png'},
+  {'subjectName': 'Physics', 'icon': 'assets/subject.png'},
+  {'subjectName': 'Chemistry', 'icon': 'assets/subject.png'},
+  {'subjectName': 'Biology', 'icon': 'assets/subject.png'},
+  {'subjectName': 'Maths', 'icon': 'assets/subject.png'},
+  {'subjectName': 'English', 'icon': 'assets/subject.png'},
+  {'subjectName': 'Social Science', 'icon': 'assets/subject.png'},
+  {'subjectName': 'Hindi', 'icon': 'assets/subject.png'},
 ];
 
 class DoubtSubjectPage extends StatelessWidget {

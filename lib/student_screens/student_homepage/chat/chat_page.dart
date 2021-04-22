@@ -4,14 +4,13 @@ import 'package:new_ivara_app/student_screens/student_homepage/chat/chat_subject
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/24X7DoubtPortal/24X7_doubt.dart';
 
 List subjects = [
-  {'subjectName': 'Subject 1', 'icon': 'assets/subject.png'},
-  {'subjectName': 'Subject 2', 'icon': 'assets/subject.png'},
-  {'subjectName': 'Subject 3', 'icon': 'assets/subject.png'},
-  {'subjectName': 'Subject 4', 'icon': 'assets/subject.png'},
-  {'subjectName': 'Subject 5', 'icon': 'assets/subject.png'},
-  {'subjectName': 'Subject 6', 'icon': 'assets/subject.png'},
-  {'subjectName': 'Subject 7', 'icon': 'assets/subject.png'},
-  {'subjectName': 'Subject 8', 'icon': 'assets/subject.png'},
+  {'subjectName': 'Physics', 'icon': 'assets/subject.png'},
+  {'subjectName': 'Chemistry', 'icon': 'assets/subject.png'},
+  {'subjectName': 'Biology', 'icon': 'assets/subject.png'},
+  {'subjectName': 'Maths', 'icon': 'assets/subject.png'},
+  {'subjectName': 'English', 'icon': 'assets/subject.png'},
+  {'subjectName': 'Social Science', 'icon': 'assets/subject.png'},
+  {'subjectName': 'Hindi', 'icon': 'assets/subject.png'},
 ];
 
 class StudentChatPage extends StatelessWidget {
