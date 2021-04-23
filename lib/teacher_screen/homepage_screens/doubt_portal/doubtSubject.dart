@@ -22,7 +22,7 @@ class DoubtSubjectPage extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       drawer: TeacherDrawer(),
-      key:_scaffoldKey,
+      key: _scaffoldKey,
       body: Container(
         width: screenWidth,
         height: screenHeight,
@@ -44,78 +44,77 @@ class DoubtSubjectPage extends StatelessWidget {
             ],
           ),
         ),
-      
-      child:SingleChildScrollView(
-        child: SafeArea(
-          child: Center(
-            child: Column(
-              children: [
-                TeacherNavbar(_scaffoldKey),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: screenHeight * 0.035),
-                      child: Text(
-                        "My Classroom",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.white,
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Center(
+              child: Column(
+                children: [
+                  TeacherNavbar(_scaffoldKey),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: screenHeight * 0.035),
+                        child: Text(
+                          "My Classes",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: screenHeight * 0.7,
-                      child: Container(
-                        child: ListView.builder(
-                            itemCount: subjects.length,
-                            itemBuilder: (context, i) {
-                              return Padding(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: screenHeight * 0.008,
-                                    horizontal: screenWidth * 0.1),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                SubjectChatPageTeacher(
-                                                  subjects[i]
-                                                      ['subjectName'],
-                                                )));
-                                  },
-                                  child: Card(
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: screenWidth * 0.05,
-                                          vertical: screenHeight * 0.009),
-                                      child: Row(
-                                        children: [
-                                          Text(subjects[i]['subjectName'],
-                                              style: TextStyle(
-                                                  fontSize:
-                                                      screenHeight * 0.03)),
-                                          Spacer(),
-                                          Image.asset(subjects[i]['icon'])
-                                        ],
+                      SizedBox(
+                        height: screenHeight * 0.7,
+                        child: Container(
+                          child: ListView.builder(
+                              itemCount: subjects.length,
+                              itemBuilder: (context, i) {
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: screenHeight * 0.008,
+                                      horizontal: screenWidth * 0.1),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SubjectChatPageTeacher(
+                                                    subjects[i]['subjectName'],
+                                                  )));
+                                    },
+                                    child: Card(
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: screenWidth * 0.05,
+                                            vertical: screenHeight * 0.009),
+                                        child: Row(
+                                          children: [
+                                            Text(subjects[i]['subjectName'],
+                                                style: TextStyle(
+                                                    fontSize:
+                                                        screenHeight * 0.03)),
+                                            Spacer(),
+                                            Image.asset(subjects[i]['icon'])
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              );
-                            }),
-                      ),
-                    )
-                  ],
-                ),
-              ],
+                                );
+                              }),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),),
+      ),
     );
   }
 }
