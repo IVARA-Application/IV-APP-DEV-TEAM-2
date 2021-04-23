@@ -201,7 +201,7 @@ class SignUpPage extends StatelessWidget {
                               focusColor: Colors.white,
                               filled: true,
                               fillColor: Colors.white.withOpacity(0.9),
-                              hintText: "Enter your Password",
+                              hintText: "Enter Password",
                               hintStyle: Theme.of(context)
                                   .textTheme
                                   .headline6

@@ -159,7 +159,7 @@ class UserTypeButton extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
       shape: kCardShape,
       child: RadioListTile(
-        // toggleable: true,
+        toggleable: true,
         value: value,
         groupValue: groupValue,
         onChanged: onChanged,
