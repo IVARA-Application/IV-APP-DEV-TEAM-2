@@ -9,24 +9,21 @@ import 'package:new_ivara_app/shared/glassmorphism.dart';
 import 'package:new_ivara_app/student_screens/auth/login.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/navbar%20section/entrance%20exam/entrance_exam.dart';
 
-class SignUpPage extends StatefulWidget {
+class SignUpPage extends StatelessWidget {
   final String userType;
   SignUpPage(this.userType);
 
-  @override
-  _SignUpPageState createState() => _SignUpPageState();
-}
-
-class _SignUpPageState extends State<SignUpPage> {
-  bool isCheck = false;
-  TextEditingController _nameC = TextEditingController();
-  TextEditingController _emailC = TextEditingController();
-  TextEditingController _phoneC = TextEditingController();
-  TextEditingController _passC = TextEditingController();
-  TextEditingController _repassC = TextEditingController();
+  final TextEditingController _nameC = TextEditingController();
+  final TextEditingController _emailC = TextEditingController();
+  final TextEditingController _phoneC = TextEditingController();
+  final TextEditingController _passC = TextEditingController();
+  final TextEditingController _repassC = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final node = FocusScope.of(context);
+    bool isCheck = false;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -79,85 +76,232 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomTextField(
-                      textController: _nameC,
-                      hintText: "Enter your name",
-                    ),
-                    CustomTextField(
-                      textController: _emailC,
-                      hintText: "Enter email",
-                    ),
-                    CustomTextField(
-                      textController: _phoneC,
-                      hintText: "Enter phone no.",
-                    ),
-                    CustomTextField(
-                      textController: _passC,
-                      hintText: "Enter your Password",
-                    ),
-                    CustomTextField(
-                      textController: _repassC,
-                      hintText: "Retype Password",
-                    ),
-                    CustomElevatedButton(
-                        label: "Register",
-                        onTap: () {
-                          Get.find<AuthController>().signup(
-                              _emailC.text, _passC.text, widget.userType,_nameC.text,_phoneC.text);
-                        }),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: isCheck,
-                          onChanged: (value) {
-                            setState(() {
-                              isCheck = !isCheck;
-                            });
-                          },
-                          checkColor: Colors.green,
-                          visualDensity: VisualDensity.compact,
-                          fillColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
-                        ),
-                        Flexible(
-                          child: Text(
-                            'I agree with all the terms and condion',
-                            style: ftt(context).bodyText1,
-                            softWrap: true,
+                child: Form(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: TextFormField(
+                          controller: _nameC,
+                          textInputAction: TextInputAction.next,
+                          onEditingComplete: () => node.nextFocus(),
+                          decoration: InputDecoration(
+                            // contentPadding: EdgeInsets.all(2),
+                            isDense: true,
+
+                            focusColor: Colors.white,
+                            filled: true,
+                            fillColor: Colors.white.withOpacity(0.9),
+                            hintText: "Enter your name",
+                            hintStyle: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                .copyWith(color: Color(0xff898989)),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xff697ae4),
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
                           ),
                         ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "Already have an account? ",
-                          style: ftt(context)
-                              .bodyText1
-                              .copyWith(color: Colors.white),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: TextFormField(
+                          controller: _emailC,
+                          textInputAction: TextInputAction.next,
+                          onEditingComplete: () => node.nextFocus(),
+                          decoration: InputDecoration(
+                            // contentPadding: EdgeInsets.all(2),
+                            isDense: true,
+
+                            focusColor: Colors.white,
+                            filled: true,
+                            fillColor: Colors.white.withOpacity(0.9),
+                            hintText: "Enter email",
+                            hintStyle: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                .copyWith(color: Color(0xff898989)),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xff697ae4),
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
                         ),
-                        InkWell(
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: TextFormField(
+                          controller: _phoneC,
+                          textInputAction: TextInputAction.next,
+                          onEditingComplete: () => node.nextFocus(),
+                          keyboardType: TextInputType.phone,
+                          decoration: InputDecoration(
+                            // contentPadding: EdgeInsets.all(2),
+                            isDense: true,
+
+                            focusColor: Colors.white,
+                            filled: true,
+                            fillColor: Colors.white.withOpacity(0.9),
+                            hintText: "Enter phone no.",
+                            hintStyle: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                .copyWith(color: Color(0xff898989)),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xff697ae4),
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: TextFormField(
+                          controller: _passC,
+                          textInputAction: TextInputAction.next,
+                          onEditingComplete: () => node.nextFocus(),
+                          keyboardType: TextInputType.visiblePassword,
+                          decoration: InputDecoration(
+                            // contentPadding: EdgeInsets.all(2),
+                            isDense: true,
+
+                            focusColor: Colors.white,
+                            filled: true,
+                            fillColor: Colors.white.withOpacity(0.9),
+                            hintText: "Enter your Password",
+                            hintStyle: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                .copyWith(color: Color(0xff898989)),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xff697ae4),
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: TextFormField(
+                          controller: _repassC,
+                          keyboardType: TextInputType.visiblePassword,
+                          decoration: InputDecoration(
+                            // contentPadding: EdgeInsets.all(2),
+                            isDense: true,
+
+                            focusColor: Colors.white,
+                            filled: true,
+                            fillColor: Colors.white.withOpacity(0.9),
+                            hintText: "Retype Password",
+                            hintStyle: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                .copyWith(color: Color(0xff898989)),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xff697ae4),
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                      CustomElevatedButton(
+                          label: "Register",
                           onTap: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => LoginPage(widget.userType)),
-                            );
-                          },
-                          child: Text(
-                            "Click here",
-                            style:
-                                ftt(context).bodyText1.copyWith(color: kPink),
+                            Get.find<AuthController>().signup(
+                                _emailC.text,
+                                _passC.text,
+                                userType,
+                                _nameC.text,
+                                _phoneC.text);
+                          }),
+                      Row(
+                        children: [
+                          StatefulBuilder(
+                            builder:
+                                (BuildContext context, StateSetter setState) {
+                              return Checkbox(
+                                value: isCheck,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isCheck = !isCheck;
+                                  });
+                                },
+                                checkColor: Colors.green,
+                                visualDensity: VisualDensity.compact,
+                                fillColor: MaterialStateProperty.all<Color>(
+                                    Colors.white),
+                              );
+                            },
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          Flexible(
+                            child: Text(
+                              'I agree with all the terms and condion',
+                              style: ftt(context).bodyText1,
+                              softWrap: true,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Already have an account? ",
+                            style: ftt(context)
+                                .bodyText1
+                                .copyWith(color: Colors.white),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => LoginPage(userType)),
+                              );
+                            },
+                            child: Text(
+                              "Click here",
+                              style:
+                                  ftt(context).bodyText1.copyWith(color: kPink),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
