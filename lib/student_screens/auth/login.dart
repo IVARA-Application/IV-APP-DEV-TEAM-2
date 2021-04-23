@@ -14,12 +14,13 @@ class LoginPage extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
 
   final TextEditingController _textController = TextEditingController();
- 
+
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
+    bool isHidden = true;
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -122,33 +123,46 @@ class LoginPage extends StatelessWidget {
 
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: TextFormField(
-                          controller: _textController,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            // contentPadding: EdgeInsets.all(2),
-                            isDense: true,
+                        child: StatefulBuilder(builder:
+                            (BuildContext context, StateSetter setState) {
+                          return TextFormField(
+                            controller: _textController,
+                            keyboardType: TextInputType.visiblePassword,
+                            obscureText: isHidden,
+                            decoration: InputDecoration(
+                              // contentPadding: EdgeInsets.all(2),
+                              suffixIcon: IconButton(
+                                  icon: isHidden
+                                      ? Icon(Icons.visibility)
+                                      : Icon(Icons.visibility_off),
+                                  onPressed: () {
+                                    setState(() {
+                                      isHidden = !isHidden;
+                                    });
+                                  }),
+                              isDense: true,
 
-                            focusColor: Colors.white,
-                            filled: true,
-                            fillColor: Colors.white.withOpacity(0.9),
-                            hintText: "Password",
-                            hintStyle: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                .copyWith(color: Color(0xff898989)),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xff697ae4),
-                                width: 2,
+                              focusColor: Colors.white,
+                              filled: true,
+                              fillColor: Colors.white.withOpacity(0.9),
+                              hintText: "Password",
+                              hintStyle: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .copyWith(color: Color(0xff898989)),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xff697ae4),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
-                              borderRadius: BorderRadius.circular(10.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
                             ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                        ),
+                          );
+                        }),
                       ),
                       SizedBox(height: 10),
                       CustomElevatedButton(

@@ -23,6 +23,8 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
     bool isCheck = false;
+    bool isHidden1 = true;
+    bool isHidden2 = true;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -177,65 +179,87 @@ class SignUpPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: TextFormField(
-                          controller: _passC,
-                          textInputAction: TextInputAction.next,
-                          onEditingComplete: () => node.nextFocus(),
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            // contentPadding: EdgeInsets.all(2),
-                            isDense: true,
-
-                            focusColor: Colors.white,
-                            filled: true,
-                            fillColor: Colors.white.withOpacity(0.9),
-                            hintText: "Enter your Password",
-                            hintStyle: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                .copyWith(color: Color(0xff898989)),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xff697ae4),
-                                width: 2,
+                        child: StatefulBuilder(
+                            builder: (context, StateSetter setState) {
+                          return TextFormField(
+                            controller: _passC,
+                            obscureText: isHidden1,
+                            textInputAction: TextInputAction.next,
+                            onEditingComplete: () => node.nextFocus(),
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                  icon: isHidden1
+                                      ? Icon(Icons.visibility)
+                                      : Icon(Icons.visibility_off),
+                                  onPressed: () {
+                                    setState(() {
+                                      isHidden1 = !isHidden1;
+                                    });
+                                  }),
+                              isDense: true,
+                              focusColor: Colors.white,
+                              filled: true,
+                              fillColor: Colors.white.withOpacity(0.9),
+                              hintText: "Enter your Password",
+                              hintStyle: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .copyWith(color: Color(0xff898989)),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xff697ae4),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
-                              borderRadius: BorderRadius.circular(10.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
                             ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                        ),
+                          );
+                        }),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: TextFormField(
-                          controller: _repassC,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            // contentPadding: EdgeInsets.all(2),
-                            isDense: true,
-
-                            focusColor: Colors.white,
-                            filled: true,
-                            fillColor: Colors.white.withOpacity(0.9),
-                            hintText: "Retype Password",
-                            hintStyle: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                .copyWith(color: Color(0xff898989)),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xff697ae4),
-                                width: 2,
+                        child: StatefulBuilder(
+                            builder: (context, StateSetter setState) {
+                          return TextFormField(
+                            controller: _repassC,
+                            obscureText: isHidden2,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                  icon: isHidden1
+                                      ? Icon(Icons.visibility)
+                                      : Icon(Icons.visibility_off),
+                                  onPressed: () {
+                                    setState(() {
+                                      isHidden2 = !isHidden2;
+                                    });
+                                  }),
+                              isDense: true,
+                              focusColor: Colors.white,
+                              filled: true,
+                              fillColor: Colors.white.withOpacity(0.9),
+                              hintText: "Retype Password",
+                              hintStyle: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .copyWith(color: Color(0xff898989)),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xff697ae4),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
-                              borderRadius: BorderRadius.circular(10.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
                             ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                        ),
+                          );
+                        }),
                       ),
                       CustomElevatedButton(
                           label: "Register",
