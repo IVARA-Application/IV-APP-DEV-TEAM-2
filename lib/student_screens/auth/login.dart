@@ -9,7 +9,7 @@ import 'package:new_ivara_app/student_screens/auth/signup.dart';
 import 'package:new_ivara_app/student_screens/student_homepage/studentHomepage.dart';
 
 class LoginPage extends StatelessWidget {
-  String userType;
+  final String userType;
   LoginPage(this.userType);
   final TextEditingController _nameController = TextEditingController();
 
@@ -102,7 +102,7 @@ class LoginPage extends StatelessWidget {
                             focusColor: Colors.white,
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.9),
-                            hintText: "Enter your name",
+                            hintText: "Enter your username",
                             hintStyle: Theme.of(context)
                                 .textTheme
                                 .headline6
