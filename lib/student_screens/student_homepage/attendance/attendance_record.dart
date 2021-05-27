@@ -10,6 +10,9 @@ class StudentAttendance extends StatefulWidget {
 class _StudentAttendanceState extends State<StudentAttendance> {
   int currentIndex = 0;
   final firestoreInstance = FirebaseFirestore.instance;
+  String selectedMonth = "Jan";
+  String selectedYear = "2020";
+
   Map data = {};
   List<String> months = [
     'Jan',
@@ -91,20 +94,26 @@ class _StudentAttendanceState extends State<StudentAttendance> {
     getData(1);
   }
 
-  Widget makeDropDown({List<String> list, onchanged}) {
+  Widget makeDropDown({List<String> list, bool isMonth, onChanged}) {
     return DropdownButtonHideUnderline(
       child: DropdownButton<String>(
         isDense: true,
         elevation: 0,
-        hint: Text(list[0], style: TextStyle(color: Color(0xFFF48380))),
+        hint: Text(isMonth ? selectedMonth : selectedYear,
+            style: TextStyle(color: Color(0xFFF48380))),
         icon: Icon(Icons.keyboard_arrow_down),
         items: list.map((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: new Text(value),
+            onTap: () {
+              setState(() {
+                isMonth ? selectedMonth = value : selectedYear = value;
+              });
+            },
           );
         }).toList(),
-        onChanged: onchanged,
+        onChanged: onChanged,
       ),
     );
   }
@@ -116,7 +125,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
         itemBuilder: (context, index) {
           return index == currentIndex
               ? Padding(
-                  padding: EdgeInsets.symmetric(horizontal:width*0.02),
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.02),
                   child: Padding(
                     padding: EdgeInsets.only(
                         top: height * 0.001,
@@ -153,7 +162,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
                   ),
                 )
               : Padding(
-                  padding: EdgeInsets.symmetric(horizontal:width*0.02),
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.02),
                   child: Padding(
                     padding: EdgeInsets.only(
                         top: height * 0.001,
@@ -231,9 +240,11 @@ class _StudentAttendanceState extends State<StudentAttendance> {
                       horizontal: width * 0.05, vertical: height * 0.01),
                   child: Row(
                     children: [
-                      makeDropDown(list: months, onchanged: (_) {}),
+                      makeDropDown(
+                          list: months, isMonth: true, onChanged: (_) {}),
                       Spacer(),
-                      makeDropDown(list: years, onchanged: (_) {}),
+                      makeDropDown(
+                          list: years, isMonth: false, onChanged: (_) {}),
                     ],
                   ),
                 ),

@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart ';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:new_ivara_app/constant/colours.dart';
 import 'package:new_ivara_app/constant/constants.dart';
 import 'package:new_ivara_app/parent_screens/drawer.dart';
 import 'package:new_ivara_app/parent_screens/navbar.dart';
 import 'package:new_ivara_app/shared/glow_circle_avatar.dart';
 import 'package:new_ivara_app/shared/custom_icon_button.dart';
-
-
 
 class TeachersList extends StatefulWidget {
   const TeachersList({Key key}) : super(key: key);
@@ -31,7 +30,7 @@ class _TeachersListState extends State<TeachersList> {
     setState(() {
       isLoading = true;
     });
-    _teacherinfo=[];
+    _teacherinfo = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection("Users")
         .where('userType', isEqualTo: 'teacher')
@@ -47,10 +46,10 @@ class _TeachersListState extends State<TeachersList> {
 
   @override
   Widget build(BuildContext context) {
-    double height=MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       drawer: ParentDrawer(),
-      key:_scaffoldKey,
+      key: _scaffoldKey,
       extendBodyBehindAppBar: true,
       // appBar: AppBar(
       //   leading: CustomIconButton(
@@ -69,20 +68,18 @@ class _TeachersListState extends State<TeachersList> {
       // ),
       body: isLoading
           ? Center(
-            child: Container(
+              child: Container(
                 child: Text("Loading..."),
               ),
-          )
+            )
           : Container(
-            decoration: kPBGdecoration,
-            height: double.infinity,
-            child: SingleChildScrollView(
+              decoration: kPBGdecoration,
+              height: double.infinity,
+              child: SingleChildScrollView(
                 child: Container(
-                  
                   child: Column(
                     children: [
-
-                      SizedBox(height: height*0.03),
+                      SizedBox(height: height * 0.03),
                       ParentNavbar(_scaffoldKey),
                       SingleChildScrollView(
                         child: Column(
@@ -100,7 +97,7 @@ class _TeachersListState extends State<TeachersList> {
                   ),
                 ),
               ),
-          ),
+            ),
     );
   }
 }

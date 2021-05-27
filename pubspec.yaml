@@ -51,6 +51,7 @@ dependencies:
   flutter_cached_pdfview: ^0.4.0-nullsafety
   intl:
   firebase_messaging:
+  flutter_svg: ^0.22.0
 
   carousel_slider: ^3.0.0
 

@@ -57,7 +57,7 @@ class _HealMyMindPageState extends State<HealMyMindPage> {
                       padding:
                           EdgeInsets.symmetric(vertical: screenHeight * 0.09),
                       child: Text(
-                        "Heal My Mind",
+                        "HealMyMind",
                         style: TextStyle(fontSize: 25, color: Colors.white),
                       ),
                     ),
@@ -217,14 +217,15 @@ class _HealMyMindPageState extends State<HealMyMindPage> {
                                     color: Colors.transparent,
                                     child: Container(
                                         decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(100.0),
-                                                bottomLeft:
-                                                    Radius.circular(100.0))),
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(100.0),
+                                            bottomLeft: Radius.circular(100.0),
+                                          ),
+                                        ),
                                         child: new Center(
                                           child: new Text(
-                                            "Heal My Mind Videos",
+                                            "HealMyMind Videos",
                                             style: TextStyle(
                                                 color: Color(0xFF8569C5),
                                                 fontSize: 18),

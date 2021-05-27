@@ -5,35 +5,42 @@ import 'package:new_ivara_app/constant/constants.dart';
 import 'package:new_ivara_app/parent_screens/navbar.dart';
 import 'package:new_ivara_app/parent_screens/parent_academic_section.dart';
 import 'package:new_ivara_app/parent_screens/teachers_list.dart';
-import 'package:new_ivara_app/shared/glow_circle_avatar.dart';
-import 'package:new_ivara_app/shared/custom_icon_button.dart';
-import 'package:new_ivara_app/teacher_screen/homepage_screens/attendance.dart';
 
 import 'attendance.dart';
 import 'drawer.dart';
 
 class ParentsHomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  
+
   @override
   Widget build(BuildContext context) {
-    double height=MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       drawer: ParentDrawer(),
-      key:_scaffoldKey,
+      key: _scaffoldKey,
       body: Container(
         decoration: kPBGdecoration,
         child: Column(
           children: [
-            SizedBox(height: height*0.03,),
+            SizedBox(
+              height: height * 0.03,
+            ),
             ParentNavbar(_scaffoldKey),
-            SizedBox(height:height*0.02),
-            Text('Hello,',style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: height*0.06)),
-            Text('Ajay Sharma',style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: height*0.04)),
-            SizedBox(height:height*0.03),
+            SizedBox(height: height * 0.02),
+            Text('Hello,',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: height * 0.06)),
+            Text('Ajay Sharma',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: height * 0.04)),
+            SizedBox(height: height * 0.03),
             CustomCard(
               imgPath: 'assets/images/teacherlist.png',
-              title: 'Teacher List',
+              title: 'Talk to Teacher',
               onTap: () {
                 Get.to(TeachersList());
               },

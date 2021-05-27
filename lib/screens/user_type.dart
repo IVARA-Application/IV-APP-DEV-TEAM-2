@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:new_ivara_app/Controllers/authController.dart';
@@ -37,100 +38,104 @@ class _UserTypeState extends State<UserType> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          CustomPaint(
-            size: Size(size.width, size.height),
-            painter: TopCurveCustomPainter(),
-          ),
-          Positioned(
-            top: 20.0,
-            left: 5.0,
-            child: Text(
-              'Welcome\nTO\nIVARA',
-              style: Theme.of(context).textTheme.headline3.copyWith(
-                    color: Colors.white,
-                  ),
-              textAlign: TextAlign.left,
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          alignment: Alignment.center,
+          children: [
+            CustomPaint(
+              size: Size(size.width, size.height),
+              painter: TopCurveCustomPainter(),
             ),
-          ),
-          Column(
-            children: [
-              Spacer(),
-              Lottie.asset(
-                'assets/walking.json',
-                alignment: Alignment.bottomCenter,
-                height: MediaQuery.of(context).size.height * 0.4,
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 40.0),
-                  child: Text(
-                    'Are You!',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline3
-                        .copyWith(color: Colors.grey),
-                    // textAlign: TextAlign.center,
+            Positioned(
+                top: 25.0,
+                left: 25.0,
+                child: SvgPicture.asset(
+                  "assets/images/ivaralogo.svg",
+                  width: 135,
+                )
+                // Text(
+                //   'Welcome\nTO\nIVARA',
+                //   style: Theme.of(context).textTheme.headline3.copyWith(
+                //         color: Colors.white,
+                //       ),
+                //   textAlign: TextAlign.left,
+                // ),
+                ),
+            Column(
+              children: [
+                Spacer(),
+                Lottie.asset(
+                  'assets/walking.json',
+                  alignment: Alignment.bottomCenter,
+                  height: MediaQuery.of(context).size.height * 0.4,
+                ),
+                Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 40.0),
+                    child: Text(
+                      'IVARA',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline3
+                          .copyWith(color: Colors.grey),
+                    ),
                   ),
                 ),
-              ),
-              UserTypeButton(
-                userType: 'Student',
-                onTap: () {},
-                value: ChoiceMethod.student,
-                groupValue: _method,
-                onChanged: (value) {
-                  setState(() {
-                    _method = value;
-                  });
+                UserTypeButton(
+                  userType: 'Student',
+                  onTap: () {},
+                  value: ChoiceMethod.student,
+                  groupValue: _method,
+                  onChanged: (value) {
+                    setState(() {
+                      _method = value;
+                    });
 
-                  foo("student");
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => StudentHomePage(0)));
-                },
-              ),
-              UserTypeButton(
-                userType: 'Teacher',
-                onTap: () {},
-                value: ChoiceMethod.teacher,
-                groupValue: _method,
-                onChanged: (value) {
-                  setState(() {
-                    _method = value;
-                  });
-                  foo("teacher");
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => TeacherHomepage()));
-                },
-              ),
-              UserTypeButton(
-                userType: 'Parent',
-                onTap: () {},
-                value: ChoiceMethod.parent,
-                groupValue: _method,
-                onChanged: (value) {
-                  setState(() {
-                    _method = value;
-                  });
-                  foo("parent");
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => ParentsHomeScreen()));
-                },
-              ),
-              SizedBox(height: 10),
-            ],
-          )
-        ],
+                    foo("student");
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => StudentHomePage(0)));
+                  },
+                ),
+                UserTypeButton(
+                  userType: 'Teacher',
+                  onTap: () {},
+                  value: ChoiceMethod.teacher,
+                  groupValue: _method,
+                  onChanged: (value) {
+                    setState(() {
+                      _method = value;
+                    });
+                    foo("teacher");
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TeacherHomepage()));
+                  },
+                ),
+                UserTypeButton(
+                  userType: 'Parent',
+                  onTap: () {},
+                  value: ChoiceMethod.parent,
+                  groupValue: _method,
+                  onChanged: (value) {
+                    setState(() {
+                      _method = value;
+                    });
+                    foo("parent");
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => ParentsHomeScreen()));
+                  },
+                ),
+                SizedBox(height: 10),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

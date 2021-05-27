@@ -174,34 +174,54 @@ class LoginPage extends StatelessWidget {
                             );
                           }),
                       SizedBox(height: 10),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "Don't have and account? ",
+                      Center(
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => SignUpPage(userType)),
+                            );
+                          },
+                          child: Text(
+                            "Register here",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1
-                                .copyWith(color: Colors.white),
+                                .copyWith(
+                                    color: kPink,
+                                    decoration: TextDecoration.underline),
                           ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => SignUpPage(userType)),
-                              );
-                            },
-                            child: Text(
-                              "Click here",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1
-                                  .copyWith(color: kPink),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
+                      // Row(
+                      //   mainAxisSize: MainAxisSize.min,
+                      //   children: [
+                      //     Text(
+                      //       "Register here ",
+                      //       style: Theme.of(context)
+                      //           .textTheme
+                      //           .bodyText1
+                      //           .copyWith(color: Colors.white),
+                      //     ),
+                      //     InkWell(
+                      //       onTap: () {
+                      //         Navigator.pushReplacement(
+                      //           context,
+                      //           MaterialPageRoute(
+                      //               builder: (_) => SignUpPage(userType)),
+                      //         );
+                      //       },
+                      //       child: Text(
+                      //         "Register here",
+                      //         style: Theme.of(context)
+                      //             .textTheme
+                      //             .bodyText1
+                      //             .copyWith(color: kPink),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),
